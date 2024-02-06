@@ -16,7 +16,7 @@ This repo is currently a work-in-progress, and new sentences are continually bei
 
 - NMEA 0183 sentence parsing for embedded devices.
 - Lightweight and easy-to-integrate into existing C projects.
-- (Planned) Support for all NMEA standard (IEC 61163-1) sentence types.
+- (Planned) Support for all NMEA standard (IEC 61162-1) sentence types.
 
 ## Usage
 
