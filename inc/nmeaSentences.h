@@ -3,6 +3,9 @@
 
 #include <stdint.h>
 
+#define AAM_WAYPOINT_MAX_LENGTH 64
+#define ABM_DATA_MAX_LENGTH 60
+
 /**
  * @brief Enumeration of NMEA 0183 Talker IDs.
  *
@@ -37,7 +40,7 @@ typedef enum TalkerID {
                                          information system (ECDIS) */
   EMERGENCY_LOCATOR = 'EL',         /**< Emergency locator */
   EMERGENCY_POSITION_BEACON = 'EP', /**< Emergency position indicating \
-                                          radio beacon (EPIRB) */
+                                         radio beacon (EPIRB) */
   ENGINE_ROOM_MONITORING = 'ER',    /**< Engine room monitoring system */
   FIRE_DOOR_CONTROLLER = 'FD', /**< Fire door controller/monitoring system */
   FIRE_EXTINGUISHER_SYSTEM = 'FE', /**< Fire extinguisher system */
@@ -239,6 +242,18 @@ typedef enum SentenceID {
 } SentenceID;
 
 /**
+ * @brief Enumeration for polarities.
+ *
+ * This enumeration represents the possible values for a polarity field.
+ */
+typedef enum Polarity {
+  NORTH = 'N', /**< Northern polarity */
+  EAST = 'E',  /**< Eastern polarity */
+  SOUTH = 'S', /**< Southern polarity */
+  WEST = 'W'   /**< Western polarity */
+} Polarity;
+
+/**
  * @brief Enumeration for status field.
  *
  * This enumeration represents the possible values of a status field,
@@ -250,12 +265,12 @@ typedef enum StatusField {
   STATUS_INVALID = 'V' /**< No, data invalid, warning flag set */
 } StatusField;
 
-#ifdef NMEA_AAM_ENABLED
+#ifdef SENTENCE_AAM_ENABLED
 /**
  * @brief Waypoint arrival alarm (AAM) sentence structure.
  *
  * Status of arrival (entering the arrival circle, or passing the perpendicular
- * of the course line) at waypoint c--c. 
+ * of the course line) at waypoint c--c.
  * *
  * @var TalkerID talkerId
  * @brief The talker ID associated with the sentence.
@@ -264,12 +279,14 @@ typedef enum StatusField {
  * @brief The unique identifier for the sentence (AAM).
  *
  * @var StatusField arrivalCircledEntered
- * @brief Single character field indicating if the vessel has entered the arrival circle (A = Yes,
- * data valid, warning flag clear; V = No, data invalid, warning flag set).
+ * @brief Single character field indicating if the vessel has entered the
+ * arrival circle (A = Yes, data valid, warning flag clear; V = No, data
+ * invalid, warning flag set).
  *
  * @var StatusField perpendicularPassedAtWaypoint
- * @brief Single character field indicating if the vessel has passed the waypoint perpendicularly
- * (A = Yes, data valid, warning flag clear; V = No, data invalid, warning flag set).
+ * @brief Single character field indicating if the vessel has passed the
+ * waypoint perpendicularly (A = Yes, data valid, warning flag clear; V = No,
+ * data invalid, warning flag set).
  *
  * @var float arrivalCircleRadius
  * @brief The radius of the arrival circle.
@@ -281,34 +298,37 @@ typedef enum StatusField {
  * @brief Pointer to the waypoint identifier.
  */
 typedef struct SENTENCE_AAM {
-    TalkerID talkerId;
-    SentenceID sentenceId = AAM;
-    StatusField arrivalCircledEntered;
-    StatusField perpendicularPassedAtWaypoint;
-    float arrivalCircleRadius;
-    uint8_t radiusUnits;
-    uint8_t *waypointID;
+  TalkerID talkerId;
+  SentenceID sentenceId = AAM;
+  StatusField arrivalCircledEntered;
+  StatusField perpendicularPassedAtWaypoint;
+  float arrivalCircleRadius;
+  uint8_t radiusUnits;
+  uint8_t waypointID[AAM_WAYPOINT_MAX_LENGTH];
 } SENTENCE_AAM;
 #endif
 
-#ifdef NMEA_ABK_ENABLED
+#ifdef SENTENCE_ABK_ENABLED
 /**
- * @brief AIS addressed and binary broadcast acknowledgement (ABK) sentence structure.
+ * @brief AIS addressed and binary broadcast acknowledgement (ABK) sentence
+ * structure.
  *
- * This structure represents information related to the AIS addressed and binary broadcast
- * acknowledgement (ABK) sentence. The ABK sentence is generated upon the completion or
- * termination of a transaction initiated by the reception of ABM, AIR, or BBM sentences.
- * It provides information about the success or failure of an ABM broadcast, specifically
- * ITU-R M.1371 Messages 6 or 12.
+ * This structure represents information related to the AIS addressed and binary
+ * broadcast acknowledgement (ABK) sentence. The ABK sentence is generated upon
+ * the completion or termination of a transaction initiated by the reception of
+ * ABM, AIR, or BBM sentences. It provides information about the success or
+ * failure of an ABM broadcast, specifically ITU-R M.1371 Messages 6 or 12.
  *
- * The ABK sentence utilises information from ITU-R M.1371 Messages 7 and 13. It is delivered
- * upon the reception of VHF Data-link Message 7 or 13, or in case of failure of Messages 6 or 12.
- * The sentence reports the AIS unit's handling of AIR (ITU-R M.1371 Message 15) and BBM (ITU-R
- * M.1371 Messages 8, 14, 25, 26) sentences to the external application.
+ * The ABK sentence utilises information from ITU-R M.1371 Messages 7 and 13. It
+ * is delivered upon the reception of VHF Data-link Message 7 or 13, or in case
+ * of failure of Messages 6 or 12. The sentence reports the AIS unit's handling
+ * of AIR (ITU-R M.1371 Message 15) and BBM (ITU-R M.1371 Messages 8, 14, 25,
+ * 26) sentences to the external application.
  *
- * The external application can initiate an interrogation through the AIR-sentence or a broadcast
- * through the BBM sentence. The AIS unit generates the ABK sentence to report the outcome of the
- * ABM, AIR, or BBM broadcast process.
+ * The external application can initiate an interrogation through the
+ * AIR-sentence or a broadcast through the BBM sentence. The AIS unit generates
+ * the ABK sentence to report the outcome of the ABM, AIR, or BBM broadcast
+ * process.
  *
  * @var TalkerID talkerId
  * @brief The talker ID associated with the sentence.
@@ -333,14 +353,287 @@ typedef struct SENTENCE_AAM {
  * V = No, data invalid, warning flag set).
  */
 typedef struct SENTENCE_ABK {
-    TalkerID talkerId;
-    SentenceID sentenceId;
-    uint32_t mmsiAddress;
-    uint8_t mmsiChannel;
-    float m1373MessageId;
-    uint8_t messageSequenceNumber;
-    uint8_t acknowledment;
+  TalkerID talkerId;
+  SentenceID sentenceId = ABK;
+  uint32_t mmsiAddress;
+  uint8_t mmsiChannel;
+  float m1373MessageId;
+  uint8_t messageSequenceNumber;
+  uint8_t acknowledment;
 } SENTENCE_ABK;
+#endif
+
+#ifdef SENTENCE_ABM_ENABLED
+
+/**
+ * @brief AIS addressed binary and safety related message (ABM) sentence
+ * structure.
+ *
+ * This structure represents information related to the AIS addressed binary and
+ * safety related message (ABM) sentence. The ABM sentence supports ITU-R M.1371
+ * Messages 6, 12, 25, and 26, providing an external application with a means to
+ * exchange data via an AIS transponder.
+ *
+ * Data encapsulated in the ABM sentence is defined by the application, offering
+ * great flexibility for implementing system functions that use the transponder
+ * as a communications device.
+ *
+ * Upon receiving the ABM sentence via the IEC 61162-2 interface, the AIS
+ * transponder initiates a VDL broadcast of Message 6, 12, 25, or 26. For
+ * Messages 6 and 12, the AIS unit makes up to four broadcasts, the actual
+ * number depending on the reception of an acknowledgement from the addressed
+ * "destination" AIS unit.
+ *
+ * The success or failure of reception of the transmission by the addressed AIS
+ * unit for Messages 6 and 12 is confirmed through the use of the "Addressed
+ * binary and safety related message acknowledgement" (ABK) sentence formatter,
+ * and the processes that support the generation of an ABK sentence.
+ *
+ * The AIS transponder determines the appropriate communications state for
+ * transmission of Message 26 over the VHF data link.
+ *
+ * @var TalkerID talkerId
+ * @brief The talker ID associated with the sentence.
+ *
+ * @var SentenceID sentenceId
+ * @brief The unique identifier for the sentence (ABM).
+ *
+ * @var uint8_t totalSentenceNumber
+ * @brief The total number of sentences in the message sequence.
+ *
+ * @var uint8_t sentenceNumber
+ * @brief The sequence number of the current sentence.
+ *
+ * @var uint8_t sequentialMessageId
+ * @brief The sequential message ID.
+ *
+ * @var uint32_t mmsiAddress
+ * @brief The Maritime Mobile Service Identity (MMSI) address.
+ *
+ * @var uint8_t aisChannel
+ * @brief The AIS channel.
+ *
+ * @var uint8_t m1373MessageId
+ * @brief The ID of ITU-R M.1373 message.
+ *
+ * @var uint8_t encapsulatedData[ABM_DATA_MAX_LENGTH]
+ * @brief The encapsulated data in the ABM sentence.
+ *
+ * @var uint8_t numberFillBits
+ * @brief The number of fill bits in the sentence.
+ */
+typedef struct SENTENCE_ABM {
+  TalkerID talkerId;
+  SentenceID sentenceId = ABM;
+  uint8_t totalSentenceNumber;
+  uint8_t sentenceNumber;
+  uint8_t sequentialMessageId;
+  uint32_t mmsiAddress;
+  uint8_t aisChannel;
+  uint8_t m1373MessageId;
+  uint8_t encapsulatedData[ABM_DATA_MAX_LENGTH];
+  uint8_t numberFillBits;
+} SENTENCE_ABM;
+#endif
+
+#ifdef SENTENCE_ACA_ENABLED
+/**
+ * @brief AIS channel assignment message (ACA) sentence structure.
+ *
+ * This structure represents information related to the AIS channel assignment
+ * message (ACA) sentence. An AIS device can receive regional channel management
+ * information in four ways: ITU-R M.1371 Message 22, DSC telecommand received
+ * on channel 70, manual operator input, and an ACA sentence. The AIS unit may
+ * store channel management information for future use. Channel management
+ * information is applied based upon the actual location of the AIS device. An
+ * AIS unit is “using” channel management information when the information is
+ * being used to manage the operation of the VHF receiver and/or transmitter
+ * inside the AIS unit.
+ *
+ * This sentence is used both to enter and obtain channel management
+ * information. When sent to an AIS unit, the ACA sentence provides regional
+ * information that the unit stores and uses to manage the internal VHF radio.
+ * When sent from an AIS unit, the ACA sentence provides the current channel
+ * management information retained by the AIS unit. The information contained in
+ * this sentence is similar to the information contained in an ITU-R M.1371
+ * Message 22. The information contained in this sentence directly relates to
+ * the initialization phase and dual-channel operation and channel management
+ * functions of the AIS unit as described in ITU-R M.1371.
+ *
+ * @var TalkerID talkerId
+ * @brief The talker ID associated with the sentence.
+ *
+ * @var SentenceID sentenceId
+ * @brief The unique identifier for the sentence (ACA).
+ *
+ * @var uint8_t sequenceNumber
+ * @brief The sequence number of the ACA sentence.
+ *
+ * @var float neLatitude
+ * @brief The latitude of the northeast corner of the geographic area.
+ *
+ * @var Polarity neLatitudePolarity
+ * @brief The polarity of the latitude of the northeast corner of the geographic
+ * area.
+ *
+ * @var float neLongitude
+ * @brief The longitude of the northeast corner of the geographic area.
+ *
+ * @var Polarity neLongitudePolarity
+ * @brief The polarity of the longitude of the northeast corner of the
+ * geographic area.
+ *
+ * @var float swLatitude
+ * @brief The latitude of the southwest corner of the geographic area.
+ *
+ * @var Polarity swLatitudePolarity
+ * @brief The polarity of the latitude of the southwest corner of the geographic
+ * area.
+ *
+ * @var float swLongitude
+ * @brief The longitude of the southwest corner of the geographic area.
+ *
+ * @var Polarity swLongitudePolarity
+ * @brief The polarity of the longitude of the southwest corner of the
+ * geographic area.
+ *
+ * @var uint8_t transitionZoneSize
+ * @brief The size of the transition zone.
+ *
+ * @var uint16_t channelA
+ * @brief The frequency of channel A.
+ *
+ * @var uint8_t channelABandwidth
+ * @brief The bandwidth of channel A. See ITU-R M.1084, Annex 4 for details.
+ *
+ * @var uint16_t channelB
+ * @brief The frequency of channel B.
+ *
+ * @var uint8_t channelBBandwidth
+ * @brief The bandwidth of channel B. See ITU-R M.1084, Annex 4 for details.
+ *
+ * @var uint8_t txRxMode
+ * @brief The transmit/receive mode. See additional comments for details.
+ *
+ * @var uint8_t powerLevel
+ * @brief The power level.
+ *
+ * @var uint8_t infoSource
+ * @brief The information source. See additional comments for details.
+ *
+ * @var uint8_t inUseFlag
+ * @brief The flag indicating if the channel management information is in use.
+ * See additional comments for details.
+ *
+ * @var float inUseChangeTime
+ * @brief The time when the channel management information became in use. See
+ * additional comments for details.
+ * @note This is the UTC time that the “In-use flag” field changed to the
+ * indicated state. This field should be null when the sentence is sent to an
+ * AIS unit.
+ */
+typedef struct SENTENCE_ACA {
+  TalkerID talkerId;
+  SentenceID sentenceId = ACA;
+  uint8_t sequenceNumber;
+  float neLatitude;
+  Polarity neLatitudePolarity;
+  float neLongitude;
+  Polarity neLongitudePolarity;
+  float swLatitude;
+  Polarity swLatitudePolarity;
+  float swLongitude;
+  Polarity swLongitudePolarity;
+  uint8_t transitionZoneSize;
+  uint16_t channelA;
+  uint8_t channelABandwidth;
+  uint16_t channelB;
+  uint8_t channelBBandwidth;
+  uint8_t txRxMode;
+  uint8_t powerLevel;
+  uint8_t infoSource;
+  uint8_t inUseFlag;
+  float inUseChangeTime;
+} SENTENCE_ACA;
+#endif
+
+#ifdef SENTENCE_ACK_ENABLED
+/**
+ * @brief Acknowledge alarm (ACK) sentence structure.
+ *
+ * This structure represents information related to the Acknowledge alarm (ACK)
+ * sentence. The ACK sentence is used to acknowledge an alarm condition reported
+ * by a device.
+ *
+ * @var TalkerID talkerId
+ * @brief The talker ID associated with the sentence.
+ *
+ * @var SentenceID sentenceId
+ * @brief The unique identifier for the sentence (ACK).
+ *
+ * @var uint16_t alarmId
+ * @brief The unique identifier (alarm number) of the alarm being acknowledged.
+ */
+typedef struct SENTENCE_ACK {
+  TalkerID talkerId;
+  SentenceID sentenceId = ACK;
+  uint32_t alarmId;
+} SENTENCE_ACK;
+
+#endif
+
+#ifdef SENTENCE_ACN_ENABLED
+/**
+ * @brief Alert command (ACN) sentence structure.
+ *
+ * This structure represents information related to the Alert command (ACN)
+ * sentence. ACN sentences, along with other related sentences like ALC, ALF,
+ * and ARC, are used for alert handling as described in IEC 61924-2.
+ *
+ * @var TalkerID talkerId
+ * @brief The talker ID associated with the sentence.
+ *
+ * @var SentenceID sentenceId
+ * @brief The unique identifier for the sentence (ACN).
+ *
+ * @var float time
+ * @brief The release time of the alert command. Optional field, can be null.
+ *
+ * @var uint8_t[3] manufacturerCode
+ * @brief The manufacturer mnemonic code for proprietary alerts. Should be null
+ * for standardized alerts.
+ *
+ * @var uint32_t alertIdentifier
+ * @brief The unique identifier of the alert. Range: 10000-9999999. 0 reserved
+ * for command request to all alerts.
+ *
+ * @var uint32_t alertInstance
+ * @brief The alert instance identifies the current instance of an alert. Range:
+ * 1 to 999999. 0 for all instances.
+ *
+ * @var uint8_t alertCommand
+ * @brief The alert command:
+ * - 'A': Acknowledge
+ * - 'Q': Request/Repeat information
+ * - 'O': Responsibility transfer
+ * - 'S': Silence
+ *
+ * @var uint8_t sentenceStatusFlag
+ * @brief The sentence status flag:
+ * - 'C': Command
+ * Should not be null, indicates a command. A sentence without 'C' is not a
+ * command.
+ */
+typedef struct SENTENCE_ACN {
+  TalkerID talkerId;
+  SentenceID sentenceId = ACN;
+  float time;
+  uint8_t manufacturerMnemonic[3];
+  uint32_t alertId;
+  uint32_t alertInstance;
+  uint8_t alertCommand;
+  uint8_t statusFlag;
+} SENTENCE_ACN;
 #endif
 
 #endif  // Header guard
