@@ -10,11 +10,13 @@
 **Embedded NMEA 0183 Parser** is a C library designed for processing NMEA 0183 sentences on embedded devices. 
 It simplifies the handling of NMEA 0183 data, allowing developers to integrate GPS and other navigation-related information into their embedded systems efficiently.
 
+This repo is currently a work-in-progress, and new sentences are continually being added.
+
 ## Features
 
 - NMEA 0183 sentence parsing for embedded devices.
 - Lightweight and easy-to-integrate into existing C projects.
-- Support for common NMEA sentence types.
+- (Planned) Support for all NMEA standard (IEC 61162-1) sentence types.
 
 ## Usage
 
