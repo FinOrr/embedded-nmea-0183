@@ -2,6 +2,7 @@
 #define INC_NMEA_SENTENCES_H_
 
 #include <stdint.h>
+
 #include "nmeaConfig.h"
 
 #define AAM_WAYPOINT_MAX_LENGTH 64
@@ -276,11 +277,12 @@ typedef enum StatusField {
  * including normal state and various alarm states.
  */
 typedef enum AlarmCondition {
-  ALARM_NORMAL = 'N',  /**< Normal state */
-  ALARM_THRESHOLD_EXCEEDED = 'H', /**< Threshold exceeded */
+  ALARM_NORMAL = 'N',                     /**< Normal state */
+  ALARM_THRESHOLD_EXCEEDED = 'H',         /**< Threshold exceeded */
   ALARM_EXTREME_THRESHOLD_EXCEEDED = 'J', /**< Extreme threshold exceeded */
-  ALARM_LOW_THRESHOLD_NOT_REACHED = 'L', /**< Low threshold not reached */
-  ALARM_EXTREME_LOW_THRESHOLD_NOT_REACHED = 'K', /**< Extreme low threshold not reached */
+  ALARM_LOW_THRESHOLD_NOT_REACHED = 'L',  /**< Low threshold not reached */
+  ALARM_EXTREME_LOW_THRESHOLD_NOT_REACHED =
+      'K',          /**< Extreme low threshold not reached */
   ALARM_OTHER = 'X' /**< Other */
 } AlarmCondition;
 
@@ -288,30 +290,32 @@ typedef enum AlarmCondition {
  * @brief Enumeration for alarm acknowledged state.
  *
  * This enumeration represents the possible states of alarm acknowledgment,
- * including acknowledged, not acknowledged, broadcast, harbour mode, and override.
+ * including acknowledged, not acknowledged, broadcast, harbour mode, and
+ * override.
  */
 typedef enum AlarmAcknowledgedState {
-  ALARM_ACKNOWLEDGED = 'A', /**< Acknowledged */
+  ALARM_ACKNOWLEDGED = 'A',     /**< Acknowledged */
   ALARM_NOT_ACKNOWLEDGED = 'V', /**< Not acknowledged */
-  ALARM_BROADCAST = 'B', /**< Broadcast (acknowledgement not applicable) */
+  ALARM_BROADCAST = 'B',    /**< Broadcast (acknowledgement not applicable) */
   ALARM_HARBOUR_MODE = 'H', /**< Harbour mode */
-  ALARM_OVERRIDE = 'O' /**< Override */
+  ALARM_OVERRIDE = 'O'      /**< Override */
 } AlarmAcknowledgedState;
 
 /**
  * @brief Alert entry structure.
  *
- * This structure represents an alert entry transported within an ALC (Cyclic Alert List) sentence.
- * Each alert entry consists of identifying data for a certain alert, including manufacturer identifier,
- * alert identifier, alert instance, and revision counter.
+ * This structure represents an alert entry transported within an ALC (Cyclic
+ * Alert List) sentence. Each alert entry consists of identifying data for a
+ * certain alert, including manufacturer identifier, alert identifier, alert
+ * instance, and revision counter.
  */
 typedef struct AlertEntry {
-  uint8_t manufacturerIdentifier; /**< Manufacturer identifier (see ALF Manufacturer Identifier) */
+  uint8_t manufacturerIdentifier; /**< Manufacturer identifier (see ALF
+                                     Manufacturer Identifier) */
   uint32_t alertIdentifier; /**< Alert identifier (see ALF Alert Identifier) */
-  uint32_t alertInstance; /**< Alert instance (see ALF Alert instance) */
+  uint32_t alertInstance;   /**< Alert instance (see ALF Alert instance) */
   uint32_t revisionCounter; /**< Revision counter (see ALF Revision Counter) */
 } AlertEntry;
-
 
 #if SENTENCE_AAM_ENABLED
 /**
@@ -700,13 +704,16 @@ typedef struct SENTENCE_ACN {
  * @brief Maritime Mobile Service Identity (MMSI) of the originator.
  *
  * @var float time
- * @brief Time of the UTC receipt of channel management information. Format: hhmmss.ss.
+ * @brief Time of the UTC receipt of channel management information. Format:
+ * hhmmss.ss.
  *
  * @var uint8_t day
- * @brief Day of the UTC date of receipt of channel management information. Range: 01 to 31.
+ * @brief Day of the UTC date of receipt of channel management information.
+ * Range: 01 to 31.
  *
  * @var uint8_t month
- * @brief Month of the UTC date of receipt of channel management information. Range: 01 to 12.
+ * @brief Month of the UTC date of receipt of channel management information.
+ * Range: 01 to 12.
  *
  * @var uint16_t checksum
  * @brief Checksum for error detection.
@@ -729,10 +736,10 @@ typedef struct SENTENCE_ACS {
 /**
  * @brief AIS Interrogation Request (AIR) sentence structure.
  *
- * This structure represents information related to the AIS Interrogation Request (AIR)
- * sentence. AIR sentences support ITU-R M.1371 Message 10 and 15, providing an external
- * application with the means to initiate requests for specific ITU-R M.1371 messages from
- * distant mobile or base station AIS units.
+ * This structure represents information related to the AIS Interrogation
+ * Request (AIR) sentence. AIR sentences support ITU-R M.1371 Message 10 and 15,
+ * providing an external application with the means to initiate requests for
+ * specific ITU-R M.1371 messages from distant mobile or base station AIS units.
  *
  * @var uint32_t mmsiStation1
  * @brief MMSI of interrogated station-1.
@@ -759,19 +766,22 @@ typedef struct SENTENCE_ACS {
  * - '\0': No specific channel assigned
  *
  * @var uint16_t messageID1_1
- * @brief Start slot number of interrogation reply for Message ID1 from station-1.
+ * @brief Start slot number of interrogation reply for Message ID1 from
+ * station-1.
  *
  * @var uint8_t messageSubsectionStation1
  * @brief Message sub-section for station-1.
  *
  * @var uint16_t messageID1_2
- * @brief Start slot number of interrogation reply for Message ID2 from station-1.
+ * @brief Start slot number of interrogation reply for Message ID2 from
+ * station-1.
  *
  * @var uint8_t messageSubsection2
  * @brief Message sub-section for station-1.
  *
  * @var uint16_t messageID2_1
- * @brief Start slot number of interrogation reply for Message ID1 from station-2.
+ * @brief Start slot number of interrogation reply for Message ID1 from
+ * station-2.
  *
  * @var uint16_t checksum
  * @brief Checksum for error detection.
@@ -797,9 +807,9 @@ typedef struct SENTENCE_AIR {
 /**
  * @brief Acknowledge Detail Alarm Condition (AKD) sentence structure.
  *
- * This structure represents information related to the AKD (Acknowledge Detail Alarm Condition)
- * sentence. AKD sentences provide acknowledgment of a detailed alarm condition reported through
- * ALA sentences.
+ * This structure represents information related to the AKD (Acknowledge Detail
+ * Alarm Condition) sentence. AKD sentences provide acknowledgment of a detailed
+ * alarm condition reported through ALA sentences.
  *
  * @var float timeOfAcknowledgement
  * @brief Time of acknowledgement in hhmmss.ss format.
@@ -845,24 +855,28 @@ typedef struct SENTENCE_AKD {
 /**
  * @brief Report Detailed Alarm Condition (ALA) sentence structure.
  *
- * This structure represents information related to the ALA (Report Detailed Alarm Condition)
- * sentence. ALA sentences permit the alarm and alarm acknowledge condition of systems to be reported.
- * Unlike ALR, this sentence supports reporting multiple system and sub-system alarm conditions.
+ * This structure represents information related to the ALA (Report Detailed
+ * Alarm Condition) sentence. ALA sentences permit the alarm and alarm
+ * acknowledge condition of systems to be reported. Unlike ALR, this sentence
+ * supports reporting multiple system and sub-system alarm conditions.
  *
  * @var float eventTime
- * @brief Event time of alarm condition change including acknowledgement state change in hhmmss.ss format.
+ * @brief Event time of alarm condition change including acknowledgement state
+ * change in hhmmss.ss format.
  *
  * @var uint8_t originalSystemIndicator
  * @brief System indicator of original alarm source.
  *
  * @var uint8_t originalSubsystemIndicator
- * @brief Subsystem equipment indicator of original alarm source. If no sub-system can be identified, this field should be null.
+ * @brief Subsystem equipment indicator of original alarm source. If no
+ * sub-system can be identified, this field should be null.
  *
  * @var uint16_t instanceNumber
  * @brief Instance number of equipment/unit/item.
  *
  * @var uint16_t alarmType
- * @brief Type of alarm as defined in Annex D, Table D.1. Codes 900 to 999 are user definable.
+ * @brief Type of alarm as defined in Annex D, Table D.1. Codes 900 to 999 are
+ * user definable.
  *
  * @var AlarmCondition alarmCondition
  * @brief Alarm condition.
@@ -871,7 +885,8 @@ typedef struct SENTENCE_AKD {
  * @brief Alarm's acknowledged state.
  *
  * @var char alarmDescriptionText[4]
- * @brief Additional and optional descriptive text/alarm detail condition tag. Maximum length is 4 characters.
+ * @brief Additional and optional descriptive text/alarm detail condition tag.
+ * Maximum length is 4 characters.
  *
  * @var uint16_t checksum
  * @brief Checksum for error detection.
@@ -895,8 +910,9 @@ typedef struct SENTENCE_ALA {
  * @brief Cyclic Alert List (ALC) sentence structure.
  *
  * This structure represents information related to the ALC (Cyclic Alert List)
- * sentence. ALC sentences provide condensed ALF sentence information, containing
- * identifying data for each present alert of one certain source/device.
+ * sentence. ALC sentences provide condensed ALF sentence information,
+ * containing identifying data for each present alert of one certain
+ * source/device.
  *
  * @var uint8_t totalSentences
  * @brief Total number of sentences used for this message.
@@ -905,7 +921,8 @@ typedef struct SENTENCE_ALA {
  * @brief Order of this sentence in the message.
  *
  * @var uint8_t sequentialMessageIdentifier
- * @brief Sequential message identifier relating all sentences belonging to a group of multiple sentences.
+ * @brief Sequential message identifier relating all sentences belonging to a
+ * group of multiple sentences.
  *
  * @var uint8_t numberOfAlertEntries
  * @brief Number of alert entries transported within this sentence.
@@ -917,11 +934,15 @@ typedef struct SENTENCE_ALA {
  * @brief Checksum for error detection.
  */
 typedef struct SENTENCE_ALC {
-  uint8_t totalSentences; /**< Total number of sentences used for this message. */
+  uint8_t
+      totalSentences; /**< Total number of sentences used for this message. */
   uint8_t sentenceNumber; /**< Order of this sentence in the message. */
-  uint8_t sequentialMessageIdentifier; /**< Sequential message identifier relating all sentences. */
-  uint8_t numberOfAlertEntries; /**< Number of alert entries transported within this sentence. */
-  AlertEntry alertEntries[ALC_MAX_ALERT_ENTRIES]; /**< Array containing alert entries. */
+  uint8_t sequentialMessageIdentifier; /**< Sequential message identifier
+                                          relating all sentences. */
+  uint8_t numberOfAlertEntries; /**< Number of alert entries transported within
+                                   this sentence. */
+  AlertEntry alertEntries[ALC_MAX_ALERT_ENTRIES]; /**< Array containing alert
+                                                     entries. */
   uint16_t checksum; /**< Checksum for error detection. */
 } SENTENCE_ALC;
 #endif
