@@ -4,12 +4,6 @@
 #include <stdint.h>
 #include "nmeaConfig.h"
 
-#define AAM_WAYPOINT_MAX_LENGTH 64
-#define ABM_DATA_MAX_LENGTH 60
-#define ALA_DETAIL_MAX_LENGTH 64
-
-#define ALC_MAX_ALERT_ENTRIES 128
-
 /**
  * @brief Enumeration of NMEA 0183 Talker IDs.
  *
@@ -313,7 +307,7 @@ typedef struct AlertEntry {
 } AlertEntry;
 
 
-#if SENTENCE_AAM_ENABLED
+#if CFG_SENTENCE_AAM_ENABLED
 /**
  * @brief Waypoint arrival alarm (AAM) sentence structure.
  *
@@ -356,7 +350,7 @@ typedef struct SENTENCE_AAM {
 } SENTENCE_AAM;
 #endif
 
-#if SENTENCE_ABK_ENABLED
+#if CFG_SENTENCE_ABK_ENABLED
 /**
  * @brief AIS addressed and binary broadcast acknowledgement (ABK) sentence
  * structure.
@@ -411,7 +405,7 @@ typedef struct SENTENCE_ABK {
 } SENTENCE_ABK;
 #endif
 
-#if SENTENCE_ABM_ENABLED
+#if CFG_SENTENCE_ABM_ENABLED
 
 /**
  * @brief AIS addressed binary and safety related message (ABM) sentence
@@ -484,7 +478,7 @@ typedef struct SENTENCE_ABM {
 } SENTENCE_ABM;
 #endif
 
-#if SENTENCE_ACA_ENABLED
+#if CFG_SENTENCE_ACA_ENABLED
 /**
  * @brief AIS channel assignment message (ACA) sentence structure.
  *
@@ -605,7 +599,7 @@ typedef struct SENTENCE_ACA {
 } SENTENCE_ACA;
 #endif
 
-#if SENTENCE_ACK_ENABLED
+#if CFG_SENTENCE_ACK_ENABLED
 /**
  * @brief Acknowledge alarm (ACK) sentence structure.
  *
@@ -630,7 +624,7 @@ typedef struct SENTENCE_ACK {
 
 #endif
 
-#if SENTENCE_ACN_ENABLED
+#if CFG_SENTENCE_ACN_ENABLED
 /**
  * @brief Alert command (ACN) sentence structure.
  *
@@ -684,7 +678,7 @@ typedef struct SENTENCE_ACN {
 } SENTENCE_ACN;
 #endif
 
-#if SENTENCE_ACS_ENABLED
+#if CFG_SENTENCE_ACS_ENABLED
 /**
  * @brief AIS Channel Management Information Source (ACS) sentence structure.
  *
@@ -725,7 +719,7 @@ typedef struct SENTENCE_ACS {
 } SENTENCE_ACS;
 #endif
 
-#if SENTENCE_AIR_ENABLED
+#if CFG_SENTENCE_AIR_ENABLED
 /**
  * @brief AIS Interrogation Request (AIR) sentence structure.
  *
@@ -793,7 +787,7 @@ typedef struct SENTENCE_AIR {
 } SENTENCE_AIR;
 #endif
 
-#if SENTENCE_AKD_ENABLED
+#if CFG_SENTENCE_AKD_ENABLED
 /**
  * @brief Acknowledge Detail Alarm Condition (AKD) sentence structure.
  *
@@ -841,7 +835,7 @@ typedef struct SENTENCE_AKD {
 } SENTENCE_AKD;
 #endif
 
-#if SENTENCE_ALA_ENABLED
+#if CFG_SENTENCE_ALA_ENABLED
 /**
  * @brief Report Detailed Alarm Condition (ALA) sentence structure.
  *
@@ -889,7 +883,7 @@ typedef struct SENTENCE_ALA {
 } SENTENCE_ALA;
 #endif
 
-#if SENTENCE_ALC_ENABLED
+#if CFG_SENTENCE_ALC_ENABLED
 
 /**
  * @brief Cyclic Alert List (ALC) sentence structure.
@@ -926,7 +920,7 @@ typedef struct SENTENCE_ALC {
 } SENTENCE_ALC;
 #endif
 
-#if SENTENCE_ALF_ENABLED
+#if CFG_SENTENCE_ALF_ENABLED
 /**
  * @brief Alert sentence structure.
  *
@@ -994,5 +988,40 @@ typedef struct SENTENCE_ALF {
 } SENTENCE_ALF;
 #endif
 
+#if CFG_SENTENCE_ALR_ENABLED
+/**
+ * @brief Local alarm condition and status (ALR) sentence structure.
+ * 
+ * This structure represents information related to the ALR (Local Alarm Condition and Status)
+ * sentence. ALR sentences are used to report an alarm condition on a device and its current
+ * state of acknowledgement.
+ * 
+ * @var float timeOfAlarmConditionChange
+ * @brief Time of alarm condition change, UTC; format is hhmmss.ss.
+ * 
+ * @var uint32_t alarmNumber
+ * @brief Unique alarm number (identifier) at alarm source.
+ * 
+ * @var AlarmCondition alarmCondition
+ * @brief Alarm condition (A = threshold exceeded, V = not exceeded).
+ * 
+ * @var AlarmAcknowledgedState alarmAcknowledgedState
+ * @brief Alarm’s acknowledge state (A = acknowledged, V = unacknowledged).
+ * 
+ * @var char alarmDescriptionText[ALR_ALARM_DESCRIPTION_MAX_LENGTH]
+ * @brief Alarm’s description text; default length is 64 characters.
+ * 
+ * @var uint16_t checksum
+ * @brief Checksum for error detection.
+ */
+typedef struct SENTENCE_ALR {
+  float timeOfAlarmConditionChange;
+  uint32_t alarmNumber;
+  AlarmCondition alarmCondition;
+  AlarmAcknowledgedState alarmAcknowledgedState;
+  char alarmDescriptionText[ALR_ALARM_DESCRIPTION_MAX_LENGTH];
+  uint16_t checksum;
+} SENTENCE_ALR;
+#endif
 
 #endif  // Header guard
