@@ -16,6 +16,7 @@
 #define CFG_SENTENCE_ALF_ENABLED true
 #define CFG_SENTENCE_ALR_ENABLED true
 #define CFG_SENTENCE_APB_ENABLED true
+#define CFG_SENTENCE_ARC_ENABLED true
 
 /* Sentence configuration parameters */
 #define AAM_WAYPOINT_MAX_LENGTH 64
