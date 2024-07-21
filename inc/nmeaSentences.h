@@ -241,6 +241,19 @@ typedef enum SentenceID
   ZTG = 'ZTG'  /**< UTC and time to destination waypoint */
 } SentenceID;
 
+/** @brief Address field.
+ *
+ * A group of alphanumeric characters identifying type of talker, and sentence
+ * formatter. The first two characters identify the talker. The last three are
+ * the sentence formatter mnemonic code identifying the data type and the
+ * string format of the successive fields.
+ */
+typedef struct AddressField
+{
+  TalkerID talkerId;     /**< Talker ID */
+  SentenceID sentenceId; /**< Sentence ID */
+} AddressField;
+
 /**
  * @brief Enumeration for polarities.
  *
@@ -255,11 +268,75 @@ typedef enum Polarity
 } Polarity;
 
 /**
+ * @brief AIS VHF channel control.
+ *
+ * This enumeration represents the possible values for AIS VHF channel control.
+ */
+typedef enum AISChannel
+{
+  AIS_CHANNEL_A = 'A', /**< AIS VHF channel A */
+  AIS_CHANNEL_B = 'B'  /**< AIS VHF channel B */
+} AISChannel;
+
+/**
+ * @brief The VHF channel bandwidth control.
+ */
+typedef enum ChannelBandwidth
+{
+  BANDWIDTH_CHANNEL_DEPENDENT = 0, /**< See ITU-R M.1084, Annex 4 for details */
+  BANDWIDTH_12_5_KHZ = 1           /**< 12.5 kHz channel bandwidth */
+} ChannelBandwidth;
+
+/**
+ * @brief Enumeration for transmit/receive mode control.
+ *
+ * This enumeration represents the possible values for transmit/receive mode control.
+ * Tx = Transmit, Rx = Receive, A = Channel A, B = Channel B.
+ * TX_RX_A_B indicates transmit on channels A and B, receive on channels A and B.
+ * TX_A_RX_A_B indicates transmit on channel A, receive on channels A and B.
+ */
+typedef enum TxRxModeControl
+{
+  ModeControl_TX_RX_A_B = 0,   /**< Transmit on channels A and B, receive on channels A and B */
+  ModeControl_TX_A_RX_A_B = 1, /**< Transmit on channel A, receive on channels A and B */
+  ModeControl_TX_B_RX_A_B = 2, /**< Transmit on channel B, receive on channels A and B */
+  ModeControl_RX_A_B = 3,      /**< Do not transmit, receive on channels A and B */
+  ModeControl_RX_A = 4,        /**< Do not transmit, receive on channel A */
+  ModeControl_RX_B = 5         /**< Do not transmit, receive on channel B */
+} TxRxModeControl;
+
+/**
+ * @brief Transmission power levels for AIS within regional operating areas.
+ *
+ * This enumeration represents the possible transmission power levels for AIS within regional operating areas.
+ */
+typedef enum TxPowerLevel
+{
+  TX_POWER_HIGH = 0, /**< High power */
+  TX_POWER_LOW = 1   /**< Low power */
+} TxPowerLevel;
+
+/**
+ * @brief The source of regional operating parameters.
+ *
+ * This enumeration represents the possible sources of regional operating parameters.
+ * Message 22 refers to the ITU-R M.1371 Message 22: Channel Management.
+ */
+typedef enum ACAInfoSource
+{
+  SOURCE_MESSAGE_22_ADDRESSED = 'A',   /**< ITU-R M.1371 Message 22: Channel Management addressed message */
+  SOURCE_MESSAGE_22_BROADCAST = 'B',   /**< ITU-R M.1371 Message 22: Channel Management broadcast geographical area message */
+  SOURCE_AIS_CHANNEL_ASSIGNMENT = 'C', /**< IEC 61162-1 AIS Channel Assignment sentence */
+  SOURCE_DSC_CHANNEL_70 = 'D',         /**< DSC Channel 70 telecommand */
+  SOURCE_MANUAL_INPUT = 'M'            /**< Operator manual input */
+} ACAInfoSource;
+
+/**
  * @brief Enumeration for status field.
  *
- * This enumeration represents the possible values of a status field,
- * where 'A' indicates "Yes, data valid, warning flag clear,"
- * and 'V' indicates "No, data invalid, warning flag set."
+ * This enumeration represents the possible values of a status field:
+ * 'A' indicates "Yes, data valid, warning flag clear,"
+ * 'V' indicates "No, data invalid, warning flag set."
  */
 typedef enum StatusField
 {
@@ -299,6 +376,59 @@ typedef enum AlarmAcknowledgedState
 } AlarmAcknowledgedState;
 
 /**
+ * @brief Enumeration for alert acknowledged state.
+ *
+ * This enumeration represents the possible states of alert acknowledgment, including:
+ * acknowledge, normal, responsibility transfer, request/repeat information, silence,
+ * unacknowledged and active, and unacknowledged and rectified.
+ */
+typedef enum AlertAcknowledgedState
+{
+  ALERT_ACKNOWLEDGED = 'A',            /**< Acknowledge */
+  ALERT_NORMAL = 'N',                  /**< Normal */
+  ALERT_TRANSFER = 'O',                /**< Responsibility transfer */
+  ALERT_REQUEST = 'Q',                 /**< Request/Repeat information */
+  ALERT_SILENCE = 'S',                 /**< Silence */
+  ALERT_UNACKNOWLEDGED_ACTIVE = 'V',   /**< Unacknowledged, active*/
+  ALERT_UNACKNOWLEDGED_RECTIFIED = 'U' /**< Unacknowledged, rectified */
+} AlertAcknowledgedState;
+
+/**
+ * @brief Enumeration for alert priority.
+ *
+ * This enumeration represents the possible alert priorities, including emergency alarm, alarm, warning, and caution.
+ */
+typedef enum AlertPriority
+{
+  EMERGENCY_ALARM = 'E', /**< Emergency Alarm */
+  ALARM = 'A',           /**< Alarm */
+  WARNING = 'W',         /**< Warning */
+  CAUTION = 'C'          /**< Caution */
+} AlertPriority;
+
+/**
+ * @enum AlertCategory
+ * @brief Defines categories for alerts based on information requirements and acknowledgement.
+ *
+ * This enum categorises alerts based on the additional information needed at the operator unit
+ * to support decision-making when evaluating the alert condition, and whether the alert
+ * can be acknowledged on the bridge. It is as described in the fINS Performance Standard
+ * (IMO MSC.252(83)) and Bridge Alert Management Performance Standard (IMO MSC.302(87)):
+ *
+ * - **ALERT_CATEGORY_A (`'A'`)**: Requires additional information for decision support,
+ *   such as graphical information for collision or grounding hazards.
+ * - **ALERT_CATEGORY_B (`'B'`)**: No additional information is needed beyond the alert source and description text.
+ * - **ALERT_CATEGORY_C (`'C'`)**: Information about the status and treatment of the alert is required,
+ *   but cannot be acknowledged on the bridge (e.g., engine alerts).
+ */
+typedef enum AlertCategory
+{
+  ALERT_CATEGORY_A = 'A', /**< Requires additional information for decision support. */
+  ALERT_CATEGORY_B = 'B',
+  ALERT_CATEGORY_C = 'C' /**< Requires information but cannot be acknowledged on bridge. */
+} AlertCategory;
+
+/**
  * @brief Alert entry structure.
  *
  * This structure represents an alert entry transported within an ALC (Cyclic Alert List) sentence.
@@ -320,11 +450,8 @@ typedef struct AlertEntry
  * Status of arrival (entering the arrival circle, or passing the perpendicular
  * of the course line) at waypoint c--c.
  * *
- * @var TalkerID talkerId
- * @brief The talker ID associated with the sentence.
- *
- * @var SentenceID sentenceId
- * @brief The unique identifier for the sentence (AAM).
+ * @var AddressField addressField
+ * @brief The address field of the sentence: talker ID and sentence formatter (AAM).
  *
  * @var StatusField arrivalCircledEntered
  * @brief Single character field indicating if the vessel has entered the
@@ -344,16 +471,21 @@ typedef struct AlertEntry
  *
  * @var uint8_t *waypointID
  * @brief Pointer to the waypoint identifier.
+ *
+ * @var uint8_t checksum
+ * @brief An 8-bit checksum for error detection is computed by XOR'ing the data
+ * bits of each character in the sentence, excluding "$" and "*", without
+ * including start or stop bits.
  */
 typedef struct SENTENCE_AAM
 {
-  TalkerID talkerId;
-  SentenceID sentenceId = AAM;
+  AddressField addressField;
   StatusField arrivalCircledEntered;
   StatusField perpendicularPassedAtWaypoint;
   float arrivalCircleRadius;
   uint8_t radiusUnits;
   uint8_t waypointID[AAM_WAYPOINT_MAX_LENGTH];
+  uint8_t checksum;
 } SENTENCE_AAM;
 #endif // CFG_SENTENCE_AAM_ENABLED
 
@@ -379,11 +511,8 @@ typedef struct SENTENCE_AAM
  * the ABK sentence to report the outcome of the ABM, AIR, or BBM broadcast
  * process.
  *
- * @var TalkerID talkerId
- * @brief The talker ID associated with the sentence.
- *
- * @var SentenceID sentenceId
- * @brief The unique identifier for the sentence (ABK).
+ * @var AddressField addressField
+ * @brief The address field of the sentence: talker ID and sentence formatter (ABK).
  *
  * @var uint32_t mmsiAddress
  * @brief The Maritime Mobile Service Identity (MMSI) address.
@@ -397,19 +526,24 @@ typedef struct SENTENCE_AAM
  * @var uint8_t messageSequenceNumber
  * @brief The sequence number of the message.
  *
- * @var uint8_t acknowledment
+ * @var StatusField acknowledgement
  * @brief The acknowledgement status (A = Yes, data valid, warning flag clear;
  * V = No, data invalid, warning flag set).
+ *
+ * @var uint8_t checksum
+ * @brief An 8-bit checksum for error detection is computed by XOR'ing the data
+ * bits of each character in the sentence, excluding "$" and "*", without
+ * including start or stop bits.
  */
 typedef struct SENTENCE_ABK
 {
-  TalkerID talkerId;
-  SentenceID sentenceId = ABK;
+  AddressField addressField;
   uint32_t mmsiAddress;
   uint8_t mmsiChannel;
   float m1373MessageId;
   uint8_t messageSequenceNumber;
-  uint8_t acknowledment;
+  StatusField acknowledgement;
+  uint8_t checksum;
 } SENTENCE_ABK;
 #endif // CFG_SENTENCE_ABK_ENABLED
 
@@ -441,11 +575,8 @@ typedef struct SENTENCE_ABK
  * The AIS transponder determines the appropriate communications state for
  * transmission of Message 26 over the VHF data link.
  *
- * @var TalkerID talkerId
- * @brief The talker ID associated with the sentence.
- *
- * @var SentenceID sentenceId
- * @brief The unique identifier for the sentence (ABM).
+ * @var AddressField addressField
+ * @brief The address field of the sentence: talker ID and sentence formatter (ABM).
  *
  * @var uint8_t totalSentenceNumber
  * @brief The total number of sentences in the message sequence.
@@ -470,11 +601,15 @@ typedef struct SENTENCE_ABK
  *
  * @var uint8_t numberFillBits
  * @brief The number of fill bits in the sentence.
+ *
+ * @var uint8_t checksum
+ * @brief An 8-bit checksum for error detection is computed by XOR'ing the data
+ * bits of each character in the sentence, excluding "$" and "*", without
+ * including start or stop bits.
  */
 typedef struct SENTENCE_ABM
 {
-  TalkerID talkerId;
-  SentenceID sentenceId = ABM;
+  AddressField addressField;
   uint8_t totalSentenceNumber;
   uint8_t sentenceNumber;
   uint8_t sequentialMessageId;
@@ -483,6 +618,7 @@ typedef struct SENTENCE_ABM
   uint8_t m1373MessageId;
   uint8_t encapsulatedData[ABM_DATA_MAX_LENGTH];
   uint8_t numberFillBits;
+  uint8_t checksum;
 } SENTENCE_ABM;
 #endif // CFG_SENTENCE_ABM_ENABLED
 
@@ -510,11 +646,8 @@ typedef struct SENTENCE_ABM
  * the initialisation phase and dual-channel operation and channel management
  * functions of the AIS unit as described in ITU-R M.1371.
  *
- * @var TalkerID talkerId
- * @brief The talker ID associated with the sentence.
- *
- * @var SentenceID sentenceId
- * @brief The unique identifier for the sentence (ACA).
+ * @var AddressField addressField
+ * @brief The address field of the sentence: talker ID and sentence formatter (ACA).
  *
  * @var uint8_t sequenceNumber
  * @brief The sequence number of the ACA sentence.
@@ -550,42 +683,44 @@ typedef struct SENTENCE_ABM
  * @var uint8_t transitionZoneSize
  * @brief The size of the transition zone.
  *
- * @var uint16_t channelA
- * @brief The frequency of channel A.
+ * @var uin16_t channelA
+ * @brief The VHF channel number of channel A (see ITU-R M.1084, Annex 4).
  *
- * @var uint8_t channelABandwidth
+ * @var ChannelBandwidth channelABandwidth
  * @brief The bandwidth of channel A. See ITU-R M.1084, Annex 4 for details.
  *
- * @var uint16_t channelB
- * @brief The frequency of channel B.
+ * @var uint32_t channelB
+ * @brief The VHF channel number of channel B (see ITU-R M.1084, Annex 4).
  *
- * @var uint8_t channelBBandwidth
+ * @var ChannelBandwidth channelBBandwidth
  * @brief The bandwidth of channel B. See ITU-R M.1084, Annex 4 for details.
  *
- * @var uint8_t txRxMode
- * @brief The transmit/receive mode. See additional comments for details.
+ * @var TxRxModeControl txRxMode
+ * @brief The transmit/receive mode while in the assigned area.
  *
- * @var uint8_t powerLevel
- * @brief The power level.
+ * @var TxPowerLevel powerLevel
+ * @brief The power level of AIS transmissions.
  *
- * @var uint8_t infoSource
- * @brief The information source. See additional comments for details.
+ * @var ACAInfoSource infoSource
+ * @brief The information source.
  *
  * @var uint8_t inUseFlag
  * @brief The flag indicating if the channel management information is in use.
- * See additional comments for details.
  *
  * @var float inUseChangeTime
- * @brief The time when the channel management information became in use. See
- * additional comments for details.
+ * @brief The time when the channel management information became in use.
  * @note This is the UTC time that the “In-use flag” field changed to the
  * indicated state. This field should be null when the sentence is sent to an
  * AIS unit.
+ *
+ * @var uint8_t checksum
+ * @brief An 8-bit checksum for error detection is computed by XOR'ing the data
+ * bits of each character in the sentence, excluding "$" and "*", without
+ * including start or stop bits.
  */
 typedef struct SENTENCE_ACA
 {
-  TalkerID talkerId;
-  SentenceID sentenceId = ACA;
+  AddressField addressField;
   uint8_t sequenceNumber;
   float neLatitude;
   Polarity neLatitudePolarity;
@@ -597,14 +732,15 @@ typedef struct SENTENCE_ACA
   Polarity swLongitudePolarity;
   uint8_t transitionZoneSize;
   uint16_t channelA;
-  uint8_t channelABandwidth;
+  ChannelBandwidth channelABandwidth;
   uint16_t channelB;
-  uint8_t channelBBandwidth;
-  uint8_t txRxMode;
-  uint8_t powerLevel;
-  uint8_t infoSource;
+  ChannelBandwidth channelBBandwidth;
+  TxRxModeControl txRxMode;
+  TxPowerLevel powerLevel;
+  ACAInfoSource infoSource;
   uint8_t inUseFlag;
   float inUseChangeTime;
+  uint8_t checksum;
 } SENTENCE_ACA;
 #endif // CFG_SENTENCE_ACA_ENABLED
 
@@ -616,20 +752,22 @@ typedef struct SENTENCE_ACA
  * sentence. The ACK sentence is used to acknowledge an alarm condition reported
  * by a device.
  *
- * @var TalkerID talkerId
- * @brief The talker ID associated with the sentence.
- *
- * @var SentenceID sentenceId
- * @brief The unique identifier for the sentence (ACK).
+ * @var AddressField addressField
+ * @brief The address field of the sentence: talker ID and sentence formatter (ACK).
  *
  * @var uint16_t alarmId
  * @brief The unique identifier (alarm number) of the alarm being acknowledged.
+ *
+ * @var uint8_t checksum
+ * @brief An 8-bit checksum for error detection is computed by XOR'ing the data
+ * bits of each character in the sentence, excluding "$" and "*", without
+ * including start or stop bits.
  */
 typedef struct SENTENCE_ACK
 {
-  TalkerID talkerId;
-  SentenceID sentenceId = ACK;
+  AddressField addressField;
   uint32_t alarmId;
+  uint8_t checksum;
 } SENTENCE_ACK;
 #endif // CFG_SENTENCE_ACK_ENABLED
 
@@ -662,7 +800,7 @@ typedef struct SENTENCE_ACK
  * @brief The alert instance identifies the current instance of an alert. Range:
  * 1 to 999999. 0 for all instances.
  *
- * @var uint8_t alertCommand
+ * @var AlertAcknowledgedState alertCommand
  * @brief The alert command:
  * - 'A': Acknowledge
  * - 'Q': Request/Repeat information
@@ -672,8 +810,13 @@ typedef struct SENTENCE_ACK
  * @var uint8_t sentenceStatusFlag
  * @brief The sentence status flag:
  * - 'C': Command
- * Should not be null, indicates a command. A sentence without 'C' is not a
- * command.
+ * Should not be null, indicates a command.
+ * A sentence without 'C' is not a command.
+ *
+ * @var uint8_t checksum
+ * @brief An 8-bit checksum for error detection is computed by XOR'ing the data
+ * bits of each character in the sentence, excluding "$" and "*", without
+ * including start or stop bits.
  */
 typedef struct SENTENCE_ACN
 {
@@ -683,8 +826,9 @@ typedef struct SENTENCE_ACN
   uint8_t manufacturerMnemonic[3];
   uint32_t alertId;
   uint32_t alertInstance;
-  uint8_t alertCommand;
+  AlertAcknowledgedState alertCommand;
   uint8_t statusFlag;
+  uint8_t checksum;
 } SENTENCE_ACN;
 #endif // CFG_SENTENCE_ACN_ENABLED
 
@@ -712,11 +856,16 @@ typedef struct SENTENCE_ACN
  * @var uint8_t month
  * @brief Month of the UTC date of receipt of channel management information. Range: 01 to 12.
  *
- * @var uint16_t checksum
- * @brief Checksum for error detection.
+ * @var uint16_t year
+ * @brief Year of the UTC date of receipt of channel management information. E.g., 2024.
  *
  * @var uint8_t sourceType
  * @brief Type of the source of information. 'x' denotes any character.
+ *
+ * @var uint8_t checksum
+ * @brief An 8-bit checksum for error detection is computed by XOR'ing the data
+ * bits of each character in the sentence, excluding "$" and "*", without
+ * including start or stop bits.
  */
 typedef struct SENTENCE_ACS
 {
@@ -725,8 +874,8 @@ typedef struct SENTENCE_ACS
   float time;
   uint8_t day;
   uint8_t month;
-  uint16_t checksum;
-  uint8_t sourceType;
+  uint16_t year;
+  uint8_t checksum;
 } SENTENCE_ACS;
 #endif // CFG_SENTENCE_ACS_ENABLED
 
@@ -739,63 +888,66 @@ typedef struct SENTENCE_ACS
  * application with the means to initiate requests for specific ITU-R M.1371 messages from
  * distant mobile or base station AIS units.
  *
- * @var uint32_t mmsiStation1
- * @brief MMSI of interrogated station-1.
+ * @var AddressField addressField
+ * @brief The address field of the sentence: talker ID and sentence formatter (AIR).
+ *
+ * @var uint32_t mmsiInterrogatedStation1
+ * @brief MMSI of the interrogated station-1.
  *
  * @var uint8_t messageNumber1
  * @brief First message number requested from station-1.
  *
  * @var uint8_t messageSubsection1
- * @brief Message sub-section for station-1.
+ * @brief Message sub-section.
  *
  * @var uint8_t messageNumber2
  * @brief Second message number requested from station-1.
  *
- * @var uint32_t mmsiStation2
- * @brief MMSI of interrogated station-2.
+ * @var uint8_t messageSubsection2
+ * @brief Message sub-section.
  *
- * @var uint8_t messageNumberStation2
- * @brief Message Number requested from station-2.
+ * @var uint32_t mmsiInterrogatedStation2
+ * @brief MMSI of the interrogated station-2.
  *
- * @var char channel
- * @brief Channel of interrogation:
- * - 'A': Channel A
- * - 'B': Channel B
- * - '\0': No specific channel assigned
+ * @var uint8_t messageNumber3
+ * @brief Message number requested from station-2.
+ *
+ * @var uint8_t messageSubsection3
+ * @brief Message sub-section.
+ *
+ * @var AISChannel interrogationChannel
+ * @brief Channel of interrogation (A or B).
  *
  * @var uint16_t messageID1_1
- * @brief Start slot number of interrogation reply for Message ID1 from station-1.
- *
- * @var uint8_t messageSubsectionStation1
- * @brief Message sub-section for station-1.
+ * @brief Message ID1.1, station-1 reply slot.
  *
  * @var uint16_t messageID1_2
- * @brief Start slot number of interrogation reply for Message ID2 from station-1.
- *
- * @var uint8_t messageSubsection2
- * @brief Message sub-section for station-1.
+ * @brief Message ID1.2, station-1 reply slot.
  *
  * @var uint16_t messageID2_1
- * @brief Start slot number of interrogation reply for Message ID1 from station-2.
+ * @brief Message ID2.1, station-2 reply slot.
  *
- * @var uint16_t checksum
- * @brief Checksum for error detection.
+ * @var uint8_t checksum
+ * @brief An 8-bit checksum for error detection is computed by XOR'ing the data
+ * bits of each character in the sentence, excluding "$" and "*", without
+ * including start or stop bits.
  */
 typedef struct SENTENCE_AIR
 {
-  uint32_t mmsiStation1;
+  AddressField addressField;
+  uint32_t mmsiInterrogatedStation1;
   uint8_t messageNumber1;
   uint8_t messageSubsection1;
   uint8_t messageNumber2;
-  uint32_t mmsiStation2;
-  uint8_t messageNumberStation2;
-  char channel;
-  uint16_t messageID1_1;
-  uint8_t messageSubsectionStation1;
-  uint16_t messageID1_2;
   uint8_t messageSubsection2;
+  uint32_t mmsiInterrogatedStation2;
+  uint8_t messageNumber3;
+  uint8_t messageSubsection3;
+  AISChannel interrogationChannel;
+  uint16_t messageID1_1;
+  uint16_t messageID1_2;
   uint16_t messageID2_1;
-  uint16_t checksum;
+  uint8_t checksum;
 } SENTENCE_AIR;
 #endif // CFG_SENTENCE_AIR_ENABLED
 
@@ -807,8 +959,8 @@ typedef struct SENTENCE_AIR
  * sentence. AKD sentences provide acknowledgment of a detailed alarm condition reported through
  * ALA sentences.
  *
- * @var TalkerID talkerID
- * @brief The talker ID associated with the sentence.
+ * @var AddressField addressField
+ * @brief The address field of the sentence: talker ID and sentence formatter (AKD).
  *
  * @var float timeOfAcknowledgement
  * @brief Time of acknowledgement in hhmmss.ss format.
@@ -835,11 +987,13 @@ typedef struct SENTENCE_AIR
  * @brief Instance of equipment/unit/item sending the acknowledgment.
  *
  * @var uint16_t checksum
- * @brief Checksum for error detection.
+ * @brief An 8-bit checksum for error detection is computed by XOR'ing the data
+ * bits of each character in the sentence, excluding "$" and "*", without
+ * including start or stop bits.
  */
 typedef struct SENTENCE_AKD
 {
-  TalkerID talkerID;
+  AddressField addressField;
   float timeOfAcknowledgement;
   uint8_t originalSystemIndicator;
   uint8_t originalSubsystemIndicator;
@@ -860,8 +1014,8 @@ typedef struct SENTENCE_AKD
  * sentence. ALA sentences permit the alarm and alarm acknowledge condition of systems to be reported.
  * Unlike ALR, this sentence supports reporting multiple system and sub-system alarm conditions.
  *
- * @var TalkerID talkerId
- * @brief The talker ID associated with the sentence.
+ * @var AddressField addressField
+ * @brief The address field of the sentence: talker ID and sentence formatter (ALA).
  *
  * @var float eventTime
  * @brief Event time of alarm condition change including acknowledgement state change in hhmmss.ss format.
@@ -887,12 +1041,14 @@ typedef struct SENTENCE_AKD
  * @var char alarmDescriptionText[4]
  * @brief Additional and optional descriptive text/alarm detail condition tag. Maximum length is 4 characters.
  *
- * @var uint16_t checksum
- * @brief Checksum for error detection.
+ * @var uint8_t checksum
+ * @brief An 8-bit checksum for error detection is computed by XOR'ing the data
+ * bits of each character in the sentence, excluding "$" and "*", without
+ * including start or stop bits.
  */
 typedef struct SENTENCE_ALA
 {
-  TalkerID talkerId;
+  AddressField addressField;
   float eventTime;
   uint8_t originalSystemIndicator;
   uint8_t originalSubsystemIndicator;
@@ -901,7 +1057,7 @@ typedef struct SENTENCE_ALA
   AlarmCondition alarmCondition;
   AlarmAcknowledgedState alarmAcknowledgedState;
   char alarmDescriptionText[4];
-  uint16_t checksum;
+  uint8_t checksum;
 } SENTENCE_ALA;
 #endif // CFG_SENTENCE_ALA_ENABLED
 
@@ -912,9 +1068,9 @@ typedef struct SENTENCE_ALA
  * This structure represents information related to the ALC (Cyclic Alert List)
  * sentence. ALC sentences provide condensed ALF sentence information, containing
  * identifying data for each present alert of one certain source/device.
- *
- * @var TalkerID talkerId
- * @brief The talker ID associated with the sentence.
+ * 
+ * @var AddressField addressField
+ * @brief The address field of the sentence: talker ID and sentence formatter (ALC).
  *
  * @var uint8_t totalSentences
  * @brief Total number of sentences used for this message.
@@ -931,18 +1087,18 @@ typedef struct SENTENCE_ALA
  * @var AlertEntry alertEntries[MAX_ALERT_ENTRIES]
  * @brief Array containing alert entries.
  *
- * @var uint16_t checksum
+ * @var uint8_t checksum
  * @brief Checksum for error detection.
  */
 typedef struct SENTENCE_ALC
 {
-  TalkerID talkerId;
+  AddressField addressField;
   uint8_t totalSentences;
   uint8_t sentenceNumber;
   uint8_t sequentialMessageIdentifier;
   uint8_t numberOfAlertEntries;
   AlertEntry alertEntries[ALC_MAX_ALERT_ENTRIES];
-  uint16_t checksum;
+  uint8_t checksum;
 } SENTENCE_ALC;
 #endif // CFG_SENTENCE_ALC_ENABLED
 
@@ -953,6 +1109,9 @@ typedef struct SENTENCE_ALC
  * This structure represents information related to the ALF (Alert Sentence)
  * sentence. ALF sentences are used to report an alert condition and the
  * alert state of a device.
+ * 
+ * @var AddressField addressField
+ * @brief The address field of the sentence: talker ID and sentence formatter (ALF).
  *
  * @var uint8_t totalSentences
  * @brief Total number of ALF sentences for this message.
@@ -969,7 +1128,7 @@ typedef struct SENTENCE_ALC
  * @var char alertCategory
  * @brief Alert category: A, B, or C.
  *
- * @var char alertPriority
+ * @var AlertPriority alertPriority
  * @brief Alert priority: E, A, W, or C.
  *
  * @var char alertState
@@ -990,15 +1149,18 @@ typedef struct SENTENCE_ALC
  * @var uint8_t escalationCounter
  * @brief Escalation counter (0 to 9).
  *
- * @var char[16] alertText
+ * @var char[86] alertText
  * @brief Alert title or additional alert description.
  *
- * @var uint16_t checksum
- * @brief Checksum for error detection.
+ * @var uint8_t checksum
+ * @brief An 8-bit checksum for error detection is computed by XOR'ing the data
+ * bits of each character in the sentence, excluding "$" and "*", without
+ * including start or stop bits.
  */
 typedef struct SENTENCE_ALF
 {
   TalkerID talkerId;
+  SentenceID sentenceId;
   uint8_t totalSentences;
   uint8_t sentenceNumber;
   uint8_t sequentialMessageIdentifier;
@@ -1011,8 +1173,8 @@ typedef struct SENTENCE_ALF
   uint32_t alertInstance;
   uint8_t revisionCounter;
   uint8_t escalationCounter;
-  char alertText[16];
-  uint16_t checksum;
+  char alertText[86];
+  uint8_t checksum;
 } SENTENCE_ALF;
 #endif // CFG_SENTENCE_ALF_ENABLED
 
@@ -1024,8 +1186,8 @@ typedef struct SENTENCE_ALF
  * sentence. ALR sentences are used to report an alarm condition on a device and its current
  * state of acknowledgement.
  *
- * @var TalkerID talkerId
- * @brief The talker ID associated with the sentence.
+ * @var AddressField addressField
+ * @brief The address field of the sentence: talker ID and sentence formatter (ALR).
  *
  * @var float timeOfAlarmConditionChange
  * @brief Time of alarm condition change, UTC; format is hhmmss.ss.
@@ -1042,18 +1204,20 @@ typedef struct SENTENCE_ALF
  * @var char alarmDescriptionText[ALR_ALARM_DESCRIPTION_MAX_LENGTH]
  * @brief Alarm’s description text; default length is 64 characters.
  *
- * @var uint16_t checksum
- * @brief Checksum for error detection.
+ * @var uint8_t checksum
+ * @brief An 8-bit checksum for error detection is computed by XOR'ing the data
+ * bits of each character in the sentence, excluding "$" and "*", without
+ * including start or stop bits. 
  */
 typedef struct SENTENCE_ALR
 {
-  TalkerID talkerId;
+  AddressField addressField;
   float timeOfAlarmConditionChange;
   uint32_t alarmNumber;
   AlarmCondition alarmCondition;
   AlarmAcknowledgedState alarmAcknowledgedState;
   char alarmDescriptionText[ALR_ALARM_DESCRIPTION_MAX_LENGTH];
-  uint16_t checksum;
+  uint8_t checksum;
 } SENTENCE_ALR;
 #endif // CFG_SENTENCE_ALR_ENABLED
 
@@ -1065,12 +1229,9 @@ typedef struct SENTENCE_ALR
  * status, cross-track-error, waypoint arrival status, initial bearing from origin waypoint to the
  * destination, continuous bearing from present position to destination, and recommended heading to
  * steer to destination waypoint for the active navigation leg of the journey.
- *
- * @var TalkerID talkerId
- * @brief The talker ID associated with the sentence.
- *
- * @var SentenceID sentenceId
- * @brief The unique identifier for the sentence (APB).
+ * 
+ * @var AddressField addressField
+ * @brief The address field of the sentence: talker ID and sentence formatter (APB).
  *
  * @var StatusField status1
  * @brief Navigation receiver warning flag status (A = Data valid, V = LORAN C blink or SNR warning).
@@ -1098,13 +1259,16 @@ typedef struct SENTENCE_ALR
  *
  * @var char destinationWaypointID[APB_WAYPOINT_MAX_LENGTH]
  * @brief Destination waypoint ID.
- *
+ * 
+ * @var uint8_t checksum
+ * @brief An 8-bit checksum for error detection is computed by XOR'ing the data 
+ * bits of each character in the sentence, excluding "$" and "*", without 
+ * including start or stop bits.
  */
 #if CFG_SENTENCE_APB_ENABLED
 typedef struct SENTENCE_APB
 {
-  TalkerID talkerId;
-  SentenceID sentenceId = APB;
+  AddressField addressField;
   StatusField status1;
   StatusField status2;
   float xteMagnitude;
@@ -1117,7 +1281,53 @@ typedef struct SENTENCE_APB
   float bearingPresentPositionToDestination;
   float headingToSteerToDestinationWaypoint;
   char modeIndicator;
+  uint8_t checksum;
 } SENTENCE_APB;
 #endif // CFG_SENTENCE_APB_ENABLED
+
+#ifdef CFG_SENTENCE_ARC_ENABLED
+/**
+ * @brief Alert command refused (ARC) sentence structure.
+ * 
+ * This structure represents information related to the Alert command refused (ARC) sentence.
+ * ARC sentences are used for alert handling as described in IEC 61924-2.
+ * 
+ * @var AddressField addressField
+ * @brief The address field of the sentence: talker ID and sentence formatter (ARC).
+ * 
+ * @var float time
+ * @brief The release time of the alert command. Optional field, can be null.
+ * 
+ * @var uint8_t manufacturerMnemonic[3]
+ * @brief The manufacturer mnemonic code for proprietary alerts. Should be null for standardised alerts.
+ * 
+ * @var uint32_t alertId
+ * @brief The unique identifier of the alert. Range: 10000-9999999. 0 reserved for command request to all alerts.
+ * 
+ * @var uint32_t alertInstance
+ * @brief The alert instance identifies the current instance of an alert. Range: 1 to 999999. 0 for all instances.
+ * 
+ * @var AlertAcknowledgedState alertCommand
+ * @brief The alert command, this should not be a null field:
+ * - 'A': Acknowledge
+ * - 'Q': Request/Repeat information
+ * - 'O': Responsibility transfer
+ * - 'S': Silence
+ * 
+ * @var uint8_t checksum
+ * @brief An 8-bit checksum for error detection is computed by XOR'ing the data bits of each character in the sentence,
+ * excluding "$" and "*", without including start or stop bits.
+ */
+typedef struct SENTENCE_ARC
+{
+  AddressField addressField;
+  float time;
+  uint8_t manufacturerMnemonic[3];
+  uint32_t alertId;
+  uint32_t alertInstance;
+  AlertAcknowledgedState alertCommand;
+  uint8_t checksum;
+} SENTENCE_ARC;
+#endif // CFG_SENTENCE_ARC_ENABLED
 
 #endif // Header guard
