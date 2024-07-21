@@ -16,48 +16,49 @@
  * ID.
  */
 
-typedef enum TalkerID {
-  AUTOPILOT_GENERAL = 'AG',         /**< Heading/track controller (autopilot): \
-                                                 general */
-  AUTOPILOT_MAGNETIC = 'AP',        /**< Heading/track controller (autopilot): \
-                                         magnetic */
-  AIS = 'AI',                       /**< Automatic identification system */
-  BILGE_SYSTEM = 'BI',              /**< Bilge system */
-  BRIDGE_NAVIGATIONAL_ALARM = 'BN', /**< Bridge navigational watch alarm \
-                                         system */
-  ALERT_MANAGEMENT = 'CA',        /**< BAM central alert management function */
-  DSC_COMMUNICATIONS = 'CD',      /**< Comms: digital selective calling (DSC) */
-  DATA_RECEIVER = 'CR',           /**< Comms: data receiver */
-  SATELLITE_COMMUNICATION = 'CS', /**< Comms: satellite */
-  VHF_RADIO_TELEPHONE = 'CV',     /**< Comms: radio-telephone (VHF) */
-  SCANNING_RECEIVER = 'CX',       /**< Comms: scanning receiver */
-  DIRECTION_FINDER = 'DF',        /**< Direction finder */
-  DUPLEX_REPEATER_STATION = 'DU', /**< Duplex repeater station */
-  ELECTRONIC_CHART_SYSTEM = 'EC', /**< Electronic chart system (ECS) */
-  ELECTRONIC_CHART_DISPLAY = 'EI',  /**< Electronic chart display and \
-                                         information system (ECDIS) */
-  EMERGENCY_LOCATOR = 'EL',         /**< Emergency locator */
-  EMERGENCY_POSITION_BEACON = 'EP', /**< Emergency position indicating \
-                                         radio beacon (EPIRB) */
-  ENGINE_ROOM_MONITORING = 'ER',    /**< Engine room monitoring system */
-  FIRE_DOOR_CONTROLLER = 'FD', /**< Fire door controller/monitoring system */
-  FIRE_EXTINGUISHER_SYSTEM = 'FE', /**< Fire extinguisher system */
-  FIRE_DETECTION_SYSTEM = 'FR',    /**< Fire detection system */
-  FIRE_SPRINKLER_SYSTEM = 'FS',    /**< Fire sprinkler system */
-  GALILEO_POSITIONING = 'GA',      /**< Galileo positioning system */
-  BEIDOU_POSITIONING = 'GB',       /**< BeiDou positioning system */
-  IRNSS_POSITIONING = 'GI',        /**< IRNSS positioning system */
-  GLONASS_POSITIONING = 'GL',      /**< GLONASS positioning system */
-  GPS_POSITIONING = 'GP',          /**< Global positioning system (GPS) */
-  QZSS_POSITIONING = 'GQ',         /**< QZSS positioning system */
-  GNSS_POSITIONING = 'GN',   /**< Global navigation satellite system (GNSS) */
-  COMPASS_HEADING = 'HC',    /**< Heading sensors: compass, magnetic */
-  GYRO_NORTH_SEEKING = 'HE', /**< Heading sensors: gyro, north seeking */
-  FLUXGATE_HEADING = 'HF',   /**< Heading sensors: fluxgate */
-  GYRO_NON_NORTH_SEEKING = 'HN', /**< Heading sensors: gyro, \
-                                      on-north seeking */
-  HULL_DOOR_CONTROLLER = 'HD',   /**< Hull door controller/monitoring system */
-  HULL_STRESS_MONITORING = 'HS', /**< Hull stress monitoring */
+typedef enum TalkerID
+{
+  AUTOPILOT_GENERAL = 'AG',            /**< Heading/track controller (autopilot): \
+                                                    general */
+  AUTOPILOT_MAGNETIC = 'AP',           /**< Heading/track controller (autopilot): \
+                                            magnetic */
+  AIS = 'AI',                          /**< Automatic identification system */
+  BILGE_SYSTEM = 'BI',                 /**< Bilge system */
+  BRIDGE_NAVIGATIONAL_ALARM = 'BN',    /**< Bridge navigational watch alarm \
+                                            system */
+  ALERT_MANAGEMENT = 'CA',             /**< BAM central alert management function */
+  DSC_COMMUNICATIONS = 'CD',           /**< Comms: digital selective calling (DSC) */
+  DATA_RECEIVER = 'CR',                /**< Comms: data receiver */
+  SATELLITE_COMMUNICATION = 'CS',      /**< Comms: satellite */
+  VHF_RADIO_TELEPHONE = 'CV',          /**< Comms: radio-telephone (VHF) */
+  SCANNING_RECEIVER = 'CX',            /**< Comms: scanning receiver */
+  DIRECTION_FINDER = 'DF',             /**< Direction finder */
+  DUPLEX_REPEATER_STATION = 'DU',      /**< Duplex repeater station */
+  ELECTRONIC_CHART_SYSTEM = 'EC',      /**< Electronic chart system (ECS) */
+  ELECTRONIC_CHART_DISPLAY = 'EI',     /**< Electronic chart display and \
+                                            information system (ECDIS) */
+  EMERGENCY_LOCATOR = 'EL',            /**< Emergency locator */
+  EMERGENCY_POSITION_BEACON = 'EP',    /**< Emergency position indicating \
+                                            radio beacon (EPIRB) */
+  ENGINE_ROOM_MONITORING = 'ER',       /**< Engine room monitoring system */
+  FIRE_DOOR_CONTROLLER = 'FD',         /**< Fire door controller/monitoring system */
+  FIRE_EXTINGUISHER_SYSTEM = 'FE',     /**< Fire extinguisher system */
+  FIRE_DETECTION_SYSTEM = 'FR',        /**< Fire detection system */
+  FIRE_SPRINKLER_SYSTEM = 'FS',        /**< Fire sprinkler system */
+  GALILEO_POSITIONING = 'GA',          /**< Galileo positioning system */
+  BEIDOU_POSITIONING = 'GB',           /**< BeiDou positioning system */
+  IRNSS_POSITIONING = 'GI',            /**< IRNSS positioning system */
+  GLONASS_POSITIONING = 'GL',          /**< GLONASS positioning system */
+  GPS_POSITIONING = 'GP',              /**< Global positioning system (GPS) */
+  QZSS_POSITIONING = 'GQ',             /**< QZSS positioning system */
+  GNSS_POSITIONING = 'GN',             /**< Global navigation satellite system (GNSS) */
+  COMPASS_HEADING = 'HC',              /**< Heading sensors: compass, magnetic */
+  GYRO_NORTH_SEEKING = 'HE',           /**< Heading sensors: gyro, north seeking */
+  FLUXGATE_HEADING = 'HF',             /**< Heading sensors: fluxgate */
+  GYRO_NON_NORTH_SEEKING = 'HN',       /**< Heading sensors: gyro, \
+                                            on-north seeking */
+  HULL_DOOR_CONTROLLER = 'HD',         /**< Hull door controller/monitoring system */
+  HULL_STRESS_MONITORING = 'HS',       /**< Hull stress monitoring */
   INTEGRATED_COMMUNICATION = 'IC',     /**< Integrated communication system */
   INTEGRATED_INSTRUMENTATION = 'II',   /**< Integrated instrumentation */
   INTEGRATED_NAVIGATION = 'IN',        /**< Integrated navigation */
@@ -77,31 +78,31 @@ typedef enum TalkerID {
   SOUNDING_SCANNING = 'SS',            /**< Sounder, scanning */
   TURN_RATE_INDICATOR = 'TI',          /**< Turn rate indicator */
   MICROPROCESSOR_CONTROLLER = 'UP',    /**< Microprocessor controller */
-  USER_TALKER_0 = 'U0',    /**< (0<=#<=9) User configured talker ID */
-  USER_TALKER_1 = 'U1',    /**< (0<=#<=9) User configured talker ID */
-  USER_TALKER_2 = 'U2',    /**< (0<=#<=9) User configured talker ID */
-  USER_TALKER_3 = 'U3',    /**< (0<=#<=9) User configured talker ID */
-  USER_TALKER_4 = 'U4',    /**< (0<=#<=9) User configured talker ID */
-  USER_TALKER_5 = 'U5',    /**< (0<=#<=9) User configured talker ID */
-  USER_TALKER_6 = 'U6',    /**< (0<=#<=9) User configured talker ID */
-  USER_TALKER_7 = 'U7',    /**< (0<=#<=9) User configured talker ID */
-  USER_TALKER_8 = 'U8',    /**< (0<=#<=9) User configured talker ID */
-  USER_TALKER_9 = 'U9',    /**< (0<=#<=9) User configured talker ID */
-  VELOCITY_DOPPLER = 'VD', /**< Velocity sensors: Doppler, other/general */
-  VELOCITY_WATER_MAGNETIC = 'VM',    /**< Velocity sensors: speed log, water, \
-                                          magnetic */
-  VELOCITY_WATER_MECHANICAL = 'VW',  /**< Velocity sensors: speed log, water, \
-                                          mechanical */
-  VOYAGE_DATA_RECORDER = 'VR',       /**< Voyage data recorder */
-  WATERTIGHT_DOOR_CONTROLLER = 'WD', /**< Watertight door controller / \
-                                          monitoring system */
-  WATER_LEVEL_DETECTION = 'WL',      /**< Water level detection system */
-  TRANSDUCER = 'YX',                 /**< Transducer */
-  ATOMIC_CLOCK = 'ZA',               /**< Timekeeper, time/date: atomic clock */
-  CHRONOMETER = 'ZC',                /**< Timekeeper, time/date: chronometer */
-  QUARTZ_CLOCK = 'ZQ',               /**< Timekeeper, time/date: quartz */
-  RADIO_UPDATE = 'ZV',               /**< Timekeeper, time/date: radio update */
-  WEATHER_INSTRUMENT = 'WI'          /**< Weather instrument */
+  USER_TALKER_0 = 'U0',                /**< (0<=#<=9) User configured talker ID */
+  USER_TALKER_1 = 'U1',                /**< (0<=#<=9) User configured talker ID */
+  USER_TALKER_2 = 'U2',                /**< (0<=#<=9) User configured talker ID */
+  USER_TALKER_3 = 'U3',                /**< (0<=#<=9) User configured talker ID */
+  USER_TALKER_4 = 'U4',                /**< (0<=#<=9) User configured talker ID */
+  USER_TALKER_5 = 'U5',                /**< (0<=#<=9) User configured talker ID */
+  USER_TALKER_6 = 'U6',                /**< (0<=#<=9) User configured talker ID */
+  USER_TALKER_7 = 'U7',                /**< (0<=#<=9) User configured talker ID */
+  USER_TALKER_8 = 'U8',                /**< (0<=#<=9) User configured talker ID */
+  USER_TALKER_9 = 'U9',                /**< (0<=#<=9) User configured talker ID */
+  VELOCITY_DOPPLER = 'VD',             /**< Velocity sensors: Doppler, other/general */
+  VELOCITY_WATER_MAGNETIC = 'VM',      /**< Velocity sensors: speed log, water, \
+                                            magnetic */
+  VELOCITY_WATER_MECHANICAL = 'VW',    /**< Velocity sensors: speed log, water, \
+                                            mechanical */
+  VOYAGE_DATA_RECORDER = 'VR',         /**< Voyage data recorder */
+  WATERTIGHT_DOOR_CONTROLLER = 'WD',   /**< Watertight door controller / \
+                                            monitoring system */
+  WATER_LEVEL_DETECTION = 'WL',        /**< Water level detection system */
+  TRANSDUCER = 'YX',                   /**< Transducer */
+  ATOMIC_CLOCK = 'ZA',                 /**< Timekeeper, time/date: atomic clock */
+  CHRONOMETER = 'ZC',                  /**< Timekeeper, time/date: chronometer */
+  QUARTZ_CLOCK = 'ZQ',                 /**< Timekeeper, time/date: quartz */
+  RADIO_UPDATE = 'ZV',                 /**< Timekeeper, time/date: radio update */
+  WEATHER_INSTRUMENT = 'WI'            /**< Weather instrument */
 } TalkerID;
 
 /**
@@ -111,7 +112,8 @@ typedef enum TalkerID {
  * Each sentence ID corresponds to a specific type of information or command.
  * Use this enum to identify and work with different NMEA 0183 sentences.
  */
-typedef enum SentenceID {
+typedef enum SentenceID
+{
   AAM = 'AAM', /**< Waypoint arrival alarm */
   ABK = 'ABK', /**< AIS addressed and binary broadcast acknowledgement */
   ABM = 'ABM', /**< AIS addressed binary and safety related message */
@@ -244,7 +246,8 @@ typedef enum SentenceID {
  *
  * This enumeration represents the possible values for a polarity field.
  */
-typedef enum Polarity {
+typedef enum Polarity
+{
   NORTH = 'N', /**< Northern polarity */
   EAST = 'E',  /**< Eastern polarity */
   SOUTH = 'S', /**< Southern polarity */
@@ -258,7 +261,8 @@ typedef enum Polarity {
  * where 'A' indicates "Yes, data valid, warning flag clear,"
  * and 'V' indicates "No, data invalid, warning flag set."
  */
-typedef enum StatusField {
+typedef enum StatusField
+{
   STATUS_VALID = 'A',  /**< Yes, data valid, warning flag clear */
   STATUS_INVALID = 'V' /**< No, data invalid, warning flag set */
 } StatusField;
@@ -269,13 +273,14 @@ typedef enum StatusField {
  * This enumeration represents the possible alarm conditions,
  * including normal state and various alarm states.
  */
-typedef enum AlarmCondition {
-  ALARM_NORMAL = 'N',  /**< Normal state */
-  ALARM_THRESHOLD_EXCEEDED = 'H', /**< Threshold exceeded */
-  ALARM_EXTREME_THRESHOLD_EXCEEDED = 'J', /**< Extreme threshold exceeded */
-  ALARM_LOW_THRESHOLD_NOT_REACHED = 'L', /**< Low threshold not reached */
+typedef enum AlarmCondition
+{
+  ALARM_NORMAL = 'N',                            /**< Normal state */
+  ALARM_THRESHOLD_EXCEEDED = 'H',                /**< Threshold exceeded */
+  ALARM_EXTREME_THRESHOLD_EXCEEDED = 'J',        /**< Extreme threshold exceeded */
+  ALARM_LOW_THRESHOLD_NOT_REACHED = 'L',         /**< Low threshold not reached */
   ALARM_EXTREME_LOW_THRESHOLD_NOT_REACHED = 'K', /**< Extreme low threshold not reached */
-  ALARM_OTHER = 'X' /**< Other */
+  ALARM_OTHER = 'X'                              /**< Other */
 } AlarmCondition;
 
 /**
@@ -284,12 +289,13 @@ typedef enum AlarmCondition {
  * This enumeration represents the possible states of alarm acknowledgment,
  * including acknowledged, not acknowledged, broadcast, harbour mode, and override.
  */
-typedef enum AlarmAcknowledgedState {
-  ALARM_ACKNOWLEDGED = 'A', /**< Acknowledged */
+typedef enum AlarmAcknowledgedState
+{
+  ALARM_ACKNOWLEDGED = 'A',     /**< Acknowledged */
   ALARM_NOT_ACKNOWLEDGED = 'V', /**< Not acknowledged */
-  ALARM_BROADCAST = 'B', /**< Broadcast (acknowledgement not applicable) */
-  ALARM_HARBOUR_MODE = 'H', /**< Harbour mode */
-  ALARM_OVERRIDE = 'O' /**< Override */
+  ALARM_BROADCAST = 'B',        /**< Broadcast (acknowledgement not applicable) */
+  ALARM_HARBOUR_MODE = 'H',     /**< Harbour mode */
+  ALARM_OVERRIDE = 'O'          /**< Override */
 } AlarmAcknowledgedState;
 
 /**
@@ -299,13 +305,13 @@ typedef enum AlarmAcknowledgedState {
  * Each alert entry consists of identifying data for a certain alert, including manufacturer identifier,
  * alert identifier, alert instance, and revision counter.
  */
-typedef struct AlertEntry {
+typedef struct AlertEntry
+{
   uint8_t manufacturerIdentifier; /**< Manufacturer identifier (see ALF Manufacturer Identifier) */
-  uint32_t alertIdentifier; /**< Alert identifier (see ALF Alert Identifier) */
-  uint32_t alertInstance; /**< Alert instance (see ALF Alert instance) */
-  uint32_t revisionCounter; /**< Revision counter (see ALF Revision Counter) */
+  uint32_t alertIdentifier;       /**< Alert identifier (see ALF Alert Identifier) */
+  uint32_t alertInstance;         /**< Alert instance (see ALF Alert instance) */
+  uint32_t revisionCounter;       /**< Revision counter (see ALF Revision Counter) */
 } AlertEntry;
-
 
 #if CFG_SENTENCE_AAM_ENABLED
 /**
@@ -339,7 +345,8 @@ typedef struct AlertEntry {
  * @var uint8_t *waypointID
  * @brief Pointer to the waypoint identifier.
  */
-typedef struct SENTENCE_AAM {
+typedef struct SENTENCE_AAM
+{
   TalkerID talkerId;
   SentenceID sentenceId = AAM;
   StatusField arrivalCircledEntered;
@@ -348,7 +355,7 @@ typedef struct SENTENCE_AAM {
   uint8_t radiusUnits;
   uint8_t waypointID[AAM_WAYPOINT_MAX_LENGTH];
 } SENTENCE_AAM;
-#endif
+#endif // CFG_SENTENCE_AAM_ENABLED
 
 #if CFG_SENTENCE_ABK_ENABLED
 /**
@@ -394,7 +401,8 @@ typedef struct SENTENCE_AAM {
  * @brief The acknowledgement status (A = Yes, data valid, warning flag clear;
  * V = No, data invalid, warning flag set).
  */
-typedef struct SENTENCE_ABK {
+typedef struct SENTENCE_ABK
+{
   TalkerID talkerId;
   SentenceID sentenceId = ABK;
   uint32_t mmsiAddress;
@@ -403,10 +411,9 @@ typedef struct SENTENCE_ABK {
   uint8_t messageSequenceNumber;
   uint8_t acknowledment;
 } SENTENCE_ABK;
-#endif
+#endif // CFG_SENTENCE_ABK_ENABLED
 
 #if CFG_SENTENCE_ABM_ENABLED
-
 /**
  * @brief AIS addressed binary and safety related message (ABM) sentence
  * structure.
@@ -464,7 +471,8 @@ typedef struct SENTENCE_ABK {
  * @var uint8_t numberFillBits
  * @brief The number of fill bits in the sentence.
  */
-typedef struct SENTENCE_ABM {
+typedef struct SENTENCE_ABM
+{
   TalkerID talkerId;
   SentenceID sentenceId = ABM;
   uint8_t totalSentenceNumber;
@@ -476,7 +484,7 @@ typedef struct SENTENCE_ABM {
   uint8_t encapsulatedData[ABM_DATA_MAX_LENGTH];
   uint8_t numberFillBits;
 } SENTENCE_ABM;
-#endif
+#endif // CFG_SENTENCE_ABM_ENABLED
 
 #if CFG_SENTENCE_ACA_ENABLED
 /**
@@ -574,7 +582,8 @@ typedef struct SENTENCE_ABM {
  * indicated state. This field should be null when the sentence is sent to an
  * AIS unit.
  */
-typedef struct SENTENCE_ACA {
+typedef struct SENTENCE_ACA
+{
   TalkerID talkerId;
   SentenceID sentenceId = ACA;
   uint8_t sequenceNumber;
@@ -597,7 +606,7 @@ typedef struct SENTENCE_ACA {
   uint8_t inUseFlag;
   float inUseChangeTime;
 } SENTENCE_ACA;
-#endif
+#endif // CFG_SENTENCE_ACA_ENABLED
 
 #if CFG_SENTENCE_ACK_ENABLED
 /**
@@ -616,13 +625,13 @@ typedef struct SENTENCE_ACA {
  * @var uint16_t alarmId
  * @brief The unique identifier (alarm number) of the alarm being acknowledged.
  */
-typedef struct SENTENCE_ACK {
+typedef struct SENTENCE_ACK
+{
   TalkerID talkerId;
   SentenceID sentenceId = ACK;
   uint32_t alarmId;
 } SENTENCE_ACK;
-
-#endif
+#endif // CFG_SENTENCE_ACK_ENABLED
 
 #if CFG_SENTENCE_ACN_ENABLED
 /**
@@ -666,7 +675,8 @@ typedef struct SENTENCE_ACK {
  * Should not be null, indicates a command. A sentence without 'C' is not a
  * command.
  */
-typedef struct SENTENCE_ACN {
+typedef struct SENTENCE_ACN
+{
   TalkerID talkerId;
   SentenceID sentenceId = ACN;
   float time;
@@ -676,7 +686,7 @@ typedef struct SENTENCE_ACN {
   uint8_t alertCommand;
   uint8_t statusFlag;
 } SENTENCE_ACN;
-#endif
+#endif // CFG_SENTENCE_ACN_ENABLED
 
 #if CFG_SENTENCE_ACS_ENABLED
 /**
@@ -708,7 +718,8 @@ typedef struct SENTENCE_ACN {
  * @var uint8_t sourceType
  * @brief Type of the source of information. 'x' denotes any character.
  */
-typedef struct SENTENCE_ACS {
+typedef struct SENTENCE_ACS
+{
   uint32_t sequenceNumber;
   uint32_t mmsi;
   float time;
@@ -717,7 +728,7 @@ typedef struct SENTENCE_ACS {
   uint16_t checksum;
   uint8_t sourceType;
 } SENTENCE_ACS;
-#endif
+#endif // CFG_SENTENCE_ACS_ENABLED
 
 #if CFG_SENTENCE_AIR_ENABLED
 /**
@@ -770,7 +781,8 @@ typedef struct SENTENCE_ACS {
  * @var uint16_t checksum
  * @brief Checksum for error detection.
  */
-typedef struct SENTENCE_AIR {
+typedef struct SENTENCE_AIR
+{
   uint32_t mmsiStation1;
   uint8_t messageNumber1;
   uint8_t messageSubsection1;
@@ -785,7 +797,7 @@ typedef struct SENTENCE_AIR {
   uint16_t messageID2_1;
   uint16_t checksum;
 } SENTENCE_AIR;
-#endif
+#endif // CFG_SENTENCE_AIR_ENABLED
 
 #if CFG_SENTENCE_AKD_ENABLED
 /**
@@ -794,6 +806,9 @@ typedef struct SENTENCE_AIR {
  * This structure represents information related to the AKD (Acknowledge Detail Alarm Condition)
  * sentence. AKD sentences provide acknowledgment of a detailed alarm condition reported through
  * ALA sentences.
+ *
+ * @var TalkerID talkerID
+ * @brief The talker ID associated with the sentence.
  *
  * @var float timeOfAcknowledgement
  * @brief Time of acknowledgement in hhmmss.ss format.
@@ -808,7 +823,7 @@ typedef struct SENTENCE_AIR {
  * @brief Instance number of equipment/unit/item.
  *
  * @var uint8_t alarmType
- * @brief Type of alarm.
+ * @brief Type of alarm: corresponds to the ALA sentence being acknowledged.
  *
  * @var uint8_t ackSystemIndicator
  * @brief System indicator of the system sending the acknowledgment.
@@ -822,7 +837,9 @@ typedef struct SENTENCE_AIR {
  * @var uint16_t checksum
  * @brief Checksum for error detection.
  */
-typedef struct SENTENCE_AKD {
+typedef struct SENTENCE_AKD
+{
+  TalkerID talkerID;
   float timeOfAcknowledgement;
   uint8_t originalSystemIndicator;
   uint8_t originalSubsystemIndicator;
@@ -833,7 +850,7 @@ typedef struct SENTENCE_AKD {
   uint16_t ackInstanceNumber;
   uint16_t checksum;
 } SENTENCE_AKD;
-#endif
+#endif // CFG_SENTENCE_AKD_ENABLED
 
 #if CFG_SENTENCE_ALA_ENABLED
 /**
@@ -843,6 +860,9 @@ typedef struct SENTENCE_AKD {
  * sentence. ALA sentences permit the alarm and alarm acknowledge condition of systems to be reported.
  * Unlike ALR, this sentence supports reporting multiple system and sub-system alarm conditions.
  *
+ * @var TalkerID talkerId
+ * @brief The talker ID associated with the sentence.
+ *
  * @var float eventTime
  * @brief Event time of alarm condition change including acknowledgement state change in hhmmss.ss format.
  *
@@ -850,13 +870,13 @@ typedef struct SENTENCE_AKD {
  * @brief System indicator of original alarm source.
  *
  * @var uint8_t originalSubsystemIndicator
- * @brief Subsystem equipment indicator of original alarm source. If no sub-system can be identified, this field should be null.
+ * @brief Subsystem equipment indicator of original alarm source. Null if no subsystem.
  *
  * @var uint16_t instanceNumber
  * @brief Instance number of equipment/unit/item.
  *
  * @var uint16_t alarmType
- * @brief Type of alarm as defined in Annex D, Table D.1. Codes 900 to 999 are user definable.
+ * @brief Type of alarm (as defined in 61162-1 Annex D, Table D.1... codes 900 to 999 are user definable).
  *
  * @var AlarmCondition alarmCondition
  * @brief Alarm condition.
@@ -870,7 +890,9 @@ typedef struct SENTENCE_AKD {
  * @var uint16_t checksum
  * @brief Checksum for error detection.
  */
-typedef struct SENTENCE_ALA {
+typedef struct SENTENCE_ALA
+{
+  TalkerID talkerId;
   float eventTime;
   uint8_t originalSystemIndicator;
   uint8_t originalSubsystemIndicator;
@@ -881,16 +903,18 @@ typedef struct SENTENCE_ALA {
   char alarmDescriptionText[4];
   uint16_t checksum;
 } SENTENCE_ALA;
-#endif
+#endif // CFG_SENTENCE_ALA_ENABLED
 
 #if CFG_SENTENCE_ALC_ENABLED
-
 /**
  * @brief Cyclic Alert List (ALC) sentence structure.
  *
  * This structure represents information related to the ALC (Cyclic Alert List)
  * sentence. ALC sentences provide condensed ALF sentence information, containing
  * identifying data for each present alert of one certain source/device.
+ *
+ * @var TalkerID talkerId
+ * @brief The talker ID associated with the sentence.
  *
  * @var uint8_t totalSentences
  * @brief Total number of sentences used for this message.
@@ -910,15 +934,17 @@ typedef struct SENTENCE_ALA {
  * @var uint16_t checksum
  * @brief Checksum for error detection.
  */
-typedef struct SENTENCE_ALC {
-  uint8_t totalSentences; /**< Total number of sentences used for this message. */
-  uint8_t sentenceNumber; /**< Order of this sentence in the message. */
-  uint8_t sequentialMessageIdentifier; /**< Sequential message identifier relating all sentences. */
-  uint8_t numberOfAlertEntries; /**< Number of alert entries transported within this sentence. */
-  AlertEntry alertEntries[ALC_MAX_ALERT_ENTRIES]; /**< Array containing alert entries. */
-  uint16_t checksum; /**< Checksum for error detection. */
+typedef struct SENTENCE_ALC
+{
+  TalkerID talkerId;
+  uint8_t totalSentences;
+  uint8_t sentenceNumber;
+  uint8_t sequentialMessageIdentifier;
+  uint8_t numberOfAlertEntries;
+  AlertEntry alertEntries[ALC_MAX_ALERT_ENTRIES];
+  uint16_t checksum;
 } SENTENCE_ALC;
-#endif
+#endif // CFG_SENTENCE_ALC_ENABLED
 
 #if CFG_SENTENCE_ALF_ENABLED
 /**
@@ -970,7 +996,9 @@ typedef struct SENTENCE_ALC {
  * @var uint16_t checksum
  * @brief Checksum for error detection.
  */
-typedef struct SENTENCE_ALF {
+typedef struct SENTENCE_ALF
+{
+  TalkerID talkerId;
   uint8_t totalSentences;
   uint8_t sentenceNumber;
   uint8_t sequentialMessageIdentifier;
@@ -986,35 +1014,40 @@ typedef struct SENTENCE_ALF {
   char alertText[16];
   uint16_t checksum;
 } SENTENCE_ALF;
-#endif
+#endif // CFG_SENTENCE_ALF_ENABLED
 
 #if CFG_SENTENCE_ALR_ENABLED
 /**
  * @brief Local alarm condition and status (ALR) sentence structure.
- * 
+ *
  * This structure represents information related to the ALR (Local Alarm Condition and Status)
  * sentence. ALR sentences are used to report an alarm condition on a device and its current
  * state of acknowledgement.
- * 
+ *
+ * @var TalkerID talkerId
+ * @brief The talker ID associated with the sentence.
+ *
  * @var float timeOfAlarmConditionChange
  * @brief Time of alarm condition change, UTC; format is hhmmss.ss.
- * 
+ *
  * @var uint32_t alarmNumber
  * @brief Unique alarm number (identifier) at alarm source.
- * 
+ *
  * @var AlarmCondition alarmCondition
  * @brief Alarm condition (A = threshold exceeded, V = not exceeded).
- * 
+ *
  * @var AlarmAcknowledgedState alarmAcknowledgedState
  * @brief Alarm’s acknowledge state (A = acknowledged, V = unacknowledged).
- * 
+ *
  * @var char alarmDescriptionText[ALR_ALARM_DESCRIPTION_MAX_LENGTH]
  * @brief Alarm’s description text; default length is 64 characters.
- * 
+ *
  * @var uint16_t checksum
  * @brief Checksum for error detection.
  */
-typedef struct SENTENCE_ALR {
+typedef struct SENTENCE_ALR
+{
+  TalkerID talkerId;
   float timeOfAlarmConditionChange;
   uint32_t alarmNumber;
   AlarmCondition alarmCondition;
@@ -1022,6 +1055,69 @@ typedef struct SENTENCE_ALR {
   char alarmDescriptionText[ALR_ALARM_DESCRIPTION_MAX_LENGTH];
   uint16_t checksum;
 } SENTENCE_ALR;
-#endif
+#endif // CFG_SENTENCE_ALR_ENABLED
 
-#endif  // Header guard
+/**
+ * @brief APB: Autopilot Sentence B structure.
+ *
+ * This structure represents information related to the APB (Heading/track controller) sentence.
+ * The APB sentence is commonly used by autopilots and contains navigation receiver warning flag
+ * status, cross-track-error, waypoint arrival status, initial bearing from origin waypoint to the
+ * destination, continuous bearing from present position to destination, and recommended heading to
+ * steer to destination waypoint for the active navigation leg of the journey.
+ *
+ * @var TalkerID talkerId
+ * @brief The talker ID associated with the sentence.
+ *
+ * @var SentenceID sentenceId
+ * @brief The unique identifier for the sentence (APB).
+ *
+ * @var StatusField status1
+ * @brief Navigation receiver warning flag status (A = Data valid, V = LORAN C blink or SNR warning).
+ *
+ * @var StatusField status2
+ * @brief Navigation receiver warning flag status (A = OK or not used, V = LORAN C cycle lock warning).
+ *
+ * @var float xteMagnitude
+ * @brief Magnitude of cross-track error.
+ *
+ * @var char xteDirection
+ * @brief Direction to steer (L/R).
+ *
+ * @var float xteUnits
+ * @brief Cross-track error units (nautical miles).
+ *
+ * @var StatusField arrivalCircleEntered
+ * @brief Arrival circle status (A = entered, V = not entered).
+ *
+ * @var StatusField perpendicularPassedAtWaypoint
+ * @brief Perpendicular status (A = passed, V = not passed).
+ *
+ * @var float bearingOriginToDestination
+ * @brief Initial bearing from origin waypoint to destination (M/T).
+ *
+ * @var char destinationWaypointID[APB_WAYPOINT_MAX_LENGTH]
+ * @brief Destination waypoint ID.
+ *
+ */
+#if CFG_SENTENCE_APB_ENABLED
+typedef struct SENTENCE_APB
+{
+  TalkerID talkerId;
+  SentenceID sentenceId = APB;
+  StatusField status1;
+  StatusField status2;
+  float xteMagnitude;
+  char xteDirection;
+  float xteUnits;
+  StatusField arrivalCircleEntered;
+  StatusField perpendicularPassedAtWaypoint;
+  float bearingOriginToDestination;
+  char destinationWaypointID[APB_WAYPOINT_MAX_LENGTH];
+  float bearingPresentPositionToDestination;
+  float headingToSteerToDestinationWaypoint;
+  char modeIndicator;
+} SENTENCE_APB;
+#endif // CFG_SENTENCE_APB_ENABLED
+
+#endif // Header guard
