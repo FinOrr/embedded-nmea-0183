@@ -1,0 +1,94 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 20,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "conf-test-base",
+            "hidden": true,
+            "generator": "Ninja",
+            "description": "Base preset for tests",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++",
+                "BUILD_TESTING": "ON",
+                "ENABLE_TESTING": "ON",
+                "TARGET_PLATFORM": "host"
+            }
+        },
+        {
+            "name": "conf-unit-tests",
+            "inherits": "conf-test-base",
+            "description": "Debug build with tests enabled (target: host)",
+            "cacheVariables": {
+                "ENABLE_UNIT_TESTS": "ON"
+            }
+        },
+        {
+            "name": "conf-fuzzing-tests",
+            "inherits": "conf-test-base",
+            "description": "Test build with fuzzing enabled (target: host)",
+            "cacheVariables": {
+                "ENABLE_FUZZING": "ON"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "build-unit-tests",
+            "configurePreset": "conf-unit-tests",
+            "description": "Build unit tests (target: host)",
+            "targets": [
+                "unit_tests"
+            ]
+        },
+        {
+            "name": "build-fuzzing-tests",
+            "configurePreset": "conf-fuzzing-tests",
+            "description": "Build fuzzing tests (target: host)",
+            "targets": [
+                "fuzz_tests"
+            ]
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "test-base",
+            "hidden": true,
+            "output": {
+                "outputOnFailure": true
+            },
+            "execution": {
+                "noTestsAction": "error",
+                "stopOnFailure": true
+            }
+        },
+        {
+            "name": "test-unit-tests",
+            "configurePreset": "conf-unit-tests",
+            "inherits": "test-base",
+            "output": {
+                "outputOnFailure": true,
+                "verbosity": "verbose"
+            },
+            "execution": {
+                "noTestsAction": "error",
+                "stopOnFailure": true,
+                "jobs": 4
+            }
+        },
+        {
+            "name": "test-unit-tests-mutation",
+            "configurePreset": "conf-clang-tools",
+            "inherits": "test-base"
+        },
+        {
+            "name": "test-fuzzing",
+            "configurePreset": "conf-fuzzing-tests",
+            "inherits": "test-base"
+        }
+    ]
+}
