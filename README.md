@@ -20,7 +20,7 @@ It features a POSIX-like interface (open, close, read, write), which makes it ea
 - **Compile Time Sentence Support:** Turn off the sentences you won't use to minimise the size of your binary.
 - **Testable and Reliable:** Built for straightforward unit testing and fuzzing.
 
-For a detailed list of supported NMEA sentence types, please refer to [Supported Sentences](supported-sentences.md).
+For a detailed list of supported NMEA sentence types, please refer to [Supported Sentences](doc/supported-sentences.md).
 
 ## Getting Started
 
