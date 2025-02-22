@@ -81,11 +81,6 @@
             }
         },
         {
-            "name": "test-unit-tests-mutation",
-            "configurePreset": "conf-clang-tools",
-            "inherits": "test-base"
-        },
-        {
             "name": "test-fuzzing",
             "configurePreset": "conf-fuzzing-tests",
             "inherits": "test-base"
