@@ -1,0 +1,34 @@
+@startuml
+!theme blueprint
+title Level-2 DFD - NMEA Parser Detailed View
+
+actor "GPS Device" as GPS
+
+rectangle "NMEA Parser System" {
+    rectangle "Open/Init" as Open
+    rectangle "Write (Parse & Dispatch)" as Write {
+        rectangle "Validation" as Val
+        rectangle "Tokenisation" as Tok
+        rectangle "Dispatch" as Disp
+    }
+    rectangle "Global State" as Store
+    rectangle "Read (Format Data)" as Read {
+        rectangle "Output Mode Selector" as OutSel
+        rectangle "Formatter" as Format
+    }
+    rectangle "Close/Cleanup" as Close
+}
+
+GPS --> Open : Provide configuration\nand initialisation
+GPS --> Write : Send NMEA Sentence
+Write --> Val : Validate checksum
+Val --> Tok : Tokenise sentence
+Tok --> Disp : Identify sentence type
+Disp --> Store : Update global state
+Store --> Read : Supply current state data
+Read --> OutSel : Select output mode
+OutSel --> Format : Format data as RAW/JSON
+Format --> GPS : Return parsed data
+GPS --> Close : Termination request
+Close --> Store : Finalise/cleanup state
+@enduml

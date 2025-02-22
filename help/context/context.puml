@@ -1,0 +1,15 @@
+@startuml
+!theme blueprint
+title Level-0 DFD - NMEA Parser Context Diagram
+
+actor "GPS Device" as GPS
+actor "User Application" as App
+
+rectangle "NMEA Parser System" as Parser {
+    note top of Parser : Provides a POSIX-like interface\n(open/close/read/write)
+}
+
+GPS --> Parser : NMEA Sentences
+Parser --> App : Parsed Data (Raw or JSON)
+App --> Parser : Control Commands / Configurations
+@enduml
