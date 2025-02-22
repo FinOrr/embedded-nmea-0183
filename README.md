@@ -7,18 +7,22 @@
 
 ## Overview
 
-**Embedded NMEA 0183 Parser** is a C library designed for processing NMEA 0183 sentences on embedded devices. 
-It simplifies the handling of NMEA 0183 data, allowing developers to integrate GPS and other navigation-related information into their embedded systems efficiently.
+Embedded NMEA 0183 Parser is a streamlined header-only C library designed for integrating NMEA sentence parsing into embedded systems.
 
-This repo is currently a work-in-progress, and new sentences are continually being added.
+It features a POSIX-like interface (open, close, read, write), which makes it easy to adopt and extend.
 
 ## Features
 
-- NMEA 0183 sentence parsing for embedded devices.
-- Lightweight and easy-to-integrate into existing C projects.
-- (Planned) Support for all NMEA standard (IEC 61162-1) sentence types.
+- **POSIX-like Interface:** Use familiar functions to open, close, read from, and write to the parser.
+- **Modular Design:** Sentence-specific parsing functions are dispatched cleanly for easy expansion.
+- **Configurable Output:** Choose between raw binary data or a JSON-formatted output through simple runtime configuration.
+- **Single Header Implementation:** Simplifies integration.
+- **Compile Time Sentence Support:** Turn off the sentences you won't use to minimise the size of your binary.
+- **Testable and Reliable:** Built for straightforward unit testing and fuzzing.
 
-## Usage
+For a detailed list of supported NMEA sentence types, please refer to [Supported Sentences](supported-sentences.md).
+
+## Getting Started
 
 ### Installation
 
@@ -28,53 +32,61 @@ Clone the repository:
 git clone https://github.com/FinOrr/embedded-nmea-0183.git
 ```
 
-Copy the nmea0183.c and nmea0183.h files into your project directory.
-
-Include the nmea0183.h header file in your source files where you want to use the NMEA 0183 parsing functionality.
+Simply include the header in your source code:
 
 ```c
-#include "nmea0183.h"
+#include "nmea_parser.h"
 ```
 
-### Example
+### Example Usage
 
-See the demo.c program for example usage.
-To build the demo, you'll need CMake installed.
+By default, all NMEA data is accessible through the `g_nmea_state` structure.
 
-Open a terminal, navigate to the directory containing your source files and the CMakeLists.txt, and run the following commands:
+If you'd rather have the parser return a JSON for external processing, ensure you first configure the parser:
 
-```bash
-mkdir build
-cd build
-cmake ..
+```C
+// Optional: Set output mode to JSON.
+g_nmea_config.output_mode = NMEA_OUTPUT_JSON;
+
+// Initialise the parser with the address of the config.
+nmea_open(&g_nmea_config);
+
+// Feed NMEA-0183 string into the parser.
+const char *your_nmea_string = "$GPGGA,123519,4807.038,N,01131.000,E,...*CC";
+nmea_write(your_nmea_string, strlen(your_nmea_string));
+
+// Access parsed data; note that latitude is a string.
+const char *current_latitude_str = g_nmea_state.latitude;
+
+// Allocate a buffer for the JSON output.
+char json_buffer[256];
+ssize_t ret = nmea_read(json_buffer, sizeof(json_buffer));
+if(ret > 0) {
+    printf("Parsed JSON: %s\n", json_buffer);
+}
 ```
 
-This will generate the build files. Once the files are generated, you can build your project by running:
+## Configuring Supported Sentences
 
-```bash
-make
+Sentences can be omitted from compilation if you know your firmware does not require them. This reduces the size of your final binary.
+
+```C
+// nmea_parser.h
+
+// To enable a sentence, simply set the config to true
+#define CFG_SENTENCE_ENABLED_AAM true
+// To disable a sentence, set the config to false
+#define CFG_SENTENCE_ENABLED_ABK false
 ```
-
-This will compile your source files and create the executable. If you want to clean the generated files, you can run:
-
-```bash
-make clean
-```
-
-The resulting executable will be in the build directory.
 
 ## Documentation
 
-Detailed documentation can be found in the [Wiki](https://github.com/FinOrr/embedded-nmea-0183/wiki).
-
-## Contributing
-
-Contributions are welcome! Please check the [Contribution Guidelines](CONTRIBUTING.md) before making a pull request.
+For in-depth technical details and a full explanation of the design requirements, please see the [Requirements Document](help/requirements-doc.md).
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the permissive MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
-For any inquiries or support, please use the [Issues](https://github.com/FinOrr/embedded-nmea-0183/issues) page.
+For inquiries or support, please open an issue on [GitHub Issues](https://github.com/FinOrr/embedded-nmea-0183/issues).
