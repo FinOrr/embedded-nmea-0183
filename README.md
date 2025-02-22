@@ -77,6 +77,8 @@ Sentences can be omitted from compilation if you know your firmware does not req
 #define CFG_SENTENCE_ENABLED_AAM true
 // To disable a sentence, set the config to false
 #define CFG_SENTENCE_ENABLED_ABK false
+// ...
+// All supported sentences are set to `true` by default.
 ```
 
 ## Documentation
