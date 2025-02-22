@@ -1,0 +1,36 @@
+@startuml
+!theme blueprint
+title NMEA Parser Sequence Diagram - JSON Mode Operation
+
+actor App as "User Application"
+participant Parser as "NMEA Parser"
+participant Global as "Global State"
+
+App -> Parser: nmea_open(config: JSON)
+activate Parser
+Parser -> Global: Initialise/Clear state
+Parser --> App: Open success
+deactivate Parser
+
+App -> Parser: nmea_write(sentence)
+activate Parser
+Parser -> Parser: Validate checksum
+Parser -> Parser: Tokenise sentence
+Parser -> Parser: Dispatch to sentence parser
+Parser -> Global: Update state with parsed data
+Parser --> App: Write OK
+deactivate Parser
+
+App -> Parser: nmea_read()
+activate Parser
+Parser -> Global: Retrieve latest state
+Parser -> Parser: Format state as JSON string
+Parser --> App: Return JSON string
+deactivate Parser
+
+App -> Parser: nmea_close()
+activate Parser
+Parser -> Global: Cleanup (if needed)
+Parser --> App: Close success
+deactivate Parser
+@enduml
