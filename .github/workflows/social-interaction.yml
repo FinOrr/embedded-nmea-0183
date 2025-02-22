@@ -1,0 +1,24 @@
+---
+name: Social Interaction
+
+on:
+  issues: {}
+  pull_request: {}
+
+permissions:
+  contents: read
+
+jobs:
+  greeting:
+    runs-on: self-hosted
+    permissions:
+      issues: write
+      pull-requests: write
+    if: github.actor != 'dependabot[bot]'
+    steps:
+      - uses: actions/first-interaction@34f15e814fe48ac9312ccf29db4e74fa767cbab7 # v1.3.0
+        continue-on-error: true
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          issue-message: "Welcome aboard! We value your input and will address your issue soon."
+          pr-message: "Great job on your first PR! Your contribution helps improve the project."
