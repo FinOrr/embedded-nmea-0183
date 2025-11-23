@@ -40,9 +40,9 @@ set(NMEA_MODULE_SOURCES
     src/modules/nmea_navigation.c
     src/modules/nmea_waypoint.c
     src/modules/nmea_ais.c
+    src/modules/nmea_radar.c
+    src/modules/nmea_safety.c
     # Additional modules will be added as they are implemented
-    # src/modules/nmea_radar.c
-    # src/modules/nmea_safety.c
     # src/modules/nmea_comm.c
     # src/modules/nmea_system.c
     # src/modules/nmea_attitude.c

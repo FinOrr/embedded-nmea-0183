@@ -13,8 +13,8 @@
  * - HTC: Heading/track control command/data
  */
 
-#include "../../inc/modules/nmea_heading.h"
-#include "../nmea_internal.h"
+#include "modules/nmea_heading.h"
+#include "nmea_internal.h"
 #include <string.h>
 #include <stdlib.h>
 

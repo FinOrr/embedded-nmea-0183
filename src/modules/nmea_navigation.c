@@ -3,8 +3,8 @@
  * @brief Navigation and routing module implementation
  */
 
-#include "../../inc/modules/nmea_navigation.h"
-#include "../nmea_internal.h"
+#include "modules/nmea_navigation.h"
+#include "nmea_internal.h"
 #include <string.h>
 
 #if NMEA_MODULE_NAVIGATION_ENABLED

@@ -3,8 +3,8 @@
  * @brief Waypoint management module implementation
  */
 
-#include "../../inc/modules/nmea_waypoint.h"
-#include "../nmea_internal.h"
+#include "modules/nmea_waypoint.h"
+#include "nmea_internal.h"
 #include <string.h>
 
 #if NMEA_MODULE_WAYPOINT_ENABLED

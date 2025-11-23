@@ -5,8 +5,8 @@
  * Implements parsers for sensor-related NMEA sentences.
  */
 
-#include "../../inc/modules/nmea_sensor.h"
-#include "../nmea_internal.h"
+#include "modules/nmea_sensor.h"
+#include "nmea_internal.h"
 #include <string.h>
 
 #if NMEA_MODULE_SENSOR_ENABLED

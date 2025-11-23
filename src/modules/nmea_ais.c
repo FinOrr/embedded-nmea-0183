@@ -3,8 +3,8 @@
  * @brief Automatic Identification System (AIS) module implementation
  */
 
-#include "../../inc/modules/nmea_ais.h"
-#include "../nmea_internal.h"
+#include "modules/nmea_ais.h"
+#include "nmea_internal.h"
 #include <string.h>
 #include <stdlib.h>
 
