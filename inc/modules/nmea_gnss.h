@@ -17,8 +17,8 @@
 extern "C" {
 #endif
 
-#include "../nmea_types.h"
-#include "../nmea_config.h"
+#include "nmea_types.h"
+#include "nmea_config.h"
 
 #if NMEA_MODULE_GNSS_ENABLED
 

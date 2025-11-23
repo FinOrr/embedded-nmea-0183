@@ -5,8 +5,8 @@
  * Implements parsers for GNSS-related NMEA sentences.
  */
 
-#include "../../inc/modules/nmea_gnss.h"
-#include "../nmea_internal.h"
+#include "modules/nmea_gnss.h"
+#include "nmea_internal.h"
 #include <string.h>
 
 #if NMEA_MODULE_GNSS_ENABLED

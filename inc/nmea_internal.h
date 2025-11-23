@@ -15,7 +15,7 @@
 extern "C" {
 #endif
 
-#include "../inc/nmea.h"  /* Includes all necessary headers and defines struct nmea_context */
+#include "nmea.h"  /* Includes all necessary headers and defines struct nmea_context */
 #include <string.h>
 
 /* Module headers already included via nmea.h */
