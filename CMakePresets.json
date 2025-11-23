@@ -12,8 +12,8 @@
             "generator": "Ninja",
             "description": "Base preset for tests",
             "cacheVariables": {
-                "CMAKE_C_COMPILER": "clang",
-                "CMAKE_CXX_COMPILER": "clang++",
+                "CMAKE_C_COMPILER": "gcc",
+                "CMAKE_CXX_COMPILER": "g++",
                 "BUILD_TESTING": "ON",
                 "ENABLE_TESTING": "ON",
                 "TARGET_PLATFORM": "host"
