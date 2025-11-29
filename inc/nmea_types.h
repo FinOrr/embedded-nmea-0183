@@ -221,6 +221,53 @@ typedef enum {
     NMEA_QUALITY_SIMULATION = 8,    /**< Simulation mode */
 } nmea_quality_t;
 
+/**
+ * @brief NMEA-0183 Talker ID enumeration
+ *
+ * Identifies the source device/system that generated the sentence.
+ */
+typedef enum {
+    NMEA_TALKER_AG = 0,   /**< Autopilot - General */
+    NMEA_TALKER_AP,       /**< Autopilot - Magnetic */
+    NMEA_TALKER_CD,       /**< Communications - Digital Selective Calling (DSC) */
+    NMEA_TALKER_CR,       /**< Communications - Receiver / Beacon Receiver */
+    NMEA_TALKER_CS,       /**< Communications - Satellite */
+    NMEA_TALKER_CT,       /**< Communications - Radio-Telephone (MF/HF) */
+    NMEA_TALKER_CV,       /**< Communications - Radio-Telephone (VHF) */
+    NMEA_TALKER_CX,       /**< Communications - Scanning Receiver */
+    NMEA_TALKER_DF,       /**< Direction Finder */
+    NMEA_TALKER_EC,       /**< Electronic Chart Display & Information System (ECDIS) */
+    NMEA_TALKER_EP,       /**< Emergency Position Indicating Beacon (EPIRB) */
+    NMEA_TALKER_ER,       /**< Engine Room Monitoring Systems */
+    NMEA_TALKER_GP,       /**< Global Positioning System (GPS) */
+    NMEA_TALKER_HC,       /**< Heading - Magnetic Compass */
+    NMEA_TALKER_HE,       /**< Heading - North Seeking Gyro */
+    NMEA_TALKER_HN,       /**< Heading - Non North Seeking Gyro */
+    NMEA_TALKER_II,       /**< Integrated Instrumentation */
+    NMEA_TALKER_IN,       /**< Integrated Navigation */
+    NMEA_TALKER_LC,       /**< Loran C */
+    NMEA_TALKER_P,        /**< Proprietary Code */
+    NMEA_TALKER_RA,       /**< RADAR and/or ARPA */
+    NMEA_TALKER_SD,       /**< Sounder, Depth */
+    NMEA_TALKER_SN,       /**< Electronic Positioning System, other/general */
+    NMEA_TALKER_SS,       /**< Sounder, Scanning */
+    NMEA_TALKER_TI,       /**< Turn Rate Indicator */
+    NMEA_TALKER_VD,       /**< Velocity Sensor, Doppler, other/general */
+    NMEA_TALKER_DM,       /**< Velocity Sensor, Speed Log, Water, Magnetic */
+    NMEA_TALKER_VW,       /**< Velocity Sensor, Speed Log, Water, Mechanical */
+    NMEA_TALKER_WI,       /**< Weather Instruments */
+    NMEA_TALKER_YX,       /**< Transducer */
+    NMEA_TALKER_ZA,       /**< Timekeeper - Atomic Clock */
+    NMEA_TALKER_ZC,       /**< Timekeeper - Chronometer */
+    NMEA_TALKER_ZQ,       /**< Timekeeper - Quartz */
+    NMEA_TALKER_ZV,       /**< Timekeeper - Radio Update, WWV or WWVH */
+    NMEA_TALKER_AI,       /**< AIS (Mobile AIS station) */
+    NMEA_TALKER_GL,       /**< GLONASS */
+    NMEA_TALKER_GN,       /**< Global Navigation Satellite System (GNSS) */
+    NMEA_TALKER_UNKNOWN,  /**< Unknown or invalid talker ID */
+    NMEA_TALKER_COUNT     /**< Total number of talker IDs */
+} nmea_talker_id_t;
+
 /* ========================================================================== */
 /*                           CONSTANTS                                        */
 /* ========================================================================== */

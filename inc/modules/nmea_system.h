@@ -11,7 +11,6 @@
  * - Navigation status (NSR)
  * - Device position (POS)
  * - MSK receiver (MSK/MSS)
- * - Rudder order (ROR)
  */
 
 #ifndef NMEA_SYSTEM_H
@@ -30,7 +29,7 @@ extern "C" {
  * @brief System module state structure
  */
 typedef struct {
-    /* HBT - Heartbeat Supervision (not in spec files, but mentioned in status) */
+    /* HBT - Heartbeat Supervision */
     nmea_time_t heartbeat_time;         /**< Heartbeat time */
     bool heartbeat_valid;                /**< Heartbeat data valid */
 
@@ -124,10 +123,6 @@ typedef struct {
     uint8_t mss_channel;                 /**< Channel number */
     bool mss_valid;                      /**< MSS data valid */
 
-    /* ROR - Rudder Order Status (not in spec files, assumed structure) */
-    float ror_starboard_order;           /**< Starboard rudder order */
-    float ror_port_order;                /**< Port rudder order */
-    bool ror_valid;                      /**< ROR data valid */
 } nmea_system_state_t;
 
 /* Forward declarations */

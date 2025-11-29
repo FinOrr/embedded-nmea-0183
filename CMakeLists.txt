@@ -30,23 +30,23 @@ set(NMEA_CORE_SOURCES
     src/nmea_checksum.c
     src/nmea_error.c
     src/nmea_helpers.c
+    src/nmea_talker.c
 )
 
 # Module source files (conditionally compiled based on nmea_config.h)
 set(NMEA_MODULE_SOURCES
-    src/modules/nmea_gnss.c
-    src/modules/nmea_sensor.c
-    src/modules/nmea_heading.c
-    src/modules/nmea_navigation.c
-    src/modules/nmea_waypoint.c
     src/modules/nmea_ais.c
+    src/modules/nmea_attitude.c
+    src/modules/nmea_comm.c
+    src/modules/nmea_gnss.c
+    src/modules/nmea_heading.c
+    src/modules/nmea_misc.c
+    src/modules/nmea_navigation.c
     src/modules/nmea_radar.c
     src/modules/nmea_safety.c
-    # Additional modules will be added as they are implemented
-    # src/modules/nmea_comm.c
-    # src/modules/nmea_system.c
-    # src/modules/nmea_attitude.c
-    # src/modules/nmea_misc.c
+    src/modules/nmea_sensor.c
+    src/modules/nmea_system.c
+    src/modules/nmea_waypoint.c
 )
 
 # Create static library

@@ -16,57 +16,47 @@
 /**
  * @brief Static dispatch table
  *
- * Maps sentence IDs to parser functions. Only includes enabled sentences.
+ * Maps sentence types (without talker IDs) to parser functions.
+ * Talker IDs are validated separately at runtime.
+ * Only includes enabled sentences.
  */
 static const nmea_dispatch_entry_t g_dispatch_table[] = {
 #if NMEA_MODULE_GNSS_ENABLED
 #if NMEA_SENTENCE_GGA_ENABLED
-    {"GPGGA", nmea_parse_gga, NMEA_MODULE_GNSS, 14},
-    {"GNGGA", nmea_parse_gga, NMEA_MODULE_GNSS, 14},
+    {"GGA", nmea_parse_gga, NMEA_MODULE_GNSS, 14},
 #endif
 #if NMEA_SENTENCE_RMC_ENABLED
-    {"GPRMC", nmea_parse_rmc, NMEA_MODULE_GNSS, 12},
-    {"GNRMC", nmea_parse_rmc, NMEA_MODULE_GNSS, 12},
+    {"RMC", nmea_parse_rmc, NMEA_MODULE_GNSS, 12},
 #endif
 #if NMEA_SENTENCE_GLL_ENABLED
-    {"GPGLL", nmea_parse_gll, NMEA_MODULE_GNSS, 7},
-    {"GNGLL", nmea_parse_gll, NMEA_MODULE_GNSS, 7},
+    {"GLL", nmea_parse_gll, NMEA_MODULE_GNSS, 7},
 #endif
 #if NMEA_SENTENCE_GSA_ENABLED
-    {"GPGSA", nmea_parse_gsa, NMEA_MODULE_GNSS, 17},
-    {"GNGSA", nmea_parse_gsa, NMEA_MODULE_GNSS, 17},
+    {"GSA", nmea_parse_gsa, NMEA_MODULE_GNSS, 17},
 #endif
 #if NMEA_SENTENCE_GSV_ENABLED
-    {"GPGSV", nmea_parse_gsv, NMEA_MODULE_GNSS, 4},
-    {"GNGSV", nmea_parse_gsv, NMEA_MODULE_GNSS, 4},
+    {"GSV", nmea_parse_gsv, NMEA_MODULE_GNSS, 4},
 #endif
 #if NMEA_SENTENCE_GST_ENABLED
-    {"GPGST", nmea_parse_gst, NMEA_MODULE_GNSS, 9},
-    {"GNGST", nmea_parse_gst, NMEA_MODULE_GNSS, 9},
+    {"GST", nmea_parse_gst, NMEA_MODULE_GNSS, 9},
 #endif
 #if NMEA_SENTENCE_GNS_ENABLED
-    {"GPGNS", nmea_parse_gns, NMEA_MODULE_GNSS, 13},
-    {"GNGNS", nmea_parse_gns, NMEA_MODULE_GNSS, 13},
+    {"GNS", nmea_parse_gns, NMEA_MODULE_GNSS, 13},
 #endif
 #if NMEA_SENTENCE_GBS_ENABLED
-    {"GPGBS", nmea_parse_gbs, NMEA_MODULE_GNSS, 9},
-    {"GNGBS", nmea_parse_gbs, NMEA_MODULE_GNSS, 9},
+    {"GBS", nmea_parse_gbs, NMEA_MODULE_GNSS, 9},
 #endif
 #if NMEA_SENTENCE_GRS_ENABLED
-    {"GPGRS", nmea_parse_grs, NMEA_MODULE_GNSS, 14},
-    {"GNGRS", nmea_parse_grs, NMEA_MODULE_GNSS, 14},
+    {"GRS", nmea_parse_grs, NMEA_MODULE_GNSS, 14},
 #endif
 #if NMEA_SENTENCE_GFA_ENABLED
-    {"GPGFA", nmea_parse_gfa, NMEA_MODULE_GNSS, 14},
-    {"GNGFA", nmea_parse_gfa, NMEA_MODULE_GNSS, 14},
+    {"GFA", nmea_parse_gfa, NMEA_MODULE_GNSS, 14},
 #endif
 #if NMEA_SENTENCE_RMA_ENABLED
-    {"GPRMA", nmea_parse_rma, NMEA_MODULE_GNSS, 12},
-    {"GNRMA", nmea_parse_rma, NMEA_MODULE_GNSS, 12},
+    {"RMA", nmea_parse_rma, NMEA_MODULE_GNSS, 12},
 #endif
 #if NMEA_SENTENCE_RMB_ENABLED
-    {"GPRMB", nmea_parse_rmb, NMEA_MODULE_GNSS, 14},
-    {"GNRMB", nmea_parse_rmb, NMEA_MODULE_GNSS, 14},
+    {"RMB", nmea_parse_rmb, NMEA_MODULE_GNSS, 14},
 #endif
 #endif /* NMEA_MODULE_GNSS_ENABLED */
 
@@ -76,40 +66,31 @@ static const nmea_dispatch_entry_t g_dispatch_table[] = {
 
 #if NMEA_MODULE_SENSOR_ENABLED
 #if NMEA_SENTENCE_DBT_ENABLED
-    {"SDDBT", nmea_parse_dbt, NMEA_MODULE_SENSOR, 6},
-    {"IIDBT", nmea_parse_dbt, NMEA_MODULE_SENSOR, 6},
+    {"DBT", nmea_parse_dbt, NMEA_MODULE_SENSOR, 6},
 #endif
 #if NMEA_SENTENCE_DPT_ENABLED
-    {"SDDPT", nmea_parse_dpt, NMEA_MODULE_SENSOR, 3},
-    {"IIDPT", nmea_parse_dpt, NMEA_MODULE_SENSOR, 3},
+    {"DPT", nmea_parse_dpt, NMEA_MODULE_SENSOR, 3},
 #endif
 #if NMEA_SENTENCE_MTW_ENABLED
-    {"IIMTW", nmea_parse_mtw, NMEA_MODULE_SENSOR, 2},
-    {"SDMTW", nmea_parse_mtw, NMEA_MODULE_SENSOR, 2},
+    {"MTW", nmea_parse_mtw, NMEA_MODULE_SENSOR, 2},
 #endif
 #if NMEA_SENTENCE_MWD_ENABLED
-    {"IIMWD", nmea_parse_mwd, NMEA_MODULE_SENSOR, 8},
-    {"WIMWD", nmea_parse_mwd, NMEA_MODULE_SENSOR, 8},
+    {"MWD", nmea_parse_mwd, NMEA_MODULE_SENSOR, 8},
 #endif
 #if NMEA_SENTENCE_MWV_ENABLED
-    {"IIMWV", nmea_parse_mwv, NMEA_MODULE_SENSOR, 5},
-    {"WIMWV", nmea_parse_mwv, NMEA_MODULE_SENSOR, 5},
+    {"MWV", nmea_parse_mwv, NMEA_MODULE_SENSOR, 5},
 #endif
 #if NMEA_SENTENCE_VBW_ENABLED
-    {"IIVBW", nmea_parse_vbw, NMEA_MODULE_SENSOR, 10},
-    {"VWVBW", nmea_parse_vbw, NMEA_MODULE_SENSOR, 10},
+    {"VBW", nmea_parse_vbw, NMEA_MODULE_SENSOR, 4},
 #endif
 #if NMEA_SENTENCE_VHW_ENABLED
-    {"IIVHW", nmea_parse_vhw, NMEA_MODULE_SENSOR, 8},
-    {"VWVHW", nmea_parse_vhw, NMEA_MODULE_SENSOR, 8},
+    {"VHW", nmea_parse_vhw, NMEA_MODULE_SENSOR, 8},
 #endif
 #if NMEA_SENTENCE_VLW_ENABLED
-    {"IIVLW", nmea_parse_vlw, NMEA_MODULE_SENSOR, 8},
-    {"VWVLW", nmea_parse_vlw, NMEA_MODULE_SENSOR, 8},
+    {"VLW", nmea_parse_vlw, NMEA_MODULE_SENSOR, 4},
 #endif
 #if NMEA_SENTENCE_VPW_ENABLED
-    {"IIVPW", nmea_parse_vpw, NMEA_MODULE_SENSOR, 4},
-    {"VWVPW", nmea_parse_vpw, NMEA_MODULE_SENSOR, 4},
+    {"VPW", nmea_parse_vpw, NMEA_MODULE_SENSOR, 2},
 #endif
 #endif /* NMEA_MODULE_SENSOR_ENABLED */
 
@@ -119,38 +100,29 @@ static const nmea_dispatch_entry_t g_dispatch_table[] = {
 
 #if NMEA_MODULE_HEADING_ENABLED
 #if NMEA_SENTENCE_HDG_ENABLED
-    {"HEHDG", nmea_parse_hdg, NMEA_MODULE_HEADING, 5},
-    {"IIHDG", nmea_parse_hdg, NMEA_MODULE_HEADING, 5},
+    {"HDG", nmea_parse_hdg, NMEA_MODULE_HEADING, 5},
 #endif
 #if NMEA_SENTENCE_HDT_ENABLED
-    {"HEHDT", nmea_parse_hdt, NMEA_MODULE_HEADING, 2},
-    {"IIHDT", nmea_parse_hdt, NMEA_MODULE_HEADING, 2},
+    {"HDT", nmea_parse_hdt, NMEA_MODULE_HEADING, 2},
 #endif
 #if NMEA_SENTENCE_ROT_ENABLED
-    {"HEROT", nmea_parse_rot, NMEA_MODULE_HEADING, 2},
-    {"IIROT", nmea_parse_rot, NMEA_MODULE_HEADING, 2},
+    {"ROT", nmea_parse_rot, NMEA_MODULE_HEADING, 2},
 #endif
 #if NMEA_SENTENCE_VTG_ENABLED
-    {"GPVTG", nmea_parse_vtg, NMEA_MODULE_HEADING, 9},
-    {"GNVTG", nmea_parse_vtg, NMEA_MODULE_HEADING, 9},
+    {"VTG", nmea_parse_vtg, NMEA_MODULE_HEADING, 9},
 #endif
 #if NMEA_SENTENCE_VDR_ENABLED
-    {"IIVDR", nmea_parse_vdr, NMEA_MODULE_HEADING, 6},
-    {"VWVDR", nmea_parse_vdr, NMEA_MODULE_HEADING, 6},
+    {"VDR", nmea_parse_vdr, NMEA_MODULE_HEADING, 6},
 #endif
 #if NMEA_SENTENCE_OSD_ENABLED
-    {"RAOSD", nmea_parse_osd, NMEA_MODULE_HEADING, 9},
-    {"IIOSD", nmea_parse_osd, NMEA_MODULE_HEADING, 9},
+    {"OSD", nmea_parse_osd, NMEA_MODULE_HEADING, 9},
 #endif
 #if NMEA_SENTENCE_HMR_ENABLED
-    {"HEHMR", nmea_parse_hmr, NMEA_MODULE_HEADING, 17},
-    {"IIHMR", nmea_parse_hmr, NMEA_MODULE_HEADING, 17},
+    {"HMR", nmea_parse_hmr, NMEA_MODULE_HEADING, 17},
 #endif
 #if NMEA_SENTENCE_HTC_ENABLED
-    {"HEHTC", nmea_parse_htc, NMEA_MODULE_HEADING, 14},
-    {"IIHTC", nmea_parse_htc, NMEA_MODULE_HEADING, 14},
-    {"HEHTD", nmea_parse_htc, NMEA_MODULE_HEADING, 17},
-    {"IIHTD", nmea_parse_htc, NMEA_MODULE_HEADING, 17},
+    {"HTC", nmea_parse_htc, NMEA_MODULE_HEADING, 14},
+    {"HTD", nmea_parse_htc, NMEA_MODULE_HEADING, 17},
 #endif
 #endif /* NMEA_MODULE_HEADING_ENABLED */
 
@@ -160,36 +132,28 @@ static const nmea_dispatch_entry_t g_dispatch_table[] = {
 
 #if NMEA_MODULE_NAVIGATION_ENABLED
 #if NMEA_SENTENCE_APB_ENABLED
-    {"GPAPB", nmea_parse_apb, NMEA_MODULE_NAVIGATION, 15},
-    {"GNAPB", nmea_parse_apb, NMEA_MODULE_NAVIGATION, 15},
+    {"APB", nmea_parse_apb, NMEA_MODULE_NAVIGATION, 15},
 #endif
 #if NMEA_SENTENCE_BWC_ENABLED
-    {"GPBWC", nmea_parse_bwc, NMEA_MODULE_NAVIGATION, 13},
-    {"GNBWC", nmea_parse_bwc, NMEA_MODULE_NAVIGATION, 13},
+    {"BWC", nmea_parse_bwc, NMEA_MODULE_NAVIGATION, 13},
 #endif
 #if NMEA_SENTENCE_BWR_ENABLED
-    {"GPBWR", nmea_parse_bwr, NMEA_MODULE_NAVIGATION, 13},
-    {"GNBWR", nmea_parse_bwr, NMEA_MODULE_NAVIGATION, 13},
+    {"BWR", nmea_parse_bwr, NMEA_MODULE_NAVIGATION, 13},
 #endif
 #if NMEA_SENTENCE_BEC_ENABLED
-    {"GPBEC", nmea_parse_bec, NMEA_MODULE_NAVIGATION, 12},
-    {"GNBEC", nmea_parse_bec, NMEA_MODULE_NAVIGATION, 12},
+    {"BEC", nmea_parse_bec, NMEA_MODULE_NAVIGATION, 12},
 #endif
 #if NMEA_SENTENCE_BOD_ENABLED
-    {"GPBOD", nmea_parse_bod, NMEA_MODULE_NAVIGATION, 6},
-    {"GNBOD", nmea_parse_bod, NMEA_MODULE_NAVIGATION, 6},
+    {"BOD", nmea_parse_bod, NMEA_MODULE_NAVIGATION, 6},
 #endif
 #if NMEA_SENTENCE_BWW_ENABLED
-    {"GPBWW", nmea_parse_bww, NMEA_MODULE_NAVIGATION, 6},
-    {"GNBWW", nmea_parse_bww, NMEA_MODULE_NAVIGATION, 6},
+    {"BWW", nmea_parse_bww, NMEA_MODULE_NAVIGATION, 6},
 #endif
 #if NMEA_SENTENCE_RTE_ENABLED
-    {"GPRTE", nmea_parse_rte, NMEA_MODULE_NAVIGATION, 4},
-    {"GNRTE", nmea_parse_rte, NMEA_MODULE_NAVIGATION, 4},
+    {"RTE", nmea_parse_rte, NMEA_MODULE_NAVIGATION, 4},
 #endif
 #if NMEA_SENTENCE_AAM_ENABLED
-    {"GPAAM", nmea_parse_aam, NMEA_MODULE_NAVIGATION, 5},
-    {"GNAAM", nmea_parse_aam, NMEA_MODULE_NAVIGATION, 5},
+    {"AAM", nmea_parse_aam, NMEA_MODULE_NAVIGATION, 5},
 #endif
 #endif /* NMEA_MODULE_NAVIGATION_ENABLED */
 
@@ -199,16 +163,13 @@ static const nmea_dispatch_entry_t g_dispatch_table[] = {
 
 #if NMEA_MODULE_WAYPOINT_ENABLED
 #if NMEA_SENTENCE_WPL_ENABLED
-    {"GPWPL", nmea_parse_wpl, NMEA_MODULE_WAYPOINT, 5},
-    {"GNWPL", nmea_parse_wpl, NMEA_MODULE_WAYPOINT, 5},
+    {"WPL", nmea_parse_wpl, NMEA_MODULE_WAYPOINT, 5},
 #endif
 #if NMEA_SENTENCE_WNC_ENABLED
-    {"GPWNC", nmea_parse_wnc, NMEA_MODULE_WAYPOINT, 6},
-    {"GNWNC", nmea_parse_wnc, NMEA_MODULE_WAYPOINT, 6},
+    {"WNC", nmea_parse_wnc, NMEA_MODULE_WAYPOINT, 6},
 #endif
 #if NMEA_SENTENCE_WCV_ENABLED
-    {"GPWCV", nmea_parse_wcv, NMEA_MODULE_WAYPOINT, 4},
-    {"GNWCV", nmea_parse_wcv, NMEA_MODULE_WAYPOINT, 4},
+    {"WCV", nmea_parse_wcv, NMEA_MODULE_WAYPOINT, 4},
 #endif
 #endif /* NMEA_MODULE_WAYPOINT_ENABLED */
 
@@ -218,44 +179,100 @@ static const nmea_dispatch_entry_t g_dispatch_table[] = {
 
 #if NMEA_MODULE_AIS_ENABLED
 #if NMEA_SENTENCE_VDM_ENABLED
-    {"AIVDM", nmea_parse_vdm, NMEA_MODULE_AIS, 6},
+    {"VDM", nmea_parse_vdm, NMEA_MODULE_AIS, 6},
 #endif
 #if NMEA_SENTENCE_VDO_ENABLED
-    {"AIVDO", nmea_parse_vdo, NMEA_MODULE_AIS, 6},
+    {"VDO", nmea_parse_vdo, NMEA_MODULE_AIS, 6},
 #endif
 #if NMEA_SENTENCE_ABK_ENABLED
-    {"AIABK", nmea_parse_abk, NMEA_MODULE_AIS, 5},
+    {"ABK", nmea_parse_abk, NMEA_MODULE_AIS, 5},
 #endif
 #if NMEA_SENTENCE_ABM_ENABLED
-    {"AIABM", nmea_parse_abm, NMEA_MODULE_AIS, 8},
+    {"ABM", nmea_parse_abm, NMEA_MODULE_AIS, 8},
 #endif
 #if NMEA_SENTENCE_BBM_ENABLED
-    {"AIBBM", nmea_parse_bbm, NMEA_MODULE_AIS, 7},
+    {"BBM", nmea_parse_bbm, NMEA_MODULE_AIS, 7},
 #endif
 #if NMEA_SENTENCE_AIR_ENABLED
-    {"AIAIR", nmea_parse_air, NMEA_MODULE_AIS, 12},
+    {"AIR", nmea_parse_air, NMEA_MODULE_AIS, 12},
 #endif
 #if NMEA_SENTENCE_ACA_ENABLED
-    {"AIACA", nmea_parse_aca, NMEA_MODULE_AIS, 19},
+    {"ACA", nmea_parse_aca, NMEA_MODULE_AIS, 19},
 #endif
 #if NMEA_SENTENCE_ACS_ENABLED
-    {"AIACS", nmea_parse_acs, NMEA_MODULE_AIS, 6},
+    {"ACS", nmea_parse_acs, NMEA_MODULE_AIS, 6},
 #endif
 #if NMEA_SENTENCE_LRF_ENABLED
-    {"AILRF", nmea_parse_lrf, NMEA_MODULE_AIS, 5},
+    {"LRF", nmea_parse_lrf, NMEA_MODULE_AIS, 5},
 #endif
 #if NMEA_SENTENCE_LRI_ENABLED
-    {"AILRI", nmea_parse_lri, NMEA_MODULE_AIS, 12},
+    {"LRI", nmea_parse_lri, NMEA_MODULE_AIS, 12},
 #endif
 #if NMEA_SENTENCE_SSD_ENABLED
-    {"AISSD", nmea_parse_ssd, NMEA_MODULE_AIS, 8},
+    {"SSD", nmea_parse_ssd, NMEA_MODULE_AIS, 8},
 #endif
 #if NMEA_SENTENCE_VSD_ENABLED
-    {"AIVSD", nmea_parse_vsd, NMEA_MODULE_AIS, 9},
+    {"VSD", nmea_parse_vsd, NMEA_MODULE_AIS, 9},
 #endif
 #endif /* NMEA_MODULE_AIS_ENABLED */
 
-    /* Additional modules will be added as they are implemented */
+    /* ====================================================================== */
+    /*                          MISC MODULE                                   */
+    /* ====================================================================== */
+
+#if NMEA_MODULE_MISC_ENABLED
+#if NMEA_SENTENCE_XDR_ENABLED
+    {"XDR", nmea_parse_xdr, NMEA_MODULE_MISC, 4},
+#endif
+#if NMEA_SENTENCE_XTE_ENABLED
+    {"XTE", nmea_parse_xte, NMEA_MODULE_MISC, 6},
+#endif
+#if NMEA_SENTENCE_XTR_ENABLED
+    {"XTR", nmea_parse_xtr, NMEA_MODULE_MISC, 2},
+#endif
+#if NMEA_SENTENCE_ZDA_ENABLED
+    {"ZDA", nmea_parse_zda, NMEA_MODULE_MISC, 6},
+#endif
+#if NMEA_SENTENCE_ZDL_ENABLED
+    {"ZDL", nmea_parse_zdl, NMEA_MODULE_MISC, 3},
+#endif
+#if NMEA_SENTENCE_ZFO_ENABLED
+    {"ZFO", nmea_parse_zfo, NMEA_MODULE_MISC, 3},
+#endif
+#if NMEA_SENTENCE_ZTG_ENABLED
+    {"ZTG", nmea_parse_ztg, NMEA_MODULE_MISC, 3},
+#endif
+#if NMEA_SENTENCE_DTM_ENABLED
+    {"DTM", nmea_parse_dtm, NMEA_MODULE_MISC, 8},
+#endif
+#if NMEA_SENTENCE_CUR_ENABLED
+    {"CUR", nmea_parse_cur, NMEA_MODULE_MISC, 11},
+#endif
+#if NMEA_SENTENCE_FSI_ENABLED
+    {"FSI", nmea_parse_fsi, NMEA_MODULE_MISC, 5},
+#endif
+#if NMEA_SENTENCE_GEN_ENABLED
+    {"GEN", nmea_parse_gen, NMEA_MODULE_MISC, 4},
+#endif
+#if NMEA_SENTENCE_RPM_ENABLED
+    {"RPM", nmea_parse_rpm, NMEA_MODULE_MISC, 5},
+#endif
+#if NMEA_SENTENCE_SFI_ENABLED
+    {"SFI", nmea_parse_sfi, NMEA_MODULE_MISC, 4},
+#endif
+#if NMEA_SENTENCE_DDC_ENABLED
+    {"DDC", nmea_parse_ddc, NMEA_MODULE_MISC, 4},
+#endif
+#if NMEA_SENTENCE_EPV_ENABLED
+    {"EPV", nmea_parse_epv, NMEA_MODULE_MISC, 5},
+#endif
+#if NMEA_SENTENCE_TRL_ENABLED
+    {"TRL", nmea_parse_trl, NMEA_MODULE_MISC, 9},
+#endif
+#if NMEA_SENTENCE_WAT_ENABLED
+    {"WAT", nmea_parse_wat, NMEA_MODULE_MISC, 10},
+#endif
+#endif /* NMEA_MODULE_MISC_ENABLED */
 
     /* Sentinel entry */
     {NULL, NULL, 0, 0}
@@ -387,15 +404,35 @@ nmea_result_t nmea_parse(
         return NMEA_ERROR_INVALID_SENTENCE;
     }
 
-    /* First token is sentence ID */
+    /* First token is sentence ID (e.g., "GPGGA", "GNGLL", "AIVDM") */
     const char *sentence_id = tokens.tokens[0];
 
-    /* Find matching parser in dispatch table */
+    /* Extract talker ID and sentence type */
+    char talker_id[3];
+    char sentence_type[4];
+    result = nmea_extract_sentence_parts(sentence_id, talker_id, sentence_type);
+    if (result != NMEA_OK) {
+        nmea_report_error(ctx, NMEA_ERROR_TYPE_SYNTAX,
+                         NMEA_ERROR_INVALID_SENTENCE,
+                         "Invalid sentence ID format");
+        return NMEA_ERROR_INVALID_SENTENCE;
+    }
+
+    /* Validate talker ID */
+    nmea_talker_id_t talker = nmea_validate_talker_id(talker_id);
+    if (talker == NMEA_TALKER_UNKNOWN) {
+        nmea_report_error(ctx, NMEA_ERROR_TYPE_SYNTAX,
+                         NMEA_ERROR_INVALID_SENTENCE,
+                         "Invalid or unknown talker ID");
+        return NMEA_ERROR_INVALID_SENTENCE;
+    }
+
+    /* Find matching parser in dispatch table using sentence type only */
     size_t table_size;
     const nmea_dispatch_entry_t *table = nmea_get_dispatch_table(&table_size);
 
     for (size_t i = 0; i < table_size; i++) {
-        if (strcmp(sentence_id, table[i].sentence_id) == 0) {
+        if (strcmp(sentence_type, table[i].sentence_id) == 0) {
             /* Check if module is enabled */
             uint32_t module_bit = (1U << table[i].module);
             if ((ctx->config.enabled_modules & module_bit) == 0) {
@@ -637,11 +674,24 @@ bool nmea_is_sentence_enabled(const nmea_context_t *ctx, const char *sentence_id
         return false;
     }
 
+    /* Extract sentence type from full sentence ID */
+    char talker_id[3];
+    char sentence_type[4];
+    if (nmea_extract_sentence_parts(sentence_id, talker_id, sentence_type) != NMEA_OK) {
+        return false;
+    }
+
+    /* Validate talker ID */
+    if (nmea_validate_talker_id(talker_id) == NMEA_TALKER_UNKNOWN) {
+        return false;
+    }
+
+    /* Check if sentence type exists and its module is enabled */
     size_t table_size;
     const nmea_dispatch_entry_t *table = nmea_get_dispatch_table(&table_size);
 
     for (size_t i = 0; i < table_size; i++) {
-        if (strcmp(sentence_id, table[i].sentence_id) == 0) {
+        if (strcmp(sentence_type, table[i].sentence_id) == 0) {
             uint32_t module_bit = (1U << table[i].module);
             return (ctx->config.enabled_modules & module_bit) != 0;
         }

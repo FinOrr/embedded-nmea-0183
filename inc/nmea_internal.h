@@ -179,6 +179,40 @@ typedef struct {
 const nmea_dispatch_entry_t *nmea_get_dispatch_table(size_t *table_size);
 
 /* ========================================================================== */
+/*                      TALKER ID VALIDATION                                  */
+/* ========================================================================== */
+
+/**
+ * @brief Validate and parse a 2-character talker ID
+ *
+ * Checks if the provided talker ID string matches one of the 34 valid
+ * NMEA-0183 talker IDs and returns the corresponding enum value.
+ *
+ * @param[in] talker_id  2-character talker ID string (e.g., "GP", "GL", "GN")
+ *
+ * @return Talker ID enum value, or NMEA_TALKER_UNKNOWN if invalid
+ */
+nmea_talker_id_t nmea_validate_talker_id(const char *talker_id);
+
+/**
+ * @brief Extract talker ID and sentence type from full sentence ID
+ *
+ * Parses a full sentence ID (e.g., "GPGGA") into its talker ID ("GP")
+ * and sentence type ("GGA") components.
+ *
+ * @param[in]  sentence_id     Full sentence ID (e.g., "GPGGA", "GNGLL")
+ * @param[out] talker_id       Buffer to store 2-char talker ID (min 3 bytes for null)
+ * @param[out] sentence_type   Buffer to store 3-char sentence type (min 4 bytes for null)
+ *
+ * @return NMEA_OK on success, NMEA_ERROR_INVALID_SENTENCE if format invalid
+ */
+nmea_result_t nmea_extract_sentence_parts(
+    const char *sentence_id,
+    char *talker_id,
+    char *sentence_type
+);
+
+/* ========================================================================== */
 /*                      PARSING HELPER FUNCTIONS                              */
 /* ========================================================================== */
 
@@ -254,6 +288,17 @@ static inline bool nmea_is_empty_token(const char *token)
 {
     return (token == NULL || token[0] == '\0');
 }
+
+/**
+ * @brief Strip checksum from end of token if present
+ *
+ * Defensively removes "*XX" suffix from a token string in place.
+ * This handles edge cases where the tokenizer may not have properly
+ * stripped the checksum from the last field.
+ *
+ * @param[in,out] token  Token string to modify (may be const char* cast to char*)
+ */
+void nmea_strip_checksum(char *token);
 
 #ifdef __cplusplus
 }
