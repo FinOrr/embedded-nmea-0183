@@ -85,10 +85,6 @@ struct nmea_tokens;
 nmea_result_t nmea_parse_hrm(struct nmea_context *ctx, const struct nmea_tokens *tokens);
 #endif
 
-#if NMEA_SENTENCE_VDR_ENABLED
-nmea_result_t nmea_parse_vdr(struct nmea_context *ctx, const struct nmea_tokens *tokens);
-#endif
-
 #if NMEA_SENTENCE_PRC_ENABLED
 nmea_result_t nmea_parse_prc(struct nmea_context *ctx, const struct nmea_tokens *tokens);
 #endif

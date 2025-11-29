@@ -303,7 +303,13 @@ nmea_result_t nmea_parse_bod(nmea_context_t *ctx, const nmea_tokens_t *tokens)
 
     /* Field 6: Origin waypoint ID */
     if (tokens->token_count > 6 && !nmea_is_empty_token(tokens->tokens[6])) {
-        strncpy(nav->bod_origin_id, tokens->tokens[6], sizeof(nav->bod_origin_id) - 1);
+        /* Strip any trailing checksum from last field */
+        char temp[32];
+        strncpy(temp, tokens->tokens[6], sizeof(temp) - 1);
+        temp[sizeof(temp) - 1] = '\0';
+        nmea_strip_checksum(temp);
+        
+        strncpy(nav->bod_origin_id, temp, sizeof(nav->bod_origin_id) - 1);
         nav->bod_origin_id[sizeof(nav->bod_origin_id) - 1] = '\0';
         nav->bod_valid = true;
     }
@@ -343,7 +349,13 @@ nmea_result_t nmea_parse_bww(nmea_context_t *ctx, const nmea_tokens_t *tokens)
 
     /* Field 6: FROM waypoint ID */
     if (tokens->token_count > 6 && !nmea_is_empty_token(tokens->tokens[6])) {
-        strncpy(nav->bww_from_id, tokens->tokens[6], sizeof(nav->bww_from_id) - 1);
+        /* Strip any trailing checksum from last field */
+        char temp[32];
+        strncpy(temp, tokens->tokens[6], sizeof(temp) - 1);
+        temp[sizeof(temp) - 1] = '\0';
+        nmea_strip_checksum(temp);
+        
+        strncpy(nav->bww_from_id, temp, sizeof(nav->bww_from_id) - 1);
         nav->bww_from_id[sizeof(nav->bww_from_id) - 1] = '\0';
         nav->bww_valid = true;
     }
@@ -396,7 +408,16 @@ nmea_result_t nmea_parse_rte(nmea_context_t *ctx, const nmea_tokens_t *tokens)
     nav->waypoint_count = 0;
     for (size_t i = 5; i < tokens->token_count && nav->waypoint_count < 12; i++) {
         if (!nmea_is_empty_token(tokens->tokens[i])) {
-            strncpy(nav->waypoint_list[nav->waypoint_count], tokens->tokens[i],
+            char temp[32];
+            strncpy(temp, tokens->tokens[i], sizeof(temp) - 1);
+            temp[sizeof(temp) - 1] = '\0';
+            
+            /* Strip checksum from last waypoint if it's the last token */
+            if (i == tokens->token_count - 1) {
+                nmea_strip_checksum(temp);
+            }
+            
+            strncpy(nav->waypoint_list[nav->waypoint_count], temp,
                     sizeof(nav->waypoint_list[0]) - 1);
             nav->waypoint_list[nav->waypoint_count][sizeof(nav->waypoint_list[0]) - 1] = '\0';
             nav->waypoint_count++;
@@ -441,7 +462,13 @@ nmea_result_t nmea_parse_aam(nmea_context_t *ctx, const nmea_tokens_t *tokens)
 
     /* Field 5: Waypoint ID */
     if (tokens->token_count > 5 && !nmea_is_empty_token(tokens->tokens[5])) {
-        strncpy(nav->aam_waypoint_id, tokens->tokens[5], sizeof(nav->aam_waypoint_id) - 1);
+        /* Strip any trailing checksum from last field */
+        char temp[32];
+        strncpy(temp, tokens->tokens[5], sizeof(temp) - 1);
+        temp[sizeof(temp) - 1] = '\0';
+        nmea_strip_checksum(temp);
+        
+        strncpy(nav->aam_waypoint_id, temp, sizeof(nav->aam_waypoint_id) - 1);
         nav->aam_waypoint_id[sizeof(nav->aam_waypoint_id) - 1] = '\0';
         nav->aam_valid = true;
     }

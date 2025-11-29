@@ -107,54 +107,6 @@ nmea_result_t nmea_parse_hrm(nmea_context_t *ctx, const nmea_tokens_t *tokens)
 #endif /* NMEA_SENTENCE_HRM_ENABLED */
 
 /* ========================================================================== */
-/*                          VDR - SET AND DRIFT                               */
-/* ========================================================================== */
-
-#if NMEA_SENTENCE_VDR_ENABLED
-/**
- * @brief Parse VDR - Set and Drift
- *
- * Format: $--VDR,x.x,T,x.x,M,x.x,N*hh
- * Example: $--VDR,215.5,T,220.3,M,2.5,N*hh
- *
- * Fields:
- * 0: Sentence ID (VDR)
- * 1: Direction true (degrees)
- * 2: T (true)
- * 3: Direction magnetic (degrees)
- * 4: M (magnetic)
- * 5: Current speed (knots)
- * 6: N (knots)
- */
-nmea_result_t nmea_parse_vdr(nmea_context_t *ctx, const nmea_tokens_t *tokens)
-{
-    if (ctx == NULL || tokens == NULL) {
-        return NMEA_ERROR_NULL_PARAM;
-    }
-
-    nmea_attitude_state_t *att = &ctx->attitude;
-
-    /* Parse direction true (field 1) */
-    if (tokens->token_count > 1 && !nmea_is_empty_token(tokens->tokens[1])) {
-        nmea_parse_float(tokens->tokens[1], &att->vdr_direction_true);
-    }
-
-    /* Parse direction magnetic (field 3) */
-    if (tokens->token_count > 3 && !nmea_is_empty_token(tokens->tokens[3])) {
-        nmea_parse_float(tokens->tokens[3], &att->vdr_direction_magnetic);
-    }
-
-    /* Parse speed (field 5) */
-    if (tokens->token_count > 5 && !nmea_is_empty_token(tokens->tokens[5])) {
-        nmea_parse_float(tokens->tokens[5], &att->vdr_speed_knots);
-    }
-
-    att->vdr_valid = true;
-    return NMEA_OK;
-}
-#endif /* NMEA_SENTENCE_VDR_ENABLED */
-
-/* ========================================================================== */
 /*                    PRC - PROPULSION REMOTE CONTROL STATUS                  */
 /* ========================================================================== */
 

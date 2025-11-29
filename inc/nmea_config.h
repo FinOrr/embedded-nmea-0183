@@ -64,8 +64,8 @@
  *  Sentences: DSC, DSE, VER, UID, SPW, TUT, TXT, NAK, RLM, STN */
 #define NMEA_MODULE_COMM_ENABLED        1
 
-/** @brief System status module (12 sentences)
- *  Sentences: HBT, HSS, OSD, EVE, ETL, NRM, NRX, NSR, POS, MSK, MSS, ROR */
+/** @brief System status module (11 sentences)
+ *  Sentences: HBT, HSS, OSD, EVE, ETL, NRM, NRX, NSR, POS, MSK, MSS */
 #define NMEA_MODULE_SYSTEM_ENABLED      1
 
 /** @brief Attitude & motion module (5 sentences)
@@ -339,7 +339,6 @@
 #define NMEA_SENTENCE_POS_ENABLED   1  /**< Device Position and Dimension Report */
 #define NMEA_SENTENCE_MSK_ENABLED   1  /**< MSK Receiver Interface */
 #define NMEA_SENTENCE_MSS_ENABLED   1  /**< MSK Receiver Signal Status */
-#define NMEA_SENTENCE_ROR_ENABLED   1  /**< Rudder Order Status */
 
 /** @} */ /* End of SystemConfig */
 

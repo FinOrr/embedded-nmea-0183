@@ -134,7 +134,7 @@ typedef struct {
 
     /* EPV - Equipment Property Value */
     char epv_status_flag;                /**< Status flag (R/C) */
-    char epv_equipment_type[4];          /**< Equipment type */
+    char epv_equipment_type[5];          /**< Equipment type */
     char epv_unique_id[20];              /**< Unique identifier */
     uint16_t epv_property_id;            /**< Property identifier */
     char epv_property_value[32];         /**< Property value */
@@ -154,9 +154,9 @@ typedef struct {
     /* WAT - Water Level Detection */
     char wat_message_type;               /**< Message type (S/E/F) */
     nmea_time_t wat_timestamp;           /**< Timestamp */
-    char wat_alarm_type[4];              /**< Alarm system type */
-    char wat_location1[4];               /**< First location indicator */
-    char wat_location2[4];               /**< Second location indicator */
+    char wat_alarm_type[5];              /**< Alarm system type */
+    char wat_location1[5];               /**< First location indicator */
+    char wat_location2[5];               /**< Second location indicator */
     uint16_t wat_detection_point;        /**< Detection point number */
     char wat_alarm_condition;            /**< Alarm condition (N/H/J/L/K/X) */
     char wat_override;                   /**< Override setting (O/N) */

@@ -89,7 +89,13 @@ nmea_result_t nmea_parse_wnc(nmea_context_t *ctx, const nmea_tokens_t *tokens)
 
     /* Parse FROM waypoint identifier (field 6) */
     if (tokens->token_count > 6 && !nmea_is_empty_token(tokens->tokens[6])) {
-        strncpy(waypoint->wnc_from_id, tokens->tokens[6], sizeof(waypoint->wnc_from_id) - 1);
+        /* Strip any trailing checksum from last field */
+        char temp[32];
+        strncpy(temp, tokens->tokens[6], sizeof(temp) - 1);
+        temp[sizeof(temp) - 1] = '\0';
+        nmea_strip_checksum(temp);
+        
+        strncpy(waypoint->wnc_from_id, temp, sizeof(waypoint->wnc_from_id) - 1);
         waypoint->wnc_from_id[sizeof(waypoint->wnc_from_id) - 1] = '\0';
         waypoint->wnc_valid = true;
     }

@@ -712,45 +712,4 @@ nmea_result_t nmea_parse_mss(nmea_context_t *ctx, const nmea_tokens_t *tokens)
 }
 #endif /* NMEA_SENTENCE_MSS_ENABLED */
 
-/* ========================================================================== */
-/*                          ROR - RUDDER ORDER STATUS                         */
-/* ========================================================================== */
-
-#if NMEA_SENTENCE_ROR_ENABLED
-/**
- * @brief Parse ROR - Rudder Order Status
- *
- * Format: $--ROR,x.x,A,x.x,A*hh (assumed format)
- * Example: $--ROR,15.0,A,0.0,V*hh
- *
- * Fields:
- * 0: Sentence ID (ROR)
- * 1: Starboard rudder order
- * 2: Starboard status
- * 3: Port rudder order
- * 4: Port status
- */
-nmea_result_t nmea_parse_ror(nmea_context_t *ctx, const nmea_tokens_t *tokens)
-{
-    if (ctx == NULL || tokens == NULL) {
-        return NMEA_ERROR_NULL_PARAM;
-    }
-
-    nmea_system_state_t *sys = &ctx->system;
-
-    /* Parse starboard order (field 1) */
-    if (tokens->token_count > 1 && !nmea_is_empty_token(tokens->tokens[1])) {
-        nmea_parse_float(tokens->tokens[1], &sys->ror_starboard_order);
-    }
-
-    /* Parse port order (field 3) */
-    if (tokens->token_count > 3 && !nmea_is_empty_token(tokens->tokens[3])) {
-        nmea_parse_float(tokens->tokens[3], &sys->ror_port_order);
-    }
-
-    sys->ror_valid = true;
-    return NMEA_OK;
-}
-#endif /* NMEA_SENTENCE_ROR_ENABLED */
-
 #endif /* NMEA_MODULE_SYSTEM_ENABLED */

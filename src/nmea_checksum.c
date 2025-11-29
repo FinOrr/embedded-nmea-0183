@@ -98,11 +98,13 @@ nmea_result_t nmea_extract_checksum(const char* sentence, size_t length,
  * @brief Validate NMEA sentence checksum
  *
  * Calculates the checksum and compares it to the value in the sentence.
+ * If no checksum is present (no '*' delimiter), validation passes since
+ * checksums are optional in NMEA-0183.
  *
  * @param sentence  Complete NMEA sentence with checksum
  * @param length    Length of sentence
  *
- * @return true if checksum is valid, false otherwise
+ * @return true if checksum is valid or absent, false if invalid
  */
 bool nmea_validate_checksum(const char* sentence, size_t length) {
   if (sentence == NULL || length == 0) {
@@ -111,8 +113,11 @@ bool nmea_validate_checksum(const char* sentence, size_t length) {
 
   /* Extract checksum from sentence */
   uint8_t expected_checksum;
-  if (nmea_extract_checksum(sentence, length, &expected_checksum) != NMEA_OK) {
-    return false;
+  nmea_result_t extract_result = nmea_extract_checksum(sentence, length, &expected_checksum);
+
+  /* If no checksum present, validation passes (checksums are optional) */
+  if (extract_result != NMEA_OK) {
+    return true;
   }
 
   /* Calculate actual checksum */

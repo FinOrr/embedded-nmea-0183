@@ -39,6 +39,9 @@ nmea_result_t nmea_parse_dbt(nmea_context_t *ctx, const nmea_tokens_t *tokens)
 
     nmea_sensor_state_t *sensor = &ctx->sensor;
 
+    /* Clear valid flag - will be set only if valid data is present */
+    sensor->depth_valid = false;
+
     /* Parse depth in feet (field 1) */
     if (tokens->token_count > 1 && !nmea_is_empty_token(tokens->tokens[1])) {
         nmea_parse_float(tokens->tokens[1], &sensor->depth_below_transducer_feet);
@@ -85,6 +88,9 @@ nmea_result_t nmea_parse_dpt(nmea_context_t *ctx, const nmea_tokens_t *tokens)
 
     nmea_sensor_state_t *sensor = &ctx->sensor;
 
+    /* Clear valid flag - will be set only if valid data is present */
+    sensor->depth_valid = false;
+
     /* Parse depth (field 1) */
     if (tokens->token_count > 1 && !nmea_is_empty_token(tokens->tokens[1])) {
         if (nmea_parse_float(tokens->tokens[1], &sensor->depth_meters) == NMEA_OK) {
@@ -130,6 +136,9 @@ nmea_result_t nmea_parse_mtw(nmea_context_t *ctx, const nmea_tokens_t *tokens)
 
     nmea_sensor_state_t *sensor = &ctx->sensor;
 
+    /* Clear valid flag - will be set only if valid data is present */
+    sensor->water_temperature_valid = false;
+
     /* Parse temperature (field 1) */
     if (tokens->token_count > 1 && !nmea_is_empty_token(tokens->tokens[1])) {
         if (nmea_parse_float(tokens->tokens[1], &sensor->water_temperature_celsius) == NMEA_OK) {
@@ -170,6 +179,9 @@ nmea_result_t nmea_parse_mwd(nmea_context_t *ctx, const nmea_tokens_t *tokens)
     }
 
     nmea_sensor_state_t *sensor = &ctx->sensor;
+
+    /* Clear valid flag - will be set only if valid data is present */
+    sensor->wind_valid = false;
 
     /* Parse wind direction true (field 1) */
     if (tokens->token_count > 1 && !nmea_is_empty_token(tokens->tokens[1])) {
@@ -223,6 +235,9 @@ nmea_result_t nmea_parse_mwv(nmea_context_t *ctx, const nmea_tokens_t *tokens)
     }
 
     nmea_sensor_state_t *sensor = &ctx->sensor;
+
+    /* Clear valid flag - will be set only if valid data is present */
+    sensor->wind_valid = false;
 
     /* Parse wind angle (field 1) - stored based on reference type */
     float wind_angle = 0.0f;
@@ -307,6 +322,9 @@ nmea_result_t nmea_parse_vbw(nmea_context_t *ctx, const nmea_tokens_t *tokens)
 
     nmea_sensor_state_t *sensor = &ctx->sensor;
 
+    /* Clear valid flag - will be set only if valid data is present */
+    sensor->speed_valid = false;
+
     /* Parse longitudinal water speed (field 1) */
     if (tokens->token_count > 1 && !nmea_is_empty_token(tokens->tokens[1])) {
         nmea_parse_float(tokens->tokens[1], &sensor->speed_water_knots);
@@ -359,6 +377,9 @@ nmea_result_t nmea_parse_vhw(nmea_context_t *ctx, const nmea_tokens_t *tokens)
 
     nmea_sensor_state_t *sensor = &ctx->sensor;
 
+    /* Clear valid flag - will be set only if valid data is present */
+    sensor->water_speed_heading_valid = false;
+
     /* Parse heading true (field 1) */
     if (tokens->token_count > 1 && !nmea_is_empty_token(tokens->tokens[1])) {
         nmea_parse_float(tokens->tokens[1], &sensor->heading_true);
@@ -410,10 +431,14 @@ nmea_result_t nmea_parse_vlw(nmea_context_t *ctx, const nmea_tokens_t *tokens)
 
     nmea_sensor_state_t *sensor = &ctx->sensor;
 
+    /* Clear valid flag - will be set only if valid data is present */
+    sensor->speed_valid = false;
+
     /* Parse total cumulative water distance (field 1) - not stored in current state */
     /* Parse water distance since reset (field 3) */
     if (tokens->token_count > 3 && !nmea_is_empty_token(tokens->tokens[3])) {
         nmea_parse_float(tokens->tokens[3], &sensor->distance_water_nm);
+        sensor->speed_valid = true;
     }
 
     /* Parse total cumulative ground distance (field 5) - not stored in current state */
@@ -452,10 +477,14 @@ nmea_result_t nmea_parse_vpw(nmea_context_t *ctx, const nmea_tokens_t *tokens)
 
     nmea_sensor_state_t *sensor = &ctx->sensor;
 
+    /* Clear valid flag - will be set only if valid data is present */
+    sensor->speed_valid = false;
+
     /* Parse speed in knots (field 1) */
     if (tokens->token_count > 1 && !nmea_is_empty_token(tokens->tokens[1])) {
         /* VPW speed is stored in the water speed field as it's a type of water speed */
         nmea_parse_float(tokens->tokens[1], &sensor->speed_water_knots);
+        sensor->speed_valid = true;
     }
 
     /* Parse speed in m/s (field 3) - could be used for validation */

@@ -232,3 +232,25 @@ size_t nmea_get_required_buffer_size(void) { return NMEA_MAX_SENTENCE_LENGTH; }
  * @brief Get size of parser context structure
  */
 size_t nmea_get_context_size(void) { return sizeof(nmea_context_t); }
+
+/**
+ * @brief Strip checksum from end of token if present
+ *
+ * Defensively removes "*XX" suffix from a token string in place.
+ * This handles edge cases where the tokenizer may not have properly
+ * stripped the checksum from the last field.
+ *
+ * @param token  Token string to modify
+ */
+void nmea_strip_checksum(char *token) {
+  if (token == NULL) {
+    return;
+  }
+
+  /* Find asterisk indicating checksum start */
+  char *asterisk = strchr(token, '*');
+  if (asterisk != NULL) {
+    /* Terminate string at asterisk position */
+    *asterisk = '\0';
+  }
+}
