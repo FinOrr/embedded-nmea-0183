@@ -179,40 +179,40 @@ static const nmea_dispatch_entry_t g_dispatch_table[] = {
 
 #if NMEA_MODULE_AIS_ENABLED
 #if NMEA_SENTENCE_VDM_ENABLED
-    {"VDM", nmea_parse_vdm, NMEA_MODULE_AIS, 6},
+    {"VDM", nmea_parse_vdm, NMEA_MODULE_AIS, 7},
 #endif
 #if NMEA_SENTENCE_VDO_ENABLED
-    {"VDO", nmea_parse_vdo, NMEA_MODULE_AIS, 6},
+    {"VDO", nmea_parse_vdo, NMEA_MODULE_AIS, 7},
 #endif
 #if NMEA_SENTENCE_ABK_ENABLED
-    {"ABK", nmea_parse_abk, NMEA_MODULE_AIS, 5},
+    {"ABK", nmea_parse_abk, NMEA_MODULE_AIS, 6},
 #endif
 #if NMEA_SENTENCE_ABM_ENABLED
-    {"ABM", nmea_parse_abm, NMEA_MODULE_AIS, 8},
+    {"ABM", nmea_parse_abm, NMEA_MODULE_AIS, 9},
 #endif
 #if NMEA_SENTENCE_BBM_ENABLED
-    {"BBM", nmea_parse_bbm, NMEA_MODULE_AIS, 7},
+    {"BBM", nmea_parse_bbm, NMEA_MODULE_AIS, 8},
 #endif
 #if NMEA_SENTENCE_AIR_ENABLED
-    {"AIR", nmea_parse_air, NMEA_MODULE_AIS, 12},
+    {"AIR", nmea_parse_air, NMEA_MODULE_AIS, 13},
 #endif
 #if NMEA_SENTENCE_ACA_ENABLED
-    {"ACA", nmea_parse_aca, NMEA_MODULE_AIS, 19},
+    {"ACA", nmea_parse_aca, NMEA_MODULE_AIS, 20},
 #endif
 #if NMEA_SENTENCE_ACS_ENABLED
-    {"ACS", nmea_parse_acs, NMEA_MODULE_AIS, 6},
+    {"ACS", nmea_parse_acs, NMEA_MODULE_AIS, 7},
 #endif
 #if NMEA_SENTENCE_LRF_ENABLED
-    {"LRF", nmea_parse_lrf, NMEA_MODULE_AIS, 5},
+    {"LRF", nmea_parse_lrf, NMEA_MODULE_AIS, 6},
 #endif
 #if NMEA_SENTENCE_LRI_ENABLED
-    {"LRI", nmea_parse_lri, NMEA_MODULE_AIS, 12},
+    {"LRI", nmea_parse_lri, NMEA_MODULE_AIS, 13},
 #endif
 #if NMEA_SENTENCE_SSD_ENABLED
-    {"SSD", nmea_parse_ssd, NMEA_MODULE_AIS, 8},
+    {"SSD", nmea_parse_ssd, NMEA_MODULE_AIS, 9},
 #endif
 #if NMEA_SENTENCE_VSD_ENABLED
-    {"VSD", nmea_parse_vsd, NMEA_MODULE_AIS, 9},
+    {"VSD", nmea_parse_vsd, NMEA_MODULE_AIS, 10},
 #endif
 #endif /* NMEA_MODULE_AIS_ENABLED */
 

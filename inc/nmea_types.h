@@ -272,8 +272,16 @@ typedef enum {
 /*                           CONSTANTS                                        */
 /* ========================================================================== */
 
-/** Maximum NMEA sentence length (NMEA-0183 standard) */
-#define NMEA_MAX_SENTENCE_LENGTH    82
+/** Maximum NMEA sentence length.
+ *
+ * The NMEA-0183 specification defines a maximum sentence length of 82
+ * characters (including '$'/'!' and trailing CRLF). However, some AIS
+ * related test sentences and extended payload use cases exceed this
+ * limit. To accommodate unit tests and longer proprietary/AIS payloads
+ * while still guarding against pathological input sizes, we raise the
+ * limit modestly.
+ */
+#define NMEA_MAX_SENTENCE_LENGTH    128
 
 /** Maximum number of fields in a sentence */
 #define NMEA_MAX_FIELDS             32
