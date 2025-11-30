@@ -1,0 +1,39 @@
+---
+version: 2
+
+updates:
+- package-ecosystem: github-actions
+  directory: /
+  schedule:
+    interval: weekly
+  groups:
+    github-actions:
+      update-types:
+      - minor
+      - patch
+  commit-message:
+    prefix: "ci(deps)"
+- package-ecosystem: docker
+  directories:
+  - .devcontainer
+  schedule:
+    interval: weekly
+- package-ecosystem: devcontainers
+  directory: /
+  schedule:
+    interval: weekly
+- package-ecosystem: npm
+  directory: /
+  schedule:
+    interval: weekly
+  groups:
+    npm:
+      update-types:
+      - minor
+      - patch
+  commit-message:
+    prefix: "test(deps)"
+- package-ecosystem: pip
+  directory: .devcontainer
+  schedule:
+    interval: weekly

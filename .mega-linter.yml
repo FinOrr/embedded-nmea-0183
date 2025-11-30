@@ -1,0 +1,36 @@
+---
+ENABLE:
+- ACTION
+- DOCKERFILE
+- JSON
+- MARKDOWN
+- REPOSITORY
+- SPELL
+- YAML
+- C
+
+ENABLE_LINTERS:
+- C_CLANG_FORMAT
+
+DISABLE_LINTERS:
+- MARKDOWN_MARKDOWN_LINK_CHECK
+- REPOSITORY_DEVSKIM
+- REPOSITORY_DUSTILOCK
+- REPOSITORY_KICS
+- REPOSITORY_SEMGREP
+- JSON_JSONLINT
+- SPELL_CSPELL
+- C_CPPLINT
+
+C_CPPLINT_FILTER_REGEX_INCLUDE: "(unc)"
+C_CLANG_FORMAT_FILTER_REGEX_INCLUDE: "(inc)"
+C_CLANG_FORMAT_FILTER_REGEX_EXCLUDE: "(test)"
+SARIF_REPORTER: true
+PRINT_ALPACA: false
+SHOW_SKIPPED_LINTERS: false
+FILTER_REGEX_EXCLUDE: (CHANGELOG.md|package-lock.json)
+# tasks.json is wrongfully matched against another schema,
+# and schemas for .vscode/[tasks.json|launch.json] are built
+# dynamically based upon context (e.g. installed extensions)
+# hence the exclusion
+JSON_V8R_FILTER_REGEX_EXCLUDE: (\.vscode)
