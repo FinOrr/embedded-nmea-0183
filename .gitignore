@@ -53,3 +53,7 @@ dkms.conf
 
 # Ignore build output
 out/
+build/
+
+# Internal docs
+sentences/
