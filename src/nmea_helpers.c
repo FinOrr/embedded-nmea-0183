@@ -93,15 +93,13 @@ nmea_result_t nmea_parse_coordinate(const char* coord_token,
 
   /* Determine if latitude (DDMM.MMMM) or longitude (DDDMM.MMMM) */
   /* Latitude: degrees are first 2 digits, longitude: first 3 digits */
-  (void)(value >=
-         10000.0f); /* Unused - format is determined by field position */
 
   /* Extract degrees and minutes */
-  int degrees = (int)(value / 100.0f);
-  float minutes = value - (degrees * 100.0f);
+  int degrees = (int)(value / 100.0);
+  float minutes = value - ((float)degrees * 100.0);
 
   /* Convert to decimal degrees */
-  float decimal_degrees = degrees + (minutes / 60.0f);
+  float decimal_degrees = (float)degrees + (minutes / 60.0);
 
   /* Apply direction (S and W are negative) */
   char direction = direction_token[0];
@@ -113,7 +111,7 @@ nmea_result_t nmea_parse_coordinate(const char* coord_token,
     return NMEA_ERROR_PARSE_FAILED;
   }
 
-  coordinate->degrees = decimal_degrees;
+  coordinate->degrees = (float)decimal_degrees;
   coordinate->valid = true;
 
   return NMEA_OK;
@@ -242,13 +240,13 @@ size_t nmea_get_context_size(void) { return sizeof(nmea_context_t); }
  *
  * @param token  Token string to modify
  */
-void nmea_strip_checksum(char *token) {
+void nmea_strip_checksum(char* token) {
   if (token == NULL) {
     return;
   }
 
   /* Find asterisk indicating checksum start */
-  char *asterisk = strchr(token, '*');
+  char* asterisk = strchr(token, '*');
   if (asterisk != NULL) {
     /* Terminate string at asterisk position */
     *asterisk = '\0';

@@ -13,7 +13,7 @@
 /**
  * @brief Calculate NMEA sentence checksum
  *
- * The checksum is an XOR of all characters between '$' and '*'.
+ * The checksum is an XOR of all characters between the starter ('$'/'!') and '*'.
  *
  * @param sentence  NMEA sentence (must start with '$')
  * @param length    Length of sentence
@@ -25,9 +25,9 @@ uint8_t nmea_calculate_checksum(const char* sentence, size_t length) {
     return 0;
   }
 
-  /* Find start of data (after '$') */
+  /* Find start of data (after '$' or '!') */
   const char* start = sentence;
-  if (*start == '$') {
+  if (*start == '$' || *start == '!') {
     start++;
   }
 

@@ -618,7 +618,12 @@ nmea_result_t nmea_parse_lrf(nmea_context_t *ctx, const nmea_tokens_t *tokens)
 
     /* Parse function reply (field 5) */
     if (tokens->token_count > 5 && !nmea_is_empty_token(tokens->tokens[5])) {
-        strncpy(ais->lrf_function_reply, tokens->tokens[5], sizeof(ais->lrf_function_reply) - 1);
+        /* Strip any trailing checksum if present */
+        char reply_buf[sizeof(ais->lrf_function_reply)];
+        strncpy(reply_buf, tokens->tokens[5], sizeof(reply_buf) - 1);
+        reply_buf[sizeof(reply_buf) - 1] = '\0';
+        nmea_strip_checksum(reply_buf);
+        strncpy(ais->lrf_function_reply, reply_buf, sizeof(ais->lrf_function_reply) - 1);
         ais->lrf_function_reply[sizeof(ais->lrf_function_reply) - 1] = '\0';
         ais->lrf_valid = true;
     }

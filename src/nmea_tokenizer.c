@@ -38,12 +38,12 @@ nmea_result_t nmea_tokenize(
         tokens->tokens[i] = NULL;
     }
 
-    /* Validate sentence starts with '$' */
-    if (buffer[0] != '$') {
+    /* Validate sentence starts with '$' or '!' (AIS) */
+    if (buffer[0] != '$' && buffer[0] != '!') {
         return NMEA_ERROR_INVALID_SENTENCE;
     }
 
-    /* Skip leading '$' */
+    /* Skip leading starter ('$' or '!') */
     char *ptr = buffer + 1;
 
     /* Find end of sentence (before checksum or end markers) */
@@ -52,8 +52,7 @@ nmea_result_t nmea_tokenize(
         end++;
     }
 
-    /* Mark end with null terminator */
-    char sentinel = *end;
+    /* Mark end with null terminator (don't save sentinel - we won't restore it) */
     *end = '\0';
 
     /* Tokenize by commas */
@@ -80,8 +79,8 @@ nmea_result_t nmea_tokenize(
         }
     }
 
-    /* Restore sentinel character for checksum extraction if needed */
-    *end = sentinel;
+    /* Do NOT restore sentinel - leave the null terminator in place so tokens are properly terminated */
+    /* The checksum has already been validated before tokenization if needed */
 
     /* Validate minimum field count (at least sentence ID) */
     if (tokens->token_count == 0) {

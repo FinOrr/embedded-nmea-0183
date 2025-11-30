@@ -411,9 +411,9 @@
  * @{
  */
 
-/** @brief Maximum sentence length to accept (NMEA standard = 82) */
+/** @brief Maximum sentence length to accept (NMEA standard = 82, extended for AIS = 128) */
 #ifndef NMEA_MAX_SENTENCE_LENGTH
-#define NMEA_MAX_SENTENCE_LENGTH    82
+#define NMEA_MAX_SENTENCE_LENGTH    128
 #endif
 
 /** @brief Maximum number of fields per sentence (default = 32) */
