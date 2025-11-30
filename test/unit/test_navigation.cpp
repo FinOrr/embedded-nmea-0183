@@ -196,7 +196,8 @@ TEST_F(NmeaNavigationTest, BWW_ValidSentence) {
 
 TEST_F(NmeaNavigationTest, RTE_ValidSentence) {
   char sentence[256];
-  make_sentence("$GPRTE,2,1,c,0,W3IWI,DRIVWY,32CEDR,32-29,32BKLD,32-I95", sentence);
+  make_sentence("$GPRTE,2,1,c,0,W3IWI,DRIVWY,32CEDR,32-29,32BKLD,32-I95",
+                sentence);
   EXPECT_EQ(parse(sentence), NMEA_OK);
 
   nmea_navigation_state_t nav;

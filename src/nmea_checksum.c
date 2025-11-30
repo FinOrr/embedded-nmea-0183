@@ -13,7 +13,8 @@
 /**
  * @brief Calculate NMEA sentence checksum
  *
- * The checksum is an XOR of all characters between the starter ('$'/'!') and '*'.
+ * The checksum is an XOR of all characters between the starter ('$'/'!') and
+ * '*'.
  *
  * @param sentence  NMEA sentence (must start with '$')
  * @param length    Length of sentence
@@ -113,7 +114,8 @@ bool nmea_validate_checksum(const char* sentence, size_t length) {
 
   /* Extract checksum from sentence */
   uint8_t expected_checksum;
-  nmea_result_t extract_result = nmea_extract_checksum(sentence, length, &expected_checksum);
+  nmea_result_t extract_result =
+      nmea_extract_checksum(sentence, length, &expected_checksum);
 
   /* If no checksum present, validation passes (checksums are optional) */
   if (extract_result != NMEA_OK) {

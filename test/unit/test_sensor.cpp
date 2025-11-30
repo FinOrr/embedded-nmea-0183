@@ -1,13 +1,155 @@
 /**
  * @file test_sensor.cpp
- * @brief Unit tests for Sensor module parsers
+ * @brief Unit tests for Sensor module sentences
  */
-
-#include <modules/nmea_sensor.h>
 
 #include "test_helpers.h"
 
-class NmeaSensorTest : public NmeaTestBase {};
+/* Sensor module covers: DBT, DPT, MTW, MWD, MWV, VBW, VHW, VLW, VPW */
+
+class NmeaSensorTest : public NmeaTestBase {
+ protected:
+  void assert_enabled(const char* id) {
+    ASSERT_TRUE(nmea_is_sentence_enabled(&ctx, id))
+        << "Sentence not enabled: " << id;
+  }
+};
+
+TEST_F(NmeaSensorTest, ParseDBT_DepthBelowTransducer) {
+  assert_enabled("SDDBT");
+  char sentence[256];
+  make_sentence("$SDDBT,12.3,f,3.7,M,2.0,F", sentence);
+  ASSERT_EQ(parse(sentence), NMEA_OK);
+
+  nmea_sensor_state_t sensor{};
+  ASSERT_EQ(nmea_get_sensor_data(&ctx, &sensor), NMEA_OK);
+  EXPECT_TRUE(sensor.depth_valid);
+  EXPECT_FLOAT_EQ(sensor.depth_below_transducer_meters, 3.7f);
+  EXPECT_FLOAT_EQ(sensor.depth_below_transducer_feet, 12.3f);
+  EXPECT_FLOAT_EQ(sensor.depth_below_transducer_fathoms, 2.0f);
+}
+
+TEST_F(NmeaSensorTest, ParseDPT_Depth) {
+  assert_enabled("SDDPT");
+  char sentence[256];
+  make_sentence("$SDDPT,3.7,0.5,100.0", sentence);
+  ASSERT_EQ(parse(sentence), NMEA_OK);
+
+  nmea_sensor_state_t sensor{};
+  ASSERT_EQ(nmea_get_sensor_data(&ctx, &sensor), NMEA_OK);
+  EXPECT_TRUE(sensor.depth_valid);
+  EXPECT_FLOAT_EQ(sensor.depth_meters, 3.7f);
+  EXPECT_FLOAT_EQ(sensor.depth_offset_meters, 0.5f);
+  EXPECT_FLOAT_EQ(sensor.depth_range_meters, 100.0f);
+}
+
+TEST_F(NmeaSensorTest, ParseMTW_WaterTemperature) {
+  assert_enabled("IIMTW");
+  char sentence[256];
+  make_sentence("$IIMTW,15.5,C", sentence);
+  ASSERT_EQ(parse(sentence), NMEA_OK);
+
+  nmea_sensor_state_t sensor{};
+  ASSERT_EQ(nmea_get_sensor_data(&ctx, &sensor), NMEA_OK);
+  EXPECT_TRUE(sensor.water_temperature_valid);
+  EXPECT_FLOAT_EQ(sensor.water_temperature_celsius, 15.5f);
+}
+
+TEST_F(NmeaSensorTest, ParseMWD_WindDirectionAndSpeed) {
+  assert_enabled("IIMWD");
+  char sentence[256];
+  make_sentence("$IIMWD,123.4,T,127.8,M,12.5,N,6.4,M", sentence);
+  ASSERT_EQ(parse(sentence), NMEA_OK);
+
+  nmea_sensor_state_t sensor{};
+  ASSERT_EQ(nmea_get_sensor_data(&ctx, &sensor), NMEA_OK);
+  EXPECT_TRUE(sensor.wind_valid);
+  EXPECT_FLOAT_EQ(sensor.wind_direction_true, 123.4f);
+  EXPECT_FLOAT_EQ(sensor.wind_direction_magnetic, 127.8f);
+  EXPECT_FLOAT_EQ(sensor.wind_speed_knots, 12.5f);
+  EXPECT_FLOAT_EQ(sensor.wind_speed_mps, 6.4f);
+}
+
+TEST_F(NmeaSensorTest, ParseMWV_RelativeKnots_Valid) {
+  assert_enabled("IIMWV");
+  char sentence[256];
+  make_sentence("$IIMWV,45.0,R,12.5,N,A", sentence);
+  ASSERT_EQ(parse(sentence), NMEA_OK);
+
+  nmea_sensor_state_t sensor{};
+  ASSERT_EQ(nmea_get_sensor_data(&ctx, &sensor), NMEA_OK);
+  EXPECT_TRUE(sensor.wind_valid);
+  EXPECT_EQ(sensor.wind_reference, 'R');
+  EXPECT_FLOAT_EQ(sensor.wind_speed_knots, 12.5f);
+  // Converted values
+  EXPECT_NEAR(sensor.wind_speed_mps, 12.5f * 0.514444f, 1e-4);
+  EXPECT_NEAR(sensor.wind_speed_kmh, 12.5f * 1.852f, 1e-4);
+}
+
+TEST_F(NmeaSensorTest, ParseMWV_Mps_InvalidStatus) {
+  assert_enabled("IIMWV");
+  char sentence[256];
+  make_sentence("$IIMWV,30.0,T,5.0,M,V", sentence);
+  ASSERT_EQ(parse(sentence), NMEA_OK);
+
+  nmea_sensor_state_t sensor{};
+  ASSERT_EQ(nmea_get_sensor_data(&ctx, &sensor), NMEA_OK);
+  EXPECT_FALSE(sensor.wind_valid);
+  EXPECT_EQ(sensor.wind_reference, 'T');
+  EXPECT_FLOAT_EQ(sensor.wind_speed_mps, 5.0f);
+}
+
+TEST_F(NmeaSensorTest, ParseVBW_DualSpeed) {
+  assert_enabled("IIVBW");
+  char sentence[256];
+  make_sentence("$IIVBW,12.3,0.5,A,10.2,0.3,A,1.2,A,0.8,A", sentence);
+  ASSERT_EQ(parse(sentence), NMEA_OK);
+
+  nmea_sensor_state_t sensor{};
+  ASSERT_EQ(nmea_get_sensor_data(&ctx, &sensor), NMEA_OK);
+  EXPECT_TRUE(sensor.speed_valid);
+  EXPECT_FLOAT_EQ(sensor.speed_water_knots, 12.3f);
+  EXPECT_FLOAT_EQ(sensor.speed_ground_knots, 10.2f);
+}
+
+TEST_F(NmeaSensorTest, ParseVHW_WaterSpeedAndHeading) {
+  assert_enabled("IIVHW");
+  char sentence[256];
+  make_sentence("$IIVHW,123.4,T,127.8,M,12.5,N,23.2,K", sentence);
+  ASSERT_EQ(parse(sentence), NMEA_OK);
+
+  nmea_sensor_state_t sensor{};
+  ASSERT_EQ(nmea_get_sensor_data(&ctx, &sensor), NMEA_OK);
+  EXPECT_TRUE(sensor.water_speed_heading_valid);
+  EXPECT_FLOAT_EQ(sensor.heading_true, 123.4f);
+  EXPECT_FLOAT_EQ(sensor.heading_magnetic, 127.8f);
+  EXPECT_FLOAT_EQ(sensor.water_speed_knots, 12.5f);
+}
+
+TEST_F(NmeaSensorTest, ParseVLW_DualDistance) {
+  assert_enabled("IIVLW");
+  char sentence[256];
+  make_sentence("$IIVLW,1234.5,N,123.4,N,987.6,N,98.7,N", sentence);
+  ASSERT_EQ(parse(sentence), NMEA_OK);
+
+  nmea_sensor_state_t sensor{};
+  ASSERT_EQ(nmea_get_sensor_data(&ctx, &sensor), NMEA_OK);
+  EXPECT_TRUE(sensor.speed_valid);
+  EXPECT_FLOAT_EQ(sensor.distance_water_nm, 123.4f);
+  EXPECT_FLOAT_EQ(sensor.distance_ground_nm, 98.7f);
+}
+
+TEST_F(NmeaSensorTest, ParseVPW_SpeedParallelToWind) {
+  assert_enabled("IIVPW");
+  char sentence[256];
+  make_sentence("$IIVPW,5.2,N,2.7,M", sentence);
+  ASSERT_EQ(parse(sentence), NMEA_OK);
+
+  nmea_sensor_state_t sensor{};
+  ASSERT_EQ(nmea_get_sensor_data(&ctx, &sensor), NMEA_OK);
+  EXPECT_TRUE(sensor.speed_valid);
+  EXPECT_FLOAT_EQ(sensor.speed_water_knots, 5.2f);
+}
 
 /* ========================================================================== */
 /*                              DBT TESTS                                     */

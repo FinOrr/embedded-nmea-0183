@@ -188,7 +188,9 @@ TEST_F(NmeaHeadingTest, OSD_ValidSentence) {
 
 TEST_F(NmeaHeadingTest, HMR_ValidSentence) {
   char sentence[256];
-  make_sentence("$IIHMR,SNS1,SNS2,5.0,3.2,A,180.5,A,M,2.1,E,185.3,A,T,0.0,E,15.2,W", sentence);
+  make_sentence(
+      "$IIHMR,SNS1,SNS2,5.0,3.2,A,180.5,A,M,2.1,E,185.3,A,T,0.0,E,15.2,W",
+      sentence);
   EXPECT_EQ(parse(sentence), NMEA_OK);
 
   nmea_heading_state_t heading;
@@ -230,7 +232,9 @@ TEST_F(NmeaHeadingTest, HMR_ValidSentence) {
 
 TEST_F(NmeaHeadingTest, HTC_ValidSentence) {
   char sentence[256];
-  make_sentence("$IIHTC,A,10.5,R,H,R,35.0,5.0,2.5,15.2,270.5,1.0,90.3,T,A,A,A,268.7", sentence);
+  make_sentence(
+      "$IIHTC,A,10.5,R,H,R,35.0,5.0,2.5,15.2,270.5,1.0,90.3,T,A,A,A,268.7",
+      sentence);
   EXPECT_EQ(parse(sentence), NMEA_OK);
 
   nmea_heading_state_t heading;

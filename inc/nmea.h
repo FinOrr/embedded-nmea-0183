@@ -3,12 +3,6 @@
  * @brief Main public API for NMEA-0183 parser library
  *
  * This is the primary header file to include when using the NMEA parser.
- * It provides a clean, modern API for parsing NMEA-0183 sentences with:
- * - Zero heap allocation (caller-provided buffers)
- * - Multi-instance support (context handles)
- * - Modular design (enable/disable modules at compile-time)
- * - Error callback mechanism
- * - Type-safe interfaces
  *
  * @section usage Basic Usage
  * @code
@@ -29,15 +23,17 @@
  * }
  *
  * // 3. Parse a sentence
- * const char *sentence = "$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*47\r\n";
- * char buffer[256];  // Working buffer for tokenization
+ * const char *sentence =
+ * "$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*47\r\n"; char
+ * buffer[256];  // Working buffer for tokenization
  *
- * nmea_result_t result = nmea_parse(&ctx, sentence, strlen(sentence), buffer, sizeof(buffer));
- * if (result == NMEA_OK) {
+ * nmea_result_t result = nmea_parse(&ctx, sentence, strlen(sentence), buffer,
+ * sizeof(buffer)); if (result == NMEA_OK) {
  *     // Access parsed data from context
  *     nmea_gnss_state_t gnss_data;
  *     if (nmea_get_gnss_data(&ctx, &gnss_data) == NMEA_OK) {
- *         printf("Lat: %f, Lon: %f\n", gnss_data.latitude.degrees, gnss_data.longitude.degrees);
+ *         printf("Lat: %f, Lon: %f\n", gnss_data.latitude.degrees,
+ * gnss_data.longitude.degrees);
  *     }
  * }
  *
@@ -45,8 +41,7 @@
  * nmea_cleanup(&ctx);
  * @endcode
  *
- * @author Embedded NMEA-0183 Parser Team
- * @version 2.0.0
+ * @version 1.0.0
  */
 
 #ifndef NMEA_H
@@ -56,8 +51,8 @@
 extern "C" {
 #endif
 
-#include "nmea_types.h"
 #include "nmea_config.h"
+#include "nmea_types.h"
 
 /* Include enabled module headers */
 #if NMEA_MODULE_GNSS_ENABLED
@@ -120,59 +115,59 @@ extern "C" {
  * Use the accessor functions to retrieve parsed data.
  */
 struct nmea_context {
-    /** Configuration */
-    nmea_config_t config;
+  /** Configuration */
+  nmea_config_t config;
 
-    /** Initialization flag */
-    bool initialized;
+  /** Initialization flag */
+  bool initialized;
 
-    /** Module state storage (defined per enabled module) */
+  /** Module state storage (defined per enabled module) */
 #if NMEA_MODULE_GNSS_ENABLED
-    nmea_gnss_state_t gnss;
+  nmea_gnss_state_t gnss;
 #endif
 
 #if NMEA_MODULE_AIS_ENABLED
-    nmea_ais_state_t ais;
+  nmea_ais_state_t ais;
 #endif
 
 #if NMEA_MODULE_NAVIGATION_ENABLED
-    nmea_navigation_state_t navigation;
+  nmea_navigation_state_t navigation;
 #endif
 
 #if NMEA_MODULE_WAYPOINT_ENABLED
-    nmea_waypoint_state_t waypoint;
+  nmea_waypoint_state_t waypoint;
 #endif
 
 #if NMEA_MODULE_HEADING_ENABLED
-    nmea_heading_state_t heading;
+  nmea_heading_state_t heading;
 #endif
 
 #if NMEA_MODULE_SENSOR_ENABLED
-    nmea_sensor_state_t sensor;
+  nmea_sensor_state_t sensor;
 #endif
 
 #if NMEA_MODULE_RADAR_ENABLED
-    nmea_radar_state_t radar;
+  nmea_radar_state_t radar;
 #endif
 
 #if NMEA_MODULE_SAFETY_ENABLED
-    nmea_safety_state_t safety;
+  nmea_safety_state_t safety;
 #endif
 
 #if NMEA_MODULE_COMM_ENABLED
-    nmea_comm_state_t comm;
+  nmea_comm_state_t comm;
 #endif
 
 #if NMEA_MODULE_SYSTEM_ENABLED
-    nmea_system_state_t system;
+  nmea_system_state_t system;
 #endif
 
 #if NMEA_MODULE_ATTITUDE_ENABLED
-    nmea_attitude_state_t attitude;
+  nmea_attitude_state_t attitude;
 #endif
 
 #if NMEA_MODULE_MISC_ENABLED
-    nmea_misc_state_t misc;
+  nmea_misc_state_t misc;
 #endif
 };
 
@@ -186,7 +181,8 @@ struct nmea_context {
  * Creates and initializes a new parser instance with the given configuration.
  * The context must be initialized before any parsing operations.
  *
- * @param[out] ctx     Pointer to context structure to initialize (must not be NULL)
+ * @param[out] ctx     Pointer to context structure to initialize (must not be
+ * NULL)
  * @param[in]  config  Parser configuration (must not be NULL)
  *
  * @return NMEA_OK on success
@@ -194,12 +190,13 @@ struct nmea_context {
  * @return NMEA_ERROR_INVALID_CONFIG if configuration is invalid
  * @return NMEA_ERROR_ALREADY_INIT if context already initialized
  *
- * @note This function performs zero heap allocation. All state is in the context structure.
+ * @note This function performs zero heap allocation. All state is in the
+ * context structure.
  *
  * @see nmea_cleanup()
  * @see nmea_config_t
  */
-nmea_result_t nmea_init(nmea_context_t *ctx, const nmea_config_t *config);
+nmea_result_t nmea_init(nmea_context_t* ctx, const nmea_config_t* config);
 
 /**
  * @brief Parse a single NMEA sentence
@@ -210,8 +207,10 @@ nmea_result_t nmea_init(nmea_context_t *ctx, const nmea_config_t *config);
  * @param[in,out] ctx          Parser context (must be initialized)
  * @param[in]     sentence     NMEA sentence string (null-terminated)
  * @param[in]     length       Length of sentence (excluding null terminator)
- * @param[in,out] buffer       Working buffer for tokenization (will be modified)
- * @param[in]     buffer_size  Size of working buffer (min: NMEA_MAX_SENTENCE_LENGTH)
+ * @param[in,out] buffer       Working buffer for tokenization (will be
+ * modified)
+ * @param[in]     buffer_size  Size of working buffer (min:
+ * NMEA_MAX_SENTENCE_LENGTH)
  *
  * @return NMEA_OK on successful parse
  * @return NMEA_ERROR_NULL_PARAM if any pointer parameter is NULL
@@ -226,17 +225,13 @@ nmea_result_t nmea_init(nmea_context_t *ctx, const nmea_config_t *config);
  * @warning The provided buffer will be modified during parsing. Pass a copy if
  *          you need to preserve the original sentence.
  *
- * @note This function performs zero heap allocation. All parsing uses the provided buffer.
+ * @note This function performs zero heap allocation. All parsing uses the
+ * provided buffer.
  *
  * @see nmea_init()
  */
-nmea_result_t nmea_parse(
-    nmea_context_t *ctx,
-    const char *sentence,
-    size_t length,
-    void *buffer,
-    size_t buffer_size
-);
+nmea_result_t nmea_parse(nmea_context_t* ctx, const char* sentence,
+                         size_t length, void* buffer, size_t buffer_size);
 
 /**
  * @brief Cleanup and reset parser context
@@ -246,12 +241,13 @@ nmea_result_t nmea_parse(
  *
  * @param[in,out] ctx  Parser context to cleanup
  *
- * @note This function is safe to call on already-cleaned or uninitialized contexts.
+ * @note This function is safe to call on already-cleaned or uninitialized
+ * contexts.
  * @note This function performs zero heap deallocation (no heap was used).
  *
  * @see nmea_init()
  */
-void nmea_cleanup(nmea_context_t *ctx);
+void nmea_cleanup(nmea_context_t* ctx);
 
 /* ========================================================================== */
 /*                      MODULE DATA ACCESSOR FUNCTIONS                        */
@@ -261,8 +257,8 @@ void nmea_cleanup(nmea_context_t *ctx);
 /**
  * @brief Get current GNSS/GPS data from parser context
  *
- * Retrieves the latest parsed GNSS data (position, time, quality, satellites, etc.)
- * from the parser context.
+ * Retrieves the latest parsed GNSS data (position, time, quality, satellites,
+ * etc.) from the parser context.
  *
  * @param[in]  ctx   Parser context
  * @param[out] data  Pointer to GNSS data structure to fill
@@ -275,7 +271,8 @@ void nmea_cleanup(nmea_context_t *ctx);
  *
  * @see nmea_gnss_state_t
  */
-nmea_result_t nmea_get_gnss_data(const nmea_context_t *ctx, nmea_gnss_state_t *data);
+nmea_result_t nmea_get_gnss_data(const nmea_context_t* ctx,
+                                 nmea_gnss_state_t* data);
 #endif
 
 #if NMEA_MODULE_AIS_ENABLED
@@ -290,7 +287,8 @@ nmea_result_t nmea_get_gnss_data(const nmea_context_t *ctx, nmea_gnss_state_t *d
  *
  * @see nmea_ais_state_t
  */
-nmea_result_t nmea_get_ais_data(const nmea_context_t *ctx, nmea_ais_state_t *data);
+nmea_result_t nmea_get_ais_data(const nmea_context_t* ctx,
+                                nmea_ais_state_t* data);
 #endif
 
 #if NMEA_MODULE_NAVIGATION_ENABLED
@@ -305,7 +303,8 @@ nmea_result_t nmea_get_ais_data(const nmea_context_t *ctx, nmea_ais_state_t *dat
  *
  * @see nmea_navigation_state_t
  */
-nmea_result_t nmea_get_navigation_data(const nmea_context_t *ctx, nmea_navigation_state_t *data);
+nmea_result_t nmea_get_navigation_data(const nmea_context_t* ctx,
+                                       nmea_navigation_state_t* data);
 #endif
 
 #if NMEA_MODULE_WAYPOINT_ENABLED
@@ -320,7 +319,8 @@ nmea_result_t nmea_get_navigation_data(const nmea_context_t *ctx, nmea_navigatio
  *
  * @see nmea_waypoint_state_t
  */
-nmea_result_t nmea_get_waypoint_data(const nmea_context_t *ctx, nmea_waypoint_state_t *data);
+nmea_result_t nmea_get_waypoint_data(const nmea_context_t* ctx,
+                                     nmea_waypoint_state_t* data);
 #endif
 
 #if NMEA_MODULE_HEADING_ENABLED
@@ -335,7 +335,8 @@ nmea_result_t nmea_get_waypoint_data(const nmea_context_t *ctx, nmea_waypoint_st
  *
  * @see nmea_heading_state_t
  */
-nmea_result_t nmea_get_heading_data(const nmea_context_t *ctx, nmea_heading_state_t *data);
+nmea_result_t nmea_get_heading_data(const nmea_context_t* ctx,
+                                    nmea_heading_state_t* data);
 #endif
 
 #if NMEA_MODULE_SENSOR_ENABLED
@@ -350,7 +351,8 @@ nmea_result_t nmea_get_heading_data(const nmea_context_t *ctx, nmea_heading_stat
  *
  * @see nmea_sensor_state_t
  */
-nmea_result_t nmea_get_sensor_data(const nmea_context_t *ctx, nmea_sensor_state_t *data);
+nmea_result_t nmea_get_sensor_data(const nmea_context_t* ctx,
+                                   nmea_sensor_state_t* data);
 #endif
 
 #if NMEA_MODULE_RADAR_ENABLED
@@ -365,7 +367,8 @@ nmea_result_t nmea_get_sensor_data(const nmea_context_t *ctx, nmea_sensor_state_
  *
  * @see nmea_radar_state_t
  */
-nmea_result_t nmea_get_radar_data(const nmea_context_t *ctx, nmea_radar_state_t *data);
+nmea_result_t nmea_get_radar_data(const nmea_context_t* ctx,
+                                  nmea_radar_state_t* data);
 #endif
 
 #if NMEA_MODULE_SAFETY_ENABLED
@@ -380,7 +383,8 @@ nmea_result_t nmea_get_radar_data(const nmea_context_t *ctx, nmea_radar_state_t 
  *
  * @see nmea_safety_state_t
  */
-nmea_result_t nmea_get_safety_data(const nmea_context_t *ctx, nmea_safety_state_t *data);
+nmea_result_t nmea_get_safety_data(const nmea_context_t* ctx,
+                                   nmea_safety_state_t* data);
 #endif
 
 #if NMEA_MODULE_COMM_ENABLED
@@ -395,7 +399,8 @@ nmea_result_t nmea_get_safety_data(const nmea_context_t *ctx, nmea_safety_state_
  *
  * @see nmea_comm_state_t
  */
-nmea_result_t nmea_get_comm_data(const nmea_context_t *ctx, nmea_comm_state_t *data);
+nmea_result_t nmea_get_comm_data(const nmea_context_t* ctx,
+                                 nmea_comm_state_t* data);
 #endif
 
 #if NMEA_MODULE_SYSTEM_ENABLED
@@ -410,7 +415,8 @@ nmea_result_t nmea_get_comm_data(const nmea_context_t *ctx, nmea_comm_state_t *d
  *
  * @see nmea_system_state_t
  */
-nmea_result_t nmea_get_system_data(const nmea_context_t *ctx, nmea_system_state_t *data);
+nmea_result_t nmea_get_system_data(const nmea_context_t* ctx,
+                                   nmea_system_state_t* data);
 #endif
 
 #if NMEA_MODULE_ATTITUDE_ENABLED
@@ -425,7 +431,8 @@ nmea_result_t nmea_get_system_data(const nmea_context_t *ctx, nmea_system_state_
  *
  * @see nmea_attitude_state_t
  */
-nmea_result_t nmea_get_attitude_data(const nmea_context_t *ctx, nmea_attitude_state_t *data);
+nmea_result_t nmea_get_attitude_data(const nmea_context_t* ctx,
+                                     nmea_attitude_state_t* data);
 #endif
 
 #if NMEA_MODULE_MISC_ENABLED
@@ -440,7 +447,8 @@ nmea_result_t nmea_get_attitude_data(const nmea_context_t *ctx, nmea_attitude_st
  *
  * @see nmea_misc_state_t
  */
-nmea_result_t nmea_get_misc_data(const nmea_context_t *ctx, nmea_misc_state_t *data);
+nmea_result_t nmea_get_misc_data(const nmea_context_t* ctx,
+                                 nmea_misc_state_t* data);
 #endif
 
 /* ========================================================================== */
@@ -481,7 +489,7 @@ size_t nmea_get_context_size(void);
  *
  * @note The returned string is statically allocated and should not be freed.
  */
-const char *nmea_get_error_string(nmea_result_t result);
+const char* nmea_get_error_string(nmea_result_t result);
 
 /**
  * @brief Get library version string
@@ -490,7 +498,7 @@ const char *nmea_get_error_string(nmea_result_t result);
  *
  * @return Pointer to static version string
  */
-const char *nmea_get_version(void);
+const char* nmea_get_version(void);
 
 /**
  * @brief Check if a sentence type is enabled
@@ -502,7 +510,8 @@ const char *nmea_get_version(void);
  *
  * @return true if sentence is enabled, false otherwise
  */
-bool nmea_is_sentence_enabled(const nmea_context_t *ctx, const char *sentence_id);
+bool nmea_is_sentence_enabled(const nmea_context_t* ctx,
+                              const char* sentence_id);
 
 /**
  * @brief Check if a module is enabled
@@ -514,7 +523,7 @@ bool nmea_is_sentence_enabled(const nmea_context_t *ctx, const char *sentence_id
  *
  * @return true if module is enabled, false otherwise
  */
-bool nmea_is_module_enabled(const nmea_context_t *ctx, nmea_module_t module);
+bool nmea_is_module_enabled(const nmea_context_t* ctx, nmea_module_t module);
 
 #ifdef __cplusplus
 }
