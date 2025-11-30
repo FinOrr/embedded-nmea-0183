@@ -181,7 +181,7 @@ nmea_result_t nmea_parse_xtr(nmea_context_t* ctx, const nmea_tokens_t* tokens) {
  * @brief Parse ZDA - Time and Date
  *
  * Format: $--ZDA,hhmmss.ss,xx,xx,xxxx,xx,xx*hh
- * Example: $--ZDA,234500,09,06,1995,-12,45*hh
+ * Example: $--ZDA,234500,09,06,2025,-12,45*hh
  *
  * Fields:
  * 0: Sentence ID (ZDA)
