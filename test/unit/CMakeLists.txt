@@ -28,6 +28,7 @@ target_include_directories(nmea PUBLIC
 add_executable(unit_tests
     main.cpp
     test_ais.cpp
+    test_attitude.cpp
     test_core.cpp
     test_gnss.cpp
     test_sensor.cpp

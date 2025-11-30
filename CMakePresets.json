@@ -34,6 +34,18 @@
             "cacheVariables": {
                 "ENABLE_FUZZING": "ON"
             }
+        },
+        {
+            "name": "conf-examples",
+            "generator": "Ninja",
+            "description": "Build library and examples (target: host)",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "gcc",
+                "CMAKE_CXX_COMPILER": "g++",
+                "BUILD_EXAMPLES": "ON",
+                "BUILD_TESTING": "OFF",
+                "TARGET_PLATFORM": "host"
+            }
         }
     ],
     "buildPresets": [
@@ -52,6 +64,11 @@
             "targets": [
                 "fuzz_tests"
             ]
+        },
+        {
+            "name": "build-examples",
+            "configurePreset": "conf-examples",
+            "description": "Build all examples (target: host)"
         }
     ],
     "testPresets": [
