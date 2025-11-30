@@ -66,8 +66,8 @@ TEST_F(NmeaNavigationTest, BWC_ValidSentence) {
   EXPECT_EQ(nav.waypoint_utc.second, 16);
 
   // Check waypoint position
-  EXPECT_TRUE(double_equals(nav.waypoint_latitude.degrees, 51.5003, 0.001));
-  EXPECT_TRUE(double_equals(nav.waypoint_longitude.degrees, -0.7723, 0.001));
+  EXPECT_TRUE(float_equals(nav.waypoint_latitude.degrees, 51.5003, 0.001));
+  EXPECT_TRUE(float_equals(nav.waypoint_longitude.degrees, -0.7723, 0.001));
 
   // Check bearings
   EXPECT_TRUE(float_equals(nav.bearing_true, 213.8f));
@@ -99,8 +99,8 @@ TEST_F(NmeaNavigationTest, BWR_ValidSentence) {
   EXPECT_EQ(nav.waypoint_utc.second, 29);
 
   // Check position
-  EXPECT_TRUE(double_equals(nav.waypoint_latitude.degrees, 37.3837, 0.001));
-  EXPECT_TRUE(double_equals(nav.waypoint_longitude.degrees, -121.0408, 0.001));
+  EXPECT_TRUE(float_equals(nav.waypoint_latitude.degrees, 37.3837, 0.001));
+  EXPECT_TRUE(float_equals(nav.waypoint_longitude.degrees, -121.0408, 0.001));
 
   // Check bearings and distance
   EXPECT_TRUE(float_equals(nav.bearing_true, 234.9f));
@@ -130,8 +130,8 @@ TEST_F(NmeaNavigationTest, BEC_ValidSentence) {
   EXPECT_EQ(nav.bec_utc.second, 37);
 
   // Check DR position
-  EXPECT_TRUE(double_equals(nav.bec_waypoint_lat.degrees, -37.8608, 0.001));
-  EXPECT_TRUE(double_equals(nav.bec_waypoint_lon.degrees, 145.1227, 0.001));
+  EXPECT_TRUE(float_equals(nav.bec_waypoint_lat.degrees, -37.8608, 0.001));
+  EXPECT_TRUE(float_equals(nav.bec_waypoint_lon.degrees, 145.1227, 0.001));
 
   // Check bearings
   EXPECT_TRUE(float_equals(nav.bec_bearing_true, 97.0f));

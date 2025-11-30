@@ -51,16 +51,10 @@ class NmeaTestBase : public ::testing::Test {
     return std::fabs(a - b) < epsilon;
   }
 
-  /**
-   * @brief Helper to compare doubles with tolerance
-   */
-  bool double_equals(double a, double b, double epsilon = 0.000001) {
-    return std::fabs(a - b) < epsilon;
-  }
-
   uint8_t get_checksum(const char* sentence) {
     const char* start = sentence;
-    if (*start == '$') start++;
+    // Skip leading start character for NMEA ('$', '!' for AIS)
+    if (*start == '$' || *start == '!') start++;
 
     uint8_t checksum = 0;
     for (size_t i = 0; start[i] != '\0' && start[i] != '*'; i++) {
@@ -71,11 +65,14 @@ class NmeaTestBase : public ::testing::Test {
 
   /**
    * @brief Helper to create a sentence with checksum appended
-   * @param sentence_without_checksum The sentence without checksum (e.g., "$GPGGA,123519,...")
-   * @param output_buffer Buffer to write complete sentence to (must be large enough)
+   * @param sentence_without_checksum The sentence without checksum (e.g.,
+   * "$GPGGA,123519,...")
+   * @param output_buffer Buffer to write complete sentence to (must be large
+   * enough)
    * @return Pointer to output_buffer
    */
-  const char* make_sentence(const char* sentence_without_checksum, char* output_buffer) {
+  const char* make_sentence(const char* sentence_without_checksum,
+                            char* output_buffer) {
     uint8_t cs = get_checksum(sentence_without_checksum);
     snprintf(output_buffer, 256, "%s*%02X", sentence_without_checksum, cs);
     return output_buffer;
@@ -88,14 +85,6 @@ class NmeaTestBase : public ::testing::Test {
 #define EXPECT_FLOAT_EQ_MSG(val1, val2, msg)                                \
   EXPECT_PRED_FORMAT2(::testing::internal::CmpHelperFloatingPointEQ<float>, \
                       val1, val2)                                           \
-      << msg
-
-/**
- * @brief Macro for testing double equality with custom message
- */
-#define EXPECT_DOUBLE_EQ_MSG(val1, val2, msg)                                \
-  EXPECT_PRED_FORMAT2(::testing::internal::CmpHelperFloatingPointEQ<double>, \
-                      val1, val2)                                            \
       << msg
 
 #endif /* TEST_HELPERS_H */

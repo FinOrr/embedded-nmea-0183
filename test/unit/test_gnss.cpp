@@ -27,11 +27,11 @@ TEST_F(NmeaGnssTest, GGA_ValidSentence) {
   EXPECT_EQ(gnss.utc_time.second, 19);
 
   // Check latitude (48°07.038'N = 48.1173°)
-  EXPECT_TRUE(double_equals(gnss.latitude.degrees, 48.1173, 0.0001));
+  EXPECT_TRUE(float_equals(gnss.latitude.degrees, 48.1173, 0.0001));
   EXPECT_TRUE(gnss.latitude.valid);
 
   // Check longitude (11°31.000'E = 11.51667°)
-  EXPECT_TRUE(double_equals(gnss.longitude.degrees, 11.51667, 0.0001));
+  EXPECT_TRUE(float_equals(gnss.longitude.degrees, 11.51667, 0.0001));
   EXPECT_TRUE(gnss.longitude.valid);
 
   // Check quality
@@ -89,10 +89,10 @@ TEST_F(NmeaGnssTest, RMC_ValidSentence) {
   EXPECT_TRUE(gnss.data_valid);
 
   // Check latitude
-  EXPECT_TRUE(double_equals(gnss.latitude.degrees, 48.1173, 0.0001));
+  EXPECT_TRUE(float_equals(gnss.latitude.degrees, 48.1173, 0.0001));
 
   // Check longitude
-  EXPECT_TRUE(double_equals(gnss.longitude.degrees, 11.51667, 0.0001));
+  EXPECT_TRUE(float_equals(gnss.longitude.degrees, 11.51667, 0.0001));
 
   // Check speed (knots)
   EXPECT_TRUE(float_equals(gnss.speed.knots, 22.4f));
@@ -135,10 +135,10 @@ TEST_F(NmeaGnssTest, GLL_ValidSentence) {
   EXPECT_EQ(nmea_get_gnss_data(&ctx, &gnss), NMEA_OK);
 
   // Check latitude
-  EXPECT_TRUE(double_equals(gnss.latitude.degrees, 48.1173, 0.0001));
+  EXPECT_TRUE(float_equals(gnss.latitude.degrees, 48.1173, 0.0001));
 
   // Check longitude
-  EXPECT_TRUE(double_equals(gnss.longitude.degrees, 11.51667, 0.0001));
+  EXPECT_TRUE(float_equals(gnss.longitude.degrees, 11.51667, 0.0001));
 
   // Check time
   EXPECT_EQ(gnss.utc_time.hour, 12);
@@ -170,8 +170,8 @@ TEST_F(NmeaGnssTest, GNS_ValidSentence) {
   EXPECT_EQ(gnss.utc_time.second, 19);
 
   // Check position
-  EXPECT_TRUE(double_equals(gnss.latitude.degrees, 48.1173, 0.0001));
-  EXPECT_TRUE(double_equals(gnss.longitude.degrees, 11.51667, 0.0001));
+  EXPECT_TRUE(float_equals(gnss.latitude.degrees, 48.1173, 0.0001));
+  EXPECT_TRUE(float_equals(gnss.longitude.degrees, 11.51667, 0.0001));
 
   // Check satellite count
   EXPECT_EQ(gnss.satellites_used, 8);
@@ -306,7 +306,7 @@ TEST_F(NmeaGnssTest, CoordinateSouth) {
   EXPECT_EQ(nmea_get_gnss_data(&ctx, &gnss), NMEA_OK);
 
   // South latitude should be negative
-  EXPECT_TRUE(double_equals(gnss.latitude.degrees, -33.835, 0.001));
+  EXPECT_TRUE(float_equals(gnss.latitude.degrees, -33.835, 0.001));
 }
 
 TEST_F(NmeaGnssTest, CoordinateWest) {
@@ -317,5 +317,5 @@ TEST_F(NmeaGnssTest, CoordinateWest) {
   EXPECT_EQ(nmea_get_gnss_data(&ctx, &gnss), NMEA_OK);
 
   // West longitude should be negative
-  EXPECT_TRUE(double_equals(gnss.longitude.degrees, -122.17, 0.001));
+  EXPECT_TRUE(float_equals(gnss.longitude.degrees, -122.17, 0.001));
 }
