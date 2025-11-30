@@ -274,6 +274,25 @@ static const nmea_dispatch_entry_t g_dispatch_table[] = {
 #endif
 #endif /* NMEA_MODULE_MISC_ENABLED */
 
+    /* ====================================================================== */
+    /*                        ATTITUDE MODULE                                 */
+    /* ====================================================================== */
+
+#if NMEA_MODULE_ATTITUDE_ENABLED
+#if NMEA_SENTENCE_HRM_ENABLED
+    {"HRM", nmea_parse_hrm, NMEA_MODULE_ATTITUDE, 11},
+#endif
+#if NMEA_SENTENCE_PRC_ENABLED
+    {"PRC", nmea_parse_prc, NMEA_MODULE_ATTITUDE, 9},
+#endif
+#if NMEA_SENTENCE_TRC_ENABLED
+    {"TRC", nmea_parse_trc, NMEA_MODULE_ATTITUDE, 9},
+#endif
+#if NMEA_SENTENCE_TRD_ENABLED
+    {"TRD", nmea_parse_trd, NMEA_MODULE_ATTITUDE, 7},
+#endif
+#endif /* NMEA_MODULE_ATTITUDE_ENABLED */
+
     /* Sentinel entry */
     {NULL, NULL, 0, 0}
 };
