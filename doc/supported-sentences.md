@@ -75,7 +75,6 @@ $--RMA
 $--RMB
 $--RMC
 $--RRT
-$--ROR
 $--ROT
 $--RRT
 $--RPM

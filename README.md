@@ -54,6 +54,67 @@ if (nmea_parse(&ctx, sentence, strlen(sentence), buffer, sizeof(buffer)) == NMEA
 nmea_cleanup(&ctx);
 ```
 
+## Examples & Use Cases
+
+Working examples demonstrating common integration scenarios:
+
+### [GPS Tracker](examples/gps_tracker/)
+Basic GPS tracking: position, speed, altitude, time.
+
+- Data: Latitude, longitude, altitude, speed, course, UTC time/date, fix quality
+- Memory: ~200 bytes RAM, ~6 KB flash
+- Complexity: Beginner
+
+```c
+nmea_parse(&ctx, sentence, len, buffer, buf_size);
+nmea_gnss_state_t gps;
+nmea_get_gnss_data(&ctx, &gps);
+printf("Position: %.6f, %.6f\n", gps.latitude.degrees, gps.longitude.degrees);
+```
+
+### [Marine Instruments](examples/marine_instruments/)
+Legacy marine equipment integration: depth sounders, wind instruments, compass, speed logs, temperature sensors.
+
+- Data: Water depth, wind speed/direction, heading, speed through water, ROT, water temperature
+- Memory: ~600 bytes RAM, ~15 KB flash
+- Complexity: Intermediate
+
+```c
+nmea_sensor_state_t sensors;
+nmea_get_sensor_data(&ctx, &sensors);
+printf("Depth: %.1f m, Wind: %.1f knots\n",
+       sensors.depth_below_transducer_meters,
+       sensors.wind_speed_knots);
+```
+
+### [Serial Stream Parsing](examples/serial_stream/)
+UART/serial port integration for Linux/POSIX systems. Includes buffering, error recovery, and statistics.
+
+- Complexity: Intermediate
+
+### [Multiple GPS Devices](examples/multi_instance/)
+Multiple independent parser contexts for redundant GPS systems or separate data streams.
+
+- Complexity: Intermediate
+
+### [Minimal Memory](examples/minimal_memory/)
+Memory optimization for resource-constrained microcontrollers.
+
+- Complexity: Intermediate
+
+### [Error Handling](examples/comprehensive_error_handling/)
+Error handling with callbacks, statistics, recovery strategies, and health monitoring.
+
+- Complexity: Advanced
+
+**All examples include:**
+- Complete, buildable code
+- Detailed documentation
+- Real-world use cases
+- Platform-specific notes
+
+See [examples/](examples/) for complete list and [doc/](doc/) for integration guides.
+
 ## Building
 
 ```bash
@@ -158,12 +219,39 @@ nmea_config_t config = {
 };
 ```
 
+## Documentation
+
+Complete guides and references in the [`doc/`](doc/) directory:
+
+**Getting Started:**
+- [Integration Guide](doc/integration-guide.md) - Step-by-step setup for CMake, Makefile, Arduino, PlatformIO
+- [Serial Port Integration](doc/serial-port-integration.md) - UART/serial connection examples (STM32, ESP32, Linux, Arduino)
+- [FAQ](doc/faq.md) - Common questions and troubleshooting
+
+**Advanced Topics:**
+- [Stream Parsing](doc/stream-parsing.md) - Buffering strategies for continuous data
+- [Memory Optimization](doc/memory-optimization.md) - Minimize RAM/flash usage
+- [Error Handling](doc/error-handling.md) - Error recovery patterns
+
+**Reference:**
+- [Supported Sentences](doc/supported-sentences.md) - Complete list of 100+ sentence types
+- [Documentation Index](doc/) - Browse all documentation
+
+**Examples:**
+- [GPS Tracker](examples/gps_tracker/) - Simple GPS position tracking
+- [Marine Instruments](examples/marine_instruments/) - Depth, wind, compass, temperature
+- [Serial Stream](examples/serial_stream/) - Real serial port integration
+- [Multi-Instance](examples/multi_instance/) - Multiple GPS devices
+- [Minimal Memory](examples/minimal_memory/) - Memory optimization
+- [Error Handling](examples/comprehensive_error_handling/) - Error handling patterns
+- [All Examples](examples/) - Browse all examples
+
 ## License
 
 MIT License - See [LICENSE](LICENSE)
 
 ## Support
 
-File issues at: https://github.com/FinOrr/embedded-nmea-0183/issues
-
-See [doc/supported-sentences.md](doc/supported-sentences.md) for complete sentence list.
+- **Documentation:** [doc/](doc/) and [examples/](examples/)
+- **Issues:** https://github.com/FinOrr/embedded-nmea-0183/issues
+- **Questions:** Check [FAQ](doc/faq.md) first
