@@ -77,7 +77,8 @@ TEST_F(NmeaAttitudeTest, HRM_InvalidStatus) {
   // Status should be 'V' (invalid)
   EXPECT_EQ(att.hrm_status, 'V');
 
-  // But sentence is still parsed (valid flag relates to sentence parsing, not data status)
+  // But sentence is still parsed (valid flag relates to sentence parsing, not
+  // data status)
   EXPECT_TRUE(att.hrm_valid);
 }
 
@@ -89,7 +90,8 @@ TEST_F(NmeaAttitudeTest, HRM_EmptyFields) {
   nmea_attitude_state_t att;
   EXPECT_EQ(nmea_get_attitude_data(&ctx, &att), NMEA_OK);
 
-  // Should be marked valid even with all empty fields (sentence was successfully parsed)
+  // Should be marked valid even with all empty fields (sentence was
+  // successfully parsed)
   EXPECT_TRUE(att.hrm_valid);
 }
 
@@ -104,7 +106,8 @@ TEST_F(NmeaAttitudeTest, HRM_HeelAngleRange) {
   EXPECT_TRUE(float_equals(att.hrm_heel_angle, 15.0f));
 
   // Test negative heel angle (port)
-  make_sentence("$HEHRM,-10.5,5.0,10.0,10.0,A,12.0,12.0,120000,01,01", sentence);
+  make_sentence("$HEHRM,-10.5,5.0,10.0,10.0,A,12.0,12.0,120000,01,01",
+                sentence);
   EXPECT_EQ(parse(sentence), NMEA_OK);
   EXPECT_EQ(nmea_get_attitude_data(&ctx, &att), NMEA_OK);
   EXPECT_TRUE(float_equals(att.hrm_heel_angle, -10.5f));
@@ -246,7 +249,8 @@ TEST_F(NmeaAttitudeTest, PRC_PitchControl) {
 TEST_F(NmeaAttitudeTest, PRC_OperatingLocation) {
   // Test different operating locations
   const char* locations[] = {"B", "P", "S", "C", "E", "W"};
-  const char* location_names[] = {"Bridge", "Port", "Starboard", "Central", "Engine room", "Wing"};
+  const char* location_names[] = {"Bridge",  "Port",        "Starboard",
+                                  "Central", "Engine room", "Wing"};
 
   for (int i = 0; i < 6; i++) {
     char sentence_template[100];
@@ -255,11 +259,13 @@ TEST_F(NmeaAttitudeTest, PRC_OperatingLocation) {
 
     char sentence[128];
     make_sentence(sentence_template, sentence);
-    EXPECT_EQ(parse(sentence), NMEA_OK) << "Failed for location: " << location_names[i];
+    EXPECT_EQ(parse(sentence), NMEA_OK)
+        << "Failed for location: " << location_names[i];
 
     nmea_attitude_state_t att;
     EXPECT_EQ(nmea_get_attitude_data(&ctx, &att), NMEA_OK);
-    EXPECT_EQ(att.prc_location, locations[i][0]) << "Location mismatch for: " << location_names[i];
+    EXPECT_EQ(att.prc_location, locations[i][0])
+        << "Location mismatch for: " << location_names[i];
   }
 }
 
@@ -421,7 +427,8 @@ TEST_F(NmeaAttitudeTest, TRC_AzimuthControl) {
 
     nmea_attitude_state_t att;
     EXPECT_EQ(nmea_get_attitude_data(&ctx, &att), NMEA_OK);
-    EXPECT_TRUE(float_equals(att.trc_azimuth_demand, angle)) << "Azimuth mismatch for: " << angle;
+    EXPECT_TRUE(float_equals(att.trc_azimuth_demand, angle))
+        << "Azimuth mismatch for: " << angle;
   }
 }
 
@@ -500,7 +507,8 @@ TEST_F(NmeaAttitudeTest, TRD_ValidSentence) {
 }
 
 TEST_F(NmeaAttitudeTest, TRD_ResponseValues) {
-  // TRD provides response (actual) values which may differ from TRC demand values
+  // TRD provides response (actual) values which may differ from TRC demand
+  // values
   char sentence[128];
   make_sentence("$HETRD,01,795.0,R,43.8,D,178.2", sentence);
   EXPECT_EQ(parse(sentence), NMEA_OK);

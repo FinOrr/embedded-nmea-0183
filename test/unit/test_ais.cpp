@@ -54,7 +54,8 @@ TEST_F(NmeaAisTest, VDO_ValidSentence) {
 
 TEST_F(NmeaAisTest, ABK_ValidSentence) {
   char sentence_buf[256];
-  const char* sentence = make_sentence("$SDABK,123456789,A,7,2,1", sentence_buf);
+  const char* sentence =
+      make_sentence("$SDABK,123456789,A,7,2,1", sentence_buf);
   EXPECT_EQ(parse(sentence), NMEA_OK);
 
   nmea_ais_state_t ais;
@@ -70,7 +71,8 @@ TEST_F(NmeaAisTest, ABK_ValidSentence) {
 
 TEST_F(NmeaAisTest, ABM_ValidSentence) {
   char sentence_buf[256];
-  const char* sentence = make_sentence("!AIABM,1,1,0,123456789,1,25,HELLO-WORLD,2", sentence_buf);
+  const char* sentence =
+      make_sentence("!AIABM,1,1,0,123456789,1,25,HELLO-WORLD,2", sentence_buf);
   EXPECT_EQ(parse(sentence), NMEA_OK);
 
   nmea_ais_state_t ais;
@@ -89,7 +91,8 @@ TEST_F(NmeaAisTest, ABM_ValidSentence) {
 
 TEST_F(NmeaAisTest, BBM_ValidSentence) {
   char sentence_buf[256];
-  const char* sentence = make_sentence("!AIBBM,2,2,9,1,25,DATA-STR,0", sentence_buf);
+  const char* sentence =
+      make_sentence("!AIBBM,2,2,9,1,25,DATA-STR,0", sentence_buf);
   EXPECT_EQ(parse(sentence), NMEA_OK);
 
   nmea_ais_state_t ais;
@@ -111,7 +114,8 @@ TEST_F(NmeaAisTest, BBM_ValidSentence) {
 
 TEST_F(NmeaAisTest, AIR_ValidSentence) {
   char sentence_buf[256];
-  const char* sentence = make_sentence("$SDAIR,123456789,1,0,2,1,987654321,3,0,B,12,34,56", sentence_buf);
+  const char* sentence = make_sentence(
+      "$SDAIR,123456789,1,0,2,1,987654321,3,0,B,12,34,56", sentence_buf);
   EXPECT_EQ(parse(sentence), NMEA_OK);
 
   nmea_ais_state_t ais;
@@ -135,7 +139,8 @@ TEST_F(NmeaAisTest, AIR_ValidSentence) {
 TEST_F(NmeaAisTest, ACA_ValidSentence) {
   char sentence_buf[256];
   const char* sentence = make_sentence(
-      "$SDACA,5,4807.038,N,01131.000,E,4707.038,S,01031.000,W,2,2087,25,2091,25,3,1,M,1,123519",
+      "$SDACA,5,4807.038,N,01131.000,E,4707.038,S,01031.000,W,2,2087,25,2091,"
+      "25,3,1,M,1,123519",
       sentence_buf);
   EXPECT_EQ(parse(sentence), NMEA_OK);
 
@@ -164,7 +169,8 @@ TEST_F(NmeaAisTest, ACA_ValidSentence) {
 
 TEST_F(NmeaAisTest, ACS_ValidSentence) {
   char sentence_buf[256];
-  const char* sentence = make_sentence("$SDACS,7,123456789,123519,30,11,2025", sentence_buf);
+  const char* sentence =
+      make_sentence("$SDACS,7,123456789,123519,30,11,2025", sentence_buf);
   EXPECT_EQ(parse(sentence), NMEA_OK);
 
   nmea_ais_state_t ais;
@@ -187,7 +193,8 @@ TEST_F(NmeaAisTest, ACS_ValidSentence) {
 
 TEST_F(NmeaAisTest, LRF_ValidSentence) {
   char sentence_buf[256];
-  const char* sentence = make_sentence("$SDLRF,3,123456789,REQNAME,FUNCTION,OK", sentence_buf);
+  const char* sentence =
+      make_sentence("$SDLRF,3,123456789,REQNAME,FUNCTION,OK", sentence_buf);
   EXPECT_EQ(parse(sentence), NMEA_OK);
 
   nmea_ais_state_t ais;
@@ -204,7 +211,8 @@ TEST_F(NmeaAisTest, LRF_ValidSentence) {
 TEST_F(NmeaAisTest, LRI_ValidSentence) {
   char sentence_buf[256];
   const char* sentence = make_sentence(
-      "$SDLRI,1,A,123456789,987654321,4807.038,N,01131.000,E,4707.038,S,01031.000,W",
+      "$SDLRI,1,A,123456789,987654321,4807.038,N,01131.000,E,4707.038,S,01031."
+      "000,W",
       sentence_buf);
   EXPECT_EQ(parse(sentence), NMEA_OK);
 
@@ -228,7 +236,8 @@ TEST_F(NmeaAisTest, LRI_ValidSentence) {
 
 TEST_F(NmeaAisTest, SSD_ValidSentence) {
   char sentence_buf[256];
-  const char* sentence = make_sentence("$SDSSD,CALLSGN,SHIPNAME,100,200,10,12,1,SD", sentence_buf);
+  const char* sentence =
+      make_sentence("$SDSSD,CALLSGN,SHIPNAME,100,200,10,12,1,SD", sentence_buf);
   EXPECT_EQ(parse(sentence), NMEA_OK);
 
   nmea_ais_state_t ais;
@@ -247,7 +256,8 @@ TEST_F(NmeaAisTest, SSD_ValidSentence) {
 
 TEST_F(NmeaAisTest, VSD_ValidSentence) {
   char sentence_buf[256];
-  const char* sentence = make_sentence("$SDVSD,45,3.4,12,DESTPORT,123519,30,11,2,3", sentence_buf);
+  const char* sentence =
+      make_sentence("$SDVSD,45,3.4,12,DESTPORT,123519,30,11,2,3", sentence_buf);
   EXPECT_EQ(parse(sentence), NMEA_OK);
 
   nmea_ais_state_t ais;
