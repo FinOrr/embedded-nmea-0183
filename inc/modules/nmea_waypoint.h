@@ -46,18 +46,18 @@ struct nmea_context;
 struct nmea_tokens;
 
 #if NMEA_SENTENCE_WPL_ENABLED
-nmea_result_t nmea_parse_wpl(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_wpl(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_WNC_ENABLED
-nmea_result_t nmea_parse_wnc(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_wnc(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_WCV_ENABLED
-nmea_result_t nmea_parse_wcv(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_wcv(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #endif /* NMEA_MODULE_WAYPOINT_ENABLED */

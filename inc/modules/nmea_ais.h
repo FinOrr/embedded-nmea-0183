@@ -150,63 +150,63 @@ struct nmea_context;
 struct nmea_tokens;
 
 #if NMEA_SENTENCE_VDM_ENABLED
-nmea_result_t nmea_parse_vdm(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_vdm(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_VDO_ENABLED
-nmea_result_t nmea_parse_vdo(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_vdo(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_ABK_ENABLED
-nmea_result_t nmea_parse_abk(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_abk(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_ABM_ENABLED
-nmea_result_t nmea_parse_abm(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_abm(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_BBM_ENABLED
-nmea_result_t nmea_parse_bbm(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_bbm(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_AIR_ENABLED
-nmea_result_t nmea_parse_air(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_air(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_ACA_ENABLED
-nmea_result_t nmea_parse_aca(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_aca(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_ACS_ENABLED
-nmea_result_t nmea_parse_acs(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_acs(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_LRF_ENABLED
-nmea_result_t nmea_parse_lrf(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_lrf(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_LRI_ENABLED
-nmea_result_t nmea_parse_lri(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_lri(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_SSD_ENABLED
-nmea_result_t nmea_parse_ssd(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_ssd(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_VSD_ENABLED
-nmea_result_t nmea_parse_vsd(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_vsd(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #endif /* NMEA_MODULE_AIS_ENABLED */

@@ -128,11 +128,11 @@ LDFLAGS += $(NMEA_LIB)
 
 # Your target
 your_program: main.o $(NMEA_LIB)
-	$(CC) -o $@ $^ $(LDFLAGS)
+ $(CC) -o $@ $^ $(LDFLAGS)
 
 # Build NMEA library if needed
 $(NMEA_LIB):
-	cd $(NMEA_DIR) && mkdir -p build && cd build && cmake .. && make
+ cd $(NMEA_DIR) && mkdir -p build && cd build && cmake .. && make
 ```
 
 ### PlatformIO (Arduino/ESP32/STM32)
@@ -182,11 +182,11 @@ NMEA_OBJS = $(NMEA_SRCS:.c=.o)
 
 # Build NMEA library
 libnmea.a: $(NMEA_OBJS)
-	$(AR) rcs $@ $^
+ $(AR) rcs $@ $^
 
 # Your application
 your_app: main.o libnmea.a
-	$(CC) $(CFLAGS) -o $@ $^
+ $(CC) $(CFLAGS) -o $@ $^
 ```
 
 ## Common Integration Patterns
@@ -203,7 +203,7 @@ nmea_config_t config = {
 };
 ```
 
-**See:** `examples/simple_parser.c`
+**See:** `examples/gps_tracker/`
 
 ### Pattern 2: Multiple Data Sources
 
@@ -309,7 +309,7 @@ void uart_rx_task(void *pvParameters) {
 }
 ```
 
-**See:** `doc/rtos-integration.md`
+**See:** `doc/serial-port-integration.md` for ESP32 UART configuration
 
 ### Raspberry Pi / Linux
 
@@ -352,8 +352,6 @@ void nmea_parser_task(void *pvParameters) {
 xTaskCreate(nmea_parser_task, "NMEA", 2048, NULL, 5, NULL);
 ```
 
-**See:** `doc/rtos-integration.md`
-
 ## Next Steps
 
 1. **Choose your integration pattern** from the examples above
@@ -368,14 +366,13 @@ xTaskCreate(nmea_parser_task, "NMEA", 2048, NULL, 5, NULL);
 - [Serial Port Integration](serial-port-integration.md) - UART/serial port specifics
 - [Memory Optimization](memory-optimization.md) - Reducing RAM/flash usage
 - [Error Handling](error-handling.md) - Error handling patterns
-- [RTOS Integration](rtos-integration.md) - Using with FreeRTOS, Zephyr, etc.
 - [FAQ](faq.md) - Frequently asked questions
 
 ## Examples
 
-- `examples/simple_parser.c` - Basic usage
-- `examples/sensor_test.c` - Sensor module parsing
+- `examples/gps_tracker/` - Basic GPS tracking
+- `examples/marine_instruments/` - Marine equipment integration
 - `examples/serial_stream/` - Serial port stream parsing
 - `examples/multi_instance/` - Multiple parser contexts
 - `examples/minimal_memory/` - Minimal memory configuration
-- `examples/comprehensive_error_handling/` - Advanced error handling
+- `examples/error_handling/` - Advanced error handling

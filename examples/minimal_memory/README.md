@@ -136,11 +136,11 @@ CFLAGS += -mthumb  # Use Thumb-2 instructions
 
 | Configuration | RAM (bytes) | Flash (KB) |
 |---------------|-------------|------------|
-| GGA only | ~200 | 5-6 |
-| GGA + RMC | ~220 | 6-8 |
-| GNSS (all) | ~350 | 12-15 |
-| GNSS + Sensor | ~600 | 15-20 |
-| All modules | ~1800 | 30-35 |
+| GGA only      | ~200        | 5-6        |
+| GGA + RMC     | ~220        | 6-8        |
+| GNSS (all)    | ~350        | 12-15      |
+| GNSS + Sensor | ~600        | 15-20      |
+| All modules   | ~1800       | 30-35      |
 
 ## Code Techniques
 

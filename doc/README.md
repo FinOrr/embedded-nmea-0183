@@ -80,7 +80,7 @@ This guide will help you find the right documentation.
 
 1. [Error Handling](error-handling.md) - Error handling patterns
 2. [FAQ](faq.md) - Common problems
-3. **Example:** [comprehensive_error_handling](../examples/comprehensive_error_handling/)
+3. **Example:** [error_handling](../examples/error_handling/)
 
 ### "I have multiple GPS devices"
 
@@ -96,41 +96,41 @@ This guide will help you find the right documentation.
 ## Examples by Complexity
 
 ### Beginner
-- [simple_parser.c](../examples/simple_parser.c) - Basic parsing
-- [sensor_test.c](../examples/sensor_test.c) - Sensor module
+- [gps_tracker](../examples/gps_tracker/) - Basic GPS tracking
 
 ### Intermediate
+- [marine_instruments](../examples/marine_instruments/) - Marine equipment integration
 - [serial_stream](../examples/serial_stream/) - Real-world serial port parsing
 - [multi_instance](../examples/multi_instance/) - Multiple parser contexts
+- [minimal_memory](../examples/minimal_memory/) - Memory optimization techniques
 
 ### Advanced
-- [minimal_memory](../examples/minimal_memory/) - Memory optimization techniques
-- [comprehensive_error_handling](../examples/comprehensive_error_handling/) - Error handling patterns
+- [error_handling](../examples/error_handling/) - Error handling patterns
 
 ## Quick Reference
 
 ### Memory Usage
 
-| Configuration | RAM | Flash |
-|---------------|-----|-------|
+| Configuration       | RAM        | Flash   |
+|---------------------|------------|---------|
 | GNSS only (minimal) | ~200 bytes | ~5-6 KB |
-| GNSS + Sensor | ~600 bytes | ~15 KB |
-| All modules | ~1.8 KB | ~30 KB |
+| GNSS + Sensor       | ~600 bytes | ~15 KB  |
+| All modules         | ~1.8 KB    | ~30 KB  |
 
 ### Common Baud Rates
 
-| Device Type | Baud Rate |
-|-------------|-----------|
-| Older GPS | 4800 |
-| Modern GPS | 9600 |
-| High-rate GPS | 38400+ |
+| Device Type   | Baud Rate |
+|---------------|-----------|
+| Older GPS     | 4800      |
+| Modern GPS    | 9600      |
+| High-rate GPS | 38400+    |
 
 ### Buffer Sizes
 
-| Buffer | Minimum | Recommended |
-|--------|---------|-------------|
-| Sentence buffer | 82 bytes | 128 bytes |
-| Parse buffer | 256 bytes | 256 bytes |
+| Buffer          | Minimum   | Recommended |
+|-----------------|-----------|-------------|
+| Sentence buffer | 82 bytes  | 128 bytes   |
+| Parse buffer    | 256 bytes | 256 bytes   |
 
 ## Platform-Specific Quick Links
 
@@ -169,7 +169,7 @@ Module-specific headers:
 
 Found an issue or want to contribute?
 
-- Report bugs: https://github.com/FinOrr/embedded-nmea-0183/issues
+- Report bugs: <https://github.com/FinOrr/embedded-nmea-0183/issues>
 - Documentation improvements welcome!
 - See [LICENSE](../LICENSE) for terms
 

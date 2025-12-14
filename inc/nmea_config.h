@@ -93,12 +93,12 @@
  */
 
 #define NMEA_SENTENCE_GGA_ENABLED 1 /**< Global Positioning System Fix Data */
-#define NMEA_SENTENCE_GLL_ENABLED \
+#define NMEA_SENTENCE_GLL_ENABLED                                              \
   1 /**< Geographic Position - Latitude/Longitude */
 #define NMEA_SENTENCE_GNS_ENABLED 1 /**< GNSS Fix Data */
-#define NMEA_SENTENCE_RMC_ENABLED \
+#define NMEA_SENTENCE_RMC_ENABLED                                              \
   1 /**< Recommended Minimum Specific GNSS Data */
-#define NMEA_SENTENCE_RMB_ENABLED \
+#define NMEA_SENTENCE_RMB_ENABLED                                              \
   1 /**< Recommended Minimum Navigation Information */
 #define NMEA_SENTENCE_RMA_ENABLED 1 /**< Recommended Minimum LORAN-C Data */
 #define NMEA_SENTENCE_GSA_ENABLED 1 /**< GNSS DOP and Active Satellites */
@@ -125,15 +125,15 @@
  */
 
 #define NMEA_SENTENCE_VDM_ENABLED 1 /**< AIS VHF Data-Link Message */
-#define NMEA_SENTENCE_VDO_ENABLED            \
-  1 /**< AIS VHF Data-Link Own-Vessel Report \
+#define NMEA_SENTENCE_VDO_ENABLED                                              \
+  1 /**< AIS VHF Data-Link Own-Vessel Report                                   \
      */
-#define NMEA_SENTENCE_ABK_ENABLED \
+#define NMEA_SENTENCE_ABK_ENABLED                                              \
   1 /**< AIS Addressed and Binary Broadcast Acknowledgement */
-#define NMEA_SENTENCE_ABM_ENABLED \
+#define NMEA_SENTENCE_ABM_ENABLED                                              \
   1 /**< AIS Addressed Binary and Safety Related Message */
 #define NMEA_SENTENCE_ACA_ENABLED 1 /**< AIS Regional Channel Assignment */
-#define NMEA_SENTENCE_ACS_ENABLED \
+#define NMEA_SENTENCE_ACS_ENABLED                                              \
   1 /**< AIS Channel Management Information Source */
 #define NMEA_SENTENCE_AIR_ENABLED 1 /**< AIS Interrogation Request */
 #define NMEA_SENTENCE_BBM_ENABLED 1 /**< AIS Broadcast Binary Message */
@@ -162,18 +162,18 @@
  */
 
 #define NMEA_SENTENCE_APB_ENABLED 1 /**< Autopilot Sentence B */
-#define NMEA_SENTENCE_BEC_ENABLED \
+#define NMEA_SENTENCE_BEC_ENABLED                                              \
   1 /**< Bearing and Distance to Waypoint - Dead Reckoning */
 #define NMEA_SENTENCE_BOD_ENABLED 1 /**< Bearing - Origin to Destination */
-#define NMEA_SENTENCE_BWC_ENABLED \
+#define NMEA_SENTENCE_BWC_ENABLED                                              \
   1 /**< Bearing and Distance to Waypoint - Great Circle */
-#define NMEA_SENTENCE_BWR_ENABLED \
+#define NMEA_SENTENCE_BWR_ENABLED                                              \
   1 /**< Bearing and Distance to Waypoint - Rhumb Line */
 #define NMEA_SENTENCE_BWW_ENABLED 1 /**< Bearing - Waypoint to Waypoint */
 #define NMEA_SENTENCE_RTE_ENABLED 1 /**< Routes */
 #define NMEA_SENTENCE_AAM_ENABLED 1 /**< Waypoint Arrival Alarm */
-#define NMEA_SENTENCE_VTG_ENABLED            \
-  1 /**< Course Over Ground and Ground Speed \
+#define NMEA_SENTENCE_VTG_ENABLED                                              \
+  1 /**< Course Over Ground and Ground Speed                                   \
      */
 
 /** @} */ /* End of NavConfig */
@@ -316,14 +316,14 @@
  * @{
  */
 
-#define NMEA_SENTENCE_DSC_ENABLED \
+#define NMEA_SENTENCE_DSC_ENABLED                                              \
   1 /**< Digital Selective Calling Information */
 #define NMEA_SENTENCE_DSE_ENABLED 1 /**< Expanded Digital Selective Calling */
 #define NMEA_SENTENCE_VER_ENABLED 1 /**< Version */
 #define NMEA_SENTENCE_UID_ENABLED 1 /**< User Identification */
 #define NMEA_SENTENCE_SPW_ENABLED 1 /**< Security Password Sentence */
-#define NMEA_SENTENCE_TUT_ENABLED                                            \
-  1                                 /**< Transmission of Multi-language Text \
+#define NMEA_SENTENCE_TUT_ENABLED                                              \
+  1                                 /**< Transmission of Multi-language Text   \
                                      */
 #define NMEA_SENTENCE_TXT_ENABLED 1 /**< Text Transmission */
 #define NMEA_SENTENCE_NAK_ENABLED 1 /**< Negative Acknowledgement */
@@ -354,8 +354,8 @@
 #define NMEA_SENTENCE_NRM_ENABLED 1 /**< NAVTEX Receiver Mask */
 #define NMEA_SENTENCE_NRX_ENABLED 1 /**< NAVTEX Received Message */
 #define NMEA_SENTENCE_NSR_ENABLED 1 /**< Navigation Status Report */
-#define NMEA_SENTENCE_POS_ENABLED                                             \
-  1                                 /**< Device Position and Dimension Report \
+#define NMEA_SENTENCE_POS_ENABLED                                              \
+  1                                 /**< Device Position and Dimension Report  \
                                      */
 #define NMEA_SENTENCE_MSK_ENABLED 1 /**< MSK Receiver Interface */
 #define NMEA_SENTENCE_MSS_ENABLED 1 /**< MSK Receiver Signal Status */
@@ -376,7 +376,7 @@
  * @{
  */
 
-#define NMEA_SENTENCE_HRM_ENABLED \
+#define NMEA_SENTENCE_HRM_ENABLED                                              \
   1 /**< Heel Angle, Roll Period, Roll Amplitude Measurement Device */
 #define NMEA_SENTENCE_VDR_ENABLED 1 /**< Set and Drift */
 #define NMEA_SENTENCE_PRC_ENABLED 1 /**< Propulsion Remote Control Status */
@@ -403,12 +403,12 @@
 #define NMEA_SENTENCE_XTE_ENABLED 1 /**< Cross-Track Error, Measured */
 #define NMEA_SENTENCE_XTR_ENABLED 1 /**< Cross-Track Error - Dead Reckoning */
 #define NMEA_SENTENCE_ZDA_ENABLED 1 /**< Time and Date */
-#define NMEA_SENTENCE_ZDL_ENABLED                                            \
-  1                                 /**< Time and Distance to Variable Point \
+#define NMEA_SENTENCE_ZDL_ENABLED                                              \
+  1                                 /**< Time and Distance to Variable Point   \
                                      */
 #define NMEA_SENTENCE_ZFO_ENABLED 1 /**< UTC and Time from Origin Waypoint */
-#define NMEA_SENTENCE_ZTG_ENABLED                                             \
-  1                                 /**< UTC and Time to Destination Waypoint \
+#define NMEA_SENTENCE_ZTG_ENABLED                                              \
+  1                                 /**< UTC and Time to Destination Waypoint  \
                                      */
 #define NMEA_SENTENCE_DTM_ENABLED 1 /**< Datum Reference */
 #define NMEA_SENTENCE_CUR_ENABLED 1 /**< Water Current Layer */
@@ -417,9 +417,9 @@
 #define NMEA_SENTENCE_RPM_ENABLED 1 /**< Revolutions */
 #define NMEA_SENTENCE_SFI_ENABLED 1 /**< Scanning Frequency Information */
 #define NMEA_SENTENCE_DDC_ENABLED 1 /**< Display Dimming Control */
-#define NMEA_SENTENCE_EPV_ENABLED \
+#define NMEA_SENTENCE_EPV_ENABLED                                              \
   1 /**< Command or Report Equipment Property Value */
-#define NMEA_SENTENCE_TRL_ENABLED \
+#define NMEA_SENTENCE_TRL_ENABLED                                              \
   1 /**< Thruster/Lateral Transverse Measurement Device */
 #define NMEA_SENTENCE_WAT_ENABLED 1      /**< Water Level Detection */
 #define NMEA_SENTENCE_TRD_MISC_ENABLED 1 /**< Thruster Response Data */

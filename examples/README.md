@@ -40,22 +40,6 @@ Integration with legacy marine instruments: depth sounders, wind instruments, co
 
 ---
 
-#### [simple_parser.c](simple_parser.c)
-**Difficulty:** Beginner
-**Purpose:** Single-file example
-
-Basic demonstration of initialization and parsing.
-
----
-
-#### [sensor_test.c](sensor_test.c)
-**Difficulty:** Beginner
-**Purpose:** Sensor module testing
-
-Demonstrates parsing of various sensor sentence types.
-
----
-
 ### Serial Port / Stream Parsing
 
 #### [serial_stream/](serial_stream/)
@@ -124,7 +108,7 @@ Demonstrates parsing of various sensor sentence types.
 
 ### Error Handling
 
-#### [comprehensive_error_handling/](comprehensive_error_handling/)
+#### [error_handling/](error_handling/)
 **Difficulty:** Advanced
 **Purpose:** Error handling patterns
 
@@ -192,7 +176,7 @@ Start with [gps_tracker/](gps_tracker/) for basic GPS parsing
 [error_handling/](error_handling/) - Error recovery and monitoring
 
 ### Sensor parsing
-[sensor_test.c](sensor_test.c) - Sensor module examples
+[marine_instruments/](marine_instruments/) - Sensor module examples
 
 ## Platform-Specific Examples
 
@@ -220,8 +204,6 @@ Start with [gps_tracker/](gps_tracker/) for basic GPS parsing
 ## Complexity Progression
 
 **Beginner:**
-- simple_parser.c
-- sensor_test.c
 - gps_tracker/
 
 **Intermediate:**
@@ -231,7 +213,7 @@ Start with [gps_tracker/](gps_tracker/) for basic GPS parsing
 - minimal_memory/
 
 **Advanced:**
-- comprehensive_error_handling/
+- error_handling/
 
 ## Contributing Examples
 
@@ -248,4 +230,4 @@ Examples should:
 
 - Check the [FAQ](../doc/faq.md)
 - Read the relevant documentation in [doc/](../doc/)
-- File an issue: https://github.com/FinOrr/embedded-nmea-0183/issues
+- File an issue: <https://github.com/FinOrr/embedded-nmea-0183/issues>
