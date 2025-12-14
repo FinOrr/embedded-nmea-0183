@@ -102,7 +102,7 @@ Memory optimization for resource-constrained microcontrollers.
 
 - Complexity: Intermediate
 
-### [Error Handling](examples/comprehensive_error_handling/)
+### [Error Handling](examples/error_handling/)
 Error handling with callbacks, statistics, recovery strategies, and health monitoring.
 
 - Complexity: Advanced
@@ -243,7 +243,7 @@ Complete guides and references in the [`doc/`](doc/) directory:
 - [Serial Stream](examples/serial_stream/) - Real serial port integration
 - [Multi-Instance](examples/multi_instance/) - Multiple GPS devices
 - [Minimal Memory](examples/minimal_memory/) - Memory optimization
-- [Error Handling](examples/comprehensive_error_handling/) - Error handling patterns
+- [Error Handling](examples/error_handling/) - Error handling patterns
 - [All Examples](examples/) - Browse all examples
 
 ## License

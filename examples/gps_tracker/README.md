@@ -302,7 +302,7 @@ After understanding this example:
 
 1. Connect to real GPS hardware - See [serial_stream example](../serial_stream/)
 2. Minimize memory usage - See [minimal_memory example](../minimal_memory/)
-3. Add error handling - See [comprehensive_error_handling example](../comprehensive_error_handling/)
+3. Add error handling - See [error_handling example](../error_handling/)
 
 ## Related Documentation
 

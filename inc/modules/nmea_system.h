@@ -131,58 +131,58 @@ struct nmea_tokens;
 
 /* Parser declarations */
 #if NMEA_SENTENCE_HBT_ENABLED
-nmea_result_t nmea_parse_hbt(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_hbt(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_HSS_ENABLED
-nmea_result_t nmea_parse_hss(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_hss(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_EVE_ENABLED
-nmea_result_t nmea_parse_eve(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_eve(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_ETL_ENABLED
-nmea_result_t nmea_parse_etl(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_etl(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_NRM_ENABLED
-nmea_result_t nmea_parse_nrm(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_nrm(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_NRX_ENABLED
-nmea_result_t nmea_parse_nrx(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_nrx(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_NSR_ENABLED
-nmea_result_t nmea_parse_nsr(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_nsr(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_POS_ENABLED
-nmea_result_t nmea_parse_pos(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_pos(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_MSK_ENABLED
-nmea_result_t nmea_parse_msk(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_msk(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_MSS_ENABLED
-nmea_result_t nmea_parse_mss(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_mss(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_ROR_ENABLED
-nmea_result_t nmea_parse_ror(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_ror(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #endif /* NMEA_MODULE_SYSTEM_ENABLED */

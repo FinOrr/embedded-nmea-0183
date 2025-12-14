@@ -84,23 +84,23 @@ struct nmea_tokens;
 
 /* Parser declarations */
 #if NMEA_SENTENCE_HRM_ENABLED
-nmea_result_t nmea_parse_hrm(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_hrm(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_PRC_ENABLED
-nmea_result_t nmea_parse_prc(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_prc(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_TRC_ENABLED
-nmea_result_t nmea_parse_trc(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_trc(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #if NMEA_SENTENCE_TRD_ENABLED
-nmea_result_t nmea_parse_trd(struct nmea_context* ctx,
-                             const struct nmea_tokens* tokens);
+nmea_result_t nmea_parse_trd(struct nmea_context *ctx,
+                             const struct nmea_tokens *tokens);
 #endif
 
 #endif /* NMEA_MODULE_ATTITUDE_ENABLED */

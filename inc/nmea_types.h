@@ -110,7 +110,7 @@ typedef enum {
  */
 typedef void (*nmea_error_callback_t)(nmea_error_type_t error_type,
                                       nmea_result_t error_code,
-                                      const char* message, void* user_data);
+                                      const char *message, void *user_data);
 
 /**
  * @brief Parser configuration structure
@@ -138,7 +138,7 @@ typedef struct {
    *
    * This pointer is passed to the error callback function. Can be NULL.
    */
-  void* error_callback_user_data;
+  void *error_callback_user_data;
 
   /**
    * @brief Validate checksums (default: true)

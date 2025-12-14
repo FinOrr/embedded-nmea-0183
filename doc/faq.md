@@ -433,7 +433,7 @@ AIS messages are encapsulated in NMEA-0183 format (VDM, VDO, ABM, BBM sentences)
 
 ### Q: Where do I report bugs?
 
-**A:** File issues at: https://github.com/FinOrr/embedded-nmea-0183/issues
+**A:** File issues at: <https://github.com/FinOrr/embedded-nmea-0183/issues>
 
 Include:
 - Platform/MCU
