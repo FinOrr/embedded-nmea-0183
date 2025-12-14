@@ -25,6 +25,12 @@ DISABLE_LINTERS:
 C_CPPLINT_FILTER_REGEX_INCLUDE: "(unc)"
 C_CLANG_FORMAT_FILTER_REGEX_INCLUDE: "(inc)"
 C_CLANG_FORMAT_FILTER_REGEX_EXCLUDE: "(test)"
+C_CPPCHECK_FILTER_REGEX_EXCLUDE: "(test)"
+C_CPPCHECK_ARGUMENTS:
+- "--suppress=normalCheckLevelMaxBranches"
+- "--suppress=toomanyconfigs"
+- "--inline-suppr"
+- "--error-exitcode=1"
 SARIF_REPORTER: true
 PRINT_ALPACA: false
 SHOW_SKIPPED_LINTERS: false
