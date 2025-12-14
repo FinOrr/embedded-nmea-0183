@@ -80,7 +80,7 @@ This guide will help you find the right documentation.
 
 1. [Error Handling](error-handling.md) - Error handling patterns
 2. [FAQ](faq.md) - Common problems
-3. **Example:** [comprehensive_error_handling](../examples/comprehensive_error_handling/)
+3. **Example:** [error_handling](../examples/error_handling/)
 
 ### "I have multiple GPS devices"
 
@@ -96,16 +96,16 @@ This guide will help you find the right documentation.
 ## Examples by Complexity
 
 ### Beginner
-- [simple_parser.c](../examples/simple_parser.c) - Basic parsing
-- [sensor_test.c](../examples/sensor_test.c) - Sensor module
+- [gps_tracker](../examples/gps_tracker/) - Basic GPS tracking
 
 ### Intermediate
+- [marine_instruments](../examples/marine_instruments/) - Marine equipment integration
 - [serial_stream](../examples/serial_stream/) - Real-world serial port parsing
 - [multi_instance](../examples/multi_instance/) - Multiple parser contexts
+- [minimal_memory](../examples/minimal_memory/) - Memory optimization techniques
 
 ### Advanced
-- [minimal_memory](../examples/minimal_memory/) - Memory optimization techniques
-- [comprehensive_error_handling](../examples/comprehensive_error_handling/) - Error handling patterns
+- [error_handling](../examples/error_handling/) - Error handling patterns
 
 ## Quick Reference
 
