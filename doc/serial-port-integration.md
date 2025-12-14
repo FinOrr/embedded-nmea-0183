@@ -24,7 +24,7 @@ NMEA-0183 devices typically output data via RS-232/RS-485 serial connections at 
 
 ### Standard GPS Module
 
-```
+```text
 Baud: 9600 8N1
 Output rate: 1 Hz (1 sentence set per second)
 Typical sentences: GGA, RMC, GSA, GSV, GLL, VTG
@@ -32,7 +32,7 @@ Typical sentences: GGA, RMC, GSA, GSV, GLL, VTG
 
 ### Marine Electronics
 
-```
+```text
 Baud: 4800 8N1
 Output rate: Varies by device
 Multiple talker IDs (GP, II, SD, etc.)
@@ -40,7 +40,7 @@ Multiple talker IDs (GP, II, SD, etc.)
 
 ### High-Performance GPS
 
-```
+```text
 Baud: 38400 or 115200 8N1
 Output rate: 5-10 Hz
 More sentences, higher update rate
