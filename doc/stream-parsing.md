@@ -599,4 +599,4 @@ void print_stats(stream_stats_t *stats) {
 ## Examples
 
 - `examples/serial_stream/` - Complete stream parsing examples
-- `examples/simple_parser.c` - Basic sentence-by-sentence parsing
+- `examples/gps_tracker/` - Basic sentence-by-sentence parsing

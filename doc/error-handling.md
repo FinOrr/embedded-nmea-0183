@@ -594,5 +594,5 @@ void use_gps_data(gps_state_t *state) {
 
 ## Examples
 
-- `examples/comprehensive_error_handling/` - Complete error handling example
-- `examples/simple_parser.c` - Basic error handling
+- `examples/error_handling/` - Complete error handling example
+- `examples/gps_tracker/` - Basic error handling
