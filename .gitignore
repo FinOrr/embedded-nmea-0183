@@ -55,5 +55,8 @@ dkms.conf
 out/
 build/
 
+# Ignore IDE specific files
+.vscode/
+
 # Internal docs
 sentences/

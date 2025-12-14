@@ -128,11 +128,11 @@ LDFLAGS += $(NMEA_LIB)
 
 # Your target
 your_program: main.o $(NMEA_LIB)
-	$(CC) -o $@ $^ $(LDFLAGS)
+ $(CC) -o $@ $^ $(LDFLAGS)
 
 # Build NMEA library if needed
 $(NMEA_LIB):
-	cd $(NMEA_DIR) && mkdir -p build && cd build && cmake .. && make
+ cd $(NMEA_DIR) && mkdir -p build && cd build && cmake .. && make
 ```
 
 ### PlatformIO (Arduino/ESP32/STM32)
@@ -182,11 +182,11 @@ NMEA_OBJS = $(NMEA_SRCS:.c=.o)
 
 # Build NMEA library
 libnmea.a: $(NMEA_OBJS)
-	$(AR) rcs $@ $^
+ $(AR) rcs $@ $^
 
 # Your application
 your_app: main.o libnmea.a
-	$(CC) $(CFLAGS) -o $@ $^
+ $(CC) $(CFLAGS) -o $@ $^
 ```
 
 ## Common Integration Patterns

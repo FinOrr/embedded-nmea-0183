@@ -39,18 +39,18 @@ typedef enum {
 
 ### Error Classification
 
-| Error Type | Severity | Action |
-|------------|----------|--------|
-| `NMEA_ERROR_NULL_PARAM` | Fatal | Fix code |
-| `NMEA_ERROR_INVALID_CONTEXT` | Fatal | Fix code |
-| `NMEA_ERROR_INVALID_CONFIG` | Fatal | Fix configuration |
-| `NMEA_ERROR_BUFFER_TOO_SMALL` | Fatal | Increase buffer size |
-| `NMEA_ERROR_CHECKSUM_FAILED` | Recoverable | Log and continue |
-| `NMEA_ERROR_INVALID_SENTENCE` | Recoverable | Resync stream |
-| `NMEA_ERROR_UNKNOWN_SENTENCE` | Informational | Ignore |
-| `NMEA_ERROR_SENTENCE_DISABLED` | Informational | Expected |
-| `NMEA_ERROR_PARSE_FAILED` | Recoverable | Log and continue |
-| `NMEA_ERROR_NO_DATA` | Informational | No action needed |
+| Error Type                     | Severity      | Action               |
+|--------------------------------|---------------|----------------------|
+| `NMEA_ERROR_NULL_PARAM`        | Fatal         | Fix code             |
+| `NMEA_ERROR_INVALID_CONTEXT`   | Fatal         | Fix code             |
+| `NMEA_ERROR_INVALID_CONFIG`    | Fatal         | Fix configuration    |
+| `NMEA_ERROR_BUFFER_TOO_SMALL`  | Fatal         | Increase buffer size |
+| `NMEA_ERROR_CHECKSUM_FAILED`   | Recoverable   | Log and continue     |
+| `NMEA_ERROR_INVALID_SENTENCE`  | Recoverable   | Resync stream        |
+| `NMEA_ERROR_UNKNOWN_SENTENCE`  | Informational | Ignore               |
+| `NMEA_ERROR_SENTENCE_DISABLED` | Informational | Expected             |
+| `NMEA_ERROR_PARSE_FAILED`      | Recoverable   | Log and continue     |
+| `NMEA_ERROR_NO_DATA`           | Informational | No action needed     |
 
 ## Error Handling Strategies
 

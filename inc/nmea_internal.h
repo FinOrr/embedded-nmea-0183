@@ -42,7 +42,7 @@ extern "C" {
  * @brief Tokenization result structure
  */
 struct nmea_tokens {
-  const char* tokens[NMEA_MAX_FIELDS]; /**< Array of token pointers */
+  const char *tokens[NMEA_MAX_FIELDS]; /**< Array of token pointers */
   size_t token_count;                  /**< Number of tokens found */
 };
 
@@ -62,8 +62,8 @@ struct nmea_tokens {
  * @return NMEA_ERROR_TOO_MANY_FIELDS if field count exceeds NMEA_MAX_FIELDS
  * @return NMEA_ERROR_INVALID_SENTENCE if sentence format is invalid
  */
-nmea_result_t nmea_tokenize(char* buffer, size_t buffer_size,
-                            nmea_tokens_t* tokens);
+nmea_result_t nmea_tokenize(char *buffer, size_t buffer_size,
+                            nmea_tokens_t *tokens);
 
 /* ========================================================================== */
 /*                         CHECKSUM INTERFACE                                 */
@@ -79,7 +79,7 @@ nmea_result_t nmea_tokenize(char* buffer, size_t buffer_size,
  *
  * @return 8-bit checksum value
  */
-uint8_t nmea_calculate_checksum(const char* sentence, size_t length);
+uint8_t nmea_calculate_checksum(const char *sentence, size_t length);
 
 /**
  * @brief Validate NMEA sentence checksum
@@ -91,7 +91,7 @@ uint8_t nmea_calculate_checksum(const char* sentence, size_t length);
  *
  * @return true if checksum is valid, false otherwise
  */
-bool nmea_validate_checksum(const char* sentence, size_t length);
+bool nmea_validate_checksum(const char *sentence, size_t length);
 
 /**
  * @brief Extract checksum from sentence
@@ -105,8 +105,8 @@ bool nmea_validate_checksum(const char* sentence, size_t length);
  * @return NMEA_OK if checksum found and extracted
  * @return NMEA_ERROR_INVALID_SENTENCE if no checksum present
  */
-nmea_result_t nmea_extract_checksum(const char* sentence, size_t length,
-                                    uint8_t* checksum);
+nmea_result_t nmea_extract_checksum(const char *sentence, size_t length,
+                                    uint8_t *checksum);
 
 /* ========================================================================== */
 /*                          ERROR INTERFACE                                   */
@@ -122,8 +122,8 @@ nmea_result_t nmea_extract_checksum(const char* sentence, size_t length,
  * @param[in] error_code  Result code
  * @param[in] message     Optional error message (can be NULL)
  */
-void nmea_report_error(const nmea_context_t* ctx, nmea_error_type_t error_type,
-                       nmea_result_t error_code, const char* message);
+void nmea_report_error(const nmea_context_t *ctx, nmea_error_type_t error_type,
+                       nmea_result_t error_code, const char *message);
 
 /* ========================================================================== */
 /*                       PARSER FUNCTION TYPEDEF                              */
@@ -139,8 +139,8 @@ void nmea_report_error(const nmea_context_t* ctx, nmea_error_type_t error_type,
  *
  * @return NMEA_OK on success, error code otherwise
  */
-typedef nmea_result_t (*nmea_parser_func_t)(nmea_context_t* ctx,
-                                            const nmea_tokens_t* tokens);
+typedef nmea_result_t (*nmea_parser_func_t)(nmea_context_t *ctx,
+                                            const nmea_tokens_t *tokens);
 
 /* ========================================================================== */
 /*                         DISPATCH TABLE ENTRY                               */
@@ -150,7 +150,7 @@ typedef nmea_result_t (*nmea_parser_func_t)(nmea_context_t* ctx,
  * @brief Dispatch table entry structure
  */
 typedef struct {
-  const char* sentence_id;   /**< Sentence identifier (e.g., "GPGGA") */
+  const char *sentence_id;   /**< Sentence identifier (e.g., "GPGGA") */
   nmea_parser_func_t parser; /**< Parser function pointer */
   nmea_module_t module;      /**< Module this sentence belongs to */
   uint8_t min_fields;        /**< Minimum number of fields required */
@@ -165,7 +165,7 @@ typedef struct {
  *
  * @return Pointer to dispatch table
  */
-const nmea_dispatch_entry_t* nmea_get_dispatch_table(size_t* table_size);
+const nmea_dispatch_entry_t *nmea_get_dispatch_table(size_t *table_size);
 
 /* ========================================================================== */
 /*                      TALKER ID VALIDATION                                  */
@@ -181,7 +181,7 @@ const nmea_dispatch_entry_t* nmea_get_dispatch_table(size_t* table_size);
  *
  * @return Talker ID enum value, or NMEA_TALKER_UNKNOWN if invalid
  */
-nmea_talker_id_t nmea_validate_talker_id(const char* talker_id);
+nmea_talker_id_t nmea_validate_talker_id(const char *talker_id);
 
 /**
  * @brief Extract talker ID and sentence type from full sentence ID
@@ -197,8 +197,8 @@ nmea_talker_id_t nmea_validate_talker_id(const char* talker_id);
  *
  * @return NMEA_OK on success, NMEA_ERROR_INVALID_SENTENCE if format invalid
  */
-nmea_result_t nmea_extract_sentence_parts(const char* sentence_id,
-                                          char* talker_id, char* sentence_type);
+nmea_result_t nmea_extract_sentence_parts(const char *sentence_id,
+                                          char *talker_id, char *sentence_type);
 
 /* ========================================================================== */
 /*                      PARSING HELPER FUNCTIONS                              */
@@ -212,7 +212,7 @@ nmea_result_t nmea_extract_sentence_parts(const char* sentence_id,
  *
  * @return NMEA_OK on success, NMEA_ERROR_PARSE_FAILED on error
  */
-nmea_result_t nmea_parse_float(const char* token, float* value);
+nmea_result_t nmea_parse_float(const char *token, float *value);
 
 /**
  * @brief Parse an integer value from token
@@ -222,7 +222,7 @@ nmea_result_t nmea_parse_float(const char* token, float* value);
  *
  * @return NMEA_OK on success, NMEA_ERROR_PARSE_FAILED on error
  */
-nmea_result_t nmea_parse_int(const char* token, int* value);
+nmea_result_t nmea_parse_int(const char *token, int *value);
 
 /**
  * @brief Parse a coordinate (latitude/longitude) from NMEA format
@@ -235,9 +235,9 @@ nmea_result_t nmea_parse_int(const char* token, int* value);
  *
  * @return NMEA_OK on success, NMEA_ERROR_PARSE_FAILED on error
  */
-nmea_result_t nmea_parse_coordinate(const char* coord_token,
-                                    const char* direction_token,
-                                    nmea_coordinate_t* coordinate);
+nmea_result_t nmea_parse_coordinate(const char *coord_token,
+                                    const char *direction_token,
+                                    nmea_coordinate_t *coordinate);
 
 /**
  * @brief Parse time from NMEA format
@@ -249,7 +249,7 @@ nmea_result_t nmea_parse_coordinate(const char* coord_token,
  *
  * @return NMEA_OK on success, NMEA_ERROR_PARSE_FAILED on error
  */
-nmea_result_t nmea_parse_time(const char* token, nmea_time_t* time);
+nmea_result_t nmea_parse_time(const char *token, nmea_time_t *time);
 
 /**
  * @brief Parse date from NMEA format
@@ -261,7 +261,7 @@ nmea_result_t nmea_parse_time(const char* token, nmea_time_t* time);
  *
  * @return NMEA_OK on success, NMEA_ERROR_PARSE_FAILED on error
  */
-nmea_result_t nmea_parse_date(const char* token, nmea_date_t* date);
+nmea_result_t nmea_parse_date(const char *token, nmea_date_t *date);
 
 /**
  * @brief Check if token is empty
@@ -270,7 +270,7 @@ nmea_result_t nmea_parse_date(const char* token, nmea_date_t* date);
  *
  * @return true if token is NULL or empty string, false otherwise
  */
-static inline bool nmea_is_empty_token(const char* token) {
+static inline bool nmea_is_empty_token(const char *token) {
   return (token == NULL || token[0] == '\0');
 }
 
@@ -284,7 +284,7 @@ static inline bool nmea_is_empty_token(const char* token) {
  * @param[in,out] token  Token string to modify (may be const char* cast to
  * char*)
  */
-void nmea_strip_checksum(char* token);
+void nmea_strip_checksum(char *token);
 
 #ifdef __cplusplus
 }

@@ -248,4 +248,4 @@ Examples should:
 
 - Check the [FAQ](../doc/faq.md)
 - Read the relevant documentation in [doc/](../doc/)
-- File an issue: https://github.com/FinOrr/embedded-nmea-0183/issues
+- File an issue: <https://github.com/FinOrr/embedded-nmea-0183/issues>

@@ -43,11 +43,11 @@ printf("Context: %zu bytes, Buffer: %zu bytes\n", ctx_size, buf_size);
 
 Flash usage scales with enabled features:
 
-| Configuration | Approximate Flash Size |
-|---------------|----------------------|
-| GNSS only (3 sentences) | ~5-8 KB |
-| GNSS + Sensor | ~8-12 KB |
-| All modules, all sentences | ~25-35 KB |
+| Configuration              | Approximate Flash Size |
+|----------------------------|------------------------|
+| GNSS only (3 sentences)    | ~5-8 KB                |
+| GNSS + Sensor              | ~8-12 KB               |
+| All modules, all sentences | ~25-35 KB              |
 
 ## Compile-Time Optimization
 
