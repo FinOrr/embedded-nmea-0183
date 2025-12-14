@@ -33,7 +33,7 @@ gcc -I./inc examples/error_handling/error_handling.c -L./out/build/conf-examples
 
 ## Expected Output
 
-```
+```text
 NMEA Error Handling Examples
 ===========================================
 

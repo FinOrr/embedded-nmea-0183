@@ -22,7 +22,7 @@ Demonstrates displaying boat instruments on a single screen or integrating legac
 
 ## What You'll See
 
-```
+```text
 ╔═══════════════════════════════════════╗
 ║  Marine Instruments Example           ║
 ║  Legacy NMEA-0183 Sensor Integration  ║
@@ -241,7 +241,8 @@ Like an odometer for your boat. Useful for:
 ## NMEA Sentence Types Explained
 
 ### DBT - Depth Below Transducer
-```
+
+```text
 $SDDBT,12.3,f,3.7,M,2.0,F*3A
        │    │  │   │  │   └─ Fathoms
        │    │  │   │  └─ Unit (F)
@@ -252,14 +253,16 @@ $SDDBT,12.3,f,3.7,M,2.0,F*3A
 ```
 
 ### MTW - Water Temperature
-```
+
+```text
 $IIMTW,15.5,C*21
        │    └─ Unit (C = Celsius)
        └─ Temperature
 ```
 
 ### MWD - Wind Direction & Speed
-```
+
+```text
 $IIMWD,045.0,T,048.5,M,15.2,N,7.8,M*52
        │     │  │     │  │    │  │   └─ Unit (M = m/s)
        │     │  │     │  │    │  └─ Speed
@@ -272,14 +275,16 @@ $IIMWD,045.0,T,048.5,M,15.2,N,7.8,M*52
 ```
 
 ### HDT - True Heading
-```
+
+```text
 $HCHDT,234.5,T*1C
        │     └─ True (T)
        └─ Heading in degrees
 ```
 
 ### ROT - Rate of Turn
-```
+
+```text
 $HEROT,2.5,A*3F
        │   └─ Valid (A = valid data)
        └─ Rate in degrees/minute
@@ -289,7 +294,7 @@ $HEROT,2.5,A*3F
 
 Most marine instruments output NMEA-0183 via RS-422 or RS-232:
 
-```
+```text
 Instrument → RS-422/RS-232 → Level shifter → MCU UART
 ```
 

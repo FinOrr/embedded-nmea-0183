@@ -34,7 +34,7 @@ gcc -I./inc examples/multi_instance/multi_instance.c -L./out/build/conf-examples
 
 ## Expected Output
 
-```
+```text
 NMEA Multi-Instance Parser Example
 ===================================
 

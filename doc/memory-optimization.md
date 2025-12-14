@@ -364,7 +364,7 @@ bool parse_gga_minimal(const char *sentence, minimal_gps_t *gps) {
 
 ## Measuring Memory Usage
 
-### RAM Usage
+### Measuring RAM Usage
 
 **Check stack usage:**
 
@@ -392,7 +392,7 @@ printf("Context size: %zu bytes\n", nmea_get_context_size());
 printf("Required buffer: %zu bytes\n", nmea_get_required_buffer_size());
 ```
 
-### Flash Usage
+### Measuring Flash Usage
 
 **GCC size command:**
 
@@ -457,7 +457,7 @@ NMEA Library:        8 KB flash,  1 KB RAM
 RTOS:               10 KB flash,  4 KB RAM
 Communications:      8 KB flash,  2 KB RAM
 Remaining:           8 KB flash,  3 KB RAM (margin)
-```
+```text
 
 ### Optimization Checklist
 

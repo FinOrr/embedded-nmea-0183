@@ -32,7 +32,7 @@ gcc -I./inc examples/minimal_memory/minimal_memory.c -L./out/build/conf-examples
 
 ## Expected Output
 
-```
+```text
 NMEA Minimal Memory Configuration Examples
 ===========================================
 
