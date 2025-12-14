@@ -18,7 +18,7 @@ Basic GPS tracking example demonstrating:
 
 ## Example Output
 
-```
+```text
 Simple GPS Tracker Example
 ===========================
 

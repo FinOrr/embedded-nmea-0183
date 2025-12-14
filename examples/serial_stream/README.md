@@ -78,7 +78,7 @@ sudo chmod 666 /dev/ttyUSB0
 
 ## Expected Output
 
-```
+```text
 Opening serial port: /dev/ttyUSB0 at 9600 baud
 Serial port opened successfully
 NMEA parser initialized

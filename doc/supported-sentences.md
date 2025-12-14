@@ -1,5 +1,6 @@
 # Supported NMEA-0183 Sentences
-```
+
+```text
 $--AAM
 $--ABK
 !--ABM
