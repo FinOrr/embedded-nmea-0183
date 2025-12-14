@@ -196,7 +196,7 @@ struct nmea_context {
  * @see nmea_cleanup()
  * @see nmea_config_t
  */
-nmea_result_t nmea_init(nmea_context_t* ctx, const nmea_config_t* config);
+nmea_result_t nmea_init(nmea_context_t *ctx, const nmea_config_t *config);
 
 /**
  * @brief Parse a single NMEA sentence
@@ -230,8 +230,8 @@ nmea_result_t nmea_init(nmea_context_t* ctx, const nmea_config_t* config);
  *
  * @see nmea_init()
  */
-nmea_result_t nmea_parse(nmea_context_t* ctx, const char* sentence,
-                         size_t length, void* buffer, size_t buffer_size);
+nmea_result_t nmea_parse(nmea_context_t *ctx, const char *sentence,
+                         size_t length, void *buffer, size_t buffer_size);
 
 /**
  * @brief Cleanup and reset parser context
@@ -247,7 +247,7 @@ nmea_result_t nmea_parse(nmea_context_t* ctx, const char* sentence,
  *
  * @see nmea_init()
  */
-void nmea_cleanup(nmea_context_t* ctx);
+void nmea_cleanup(nmea_context_t *ctx);
 
 /* ========================================================================== */
 /*                      MODULE DATA ACCESSOR FUNCTIONS                        */
@@ -271,8 +271,8 @@ void nmea_cleanup(nmea_context_t* ctx);
  *
  * @see nmea_gnss_state_t
  */
-nmea_result_t nmea_get_gnss_data(const nmea_context_t* ctx,
-                                 nmea_gnss_state_t* data);
+nmea_result_t nmea_get_gnss_data(const nmea_context_t *ctx,
+                                 nmea_gnss_state_t *data);
 #endif
 
 #if NMEA_MODULE_AIS_ENABLED
@@ -287,8 +287,8 @@ nmea_result_t nmea_get_gnss_data(const nmea_context_t* ctx,
  *
  * @see nmea_ais_state_t
  */
-nmea_result_t nmea_get_ais_data(const nmea_context_t* ctx,
-                                nmea_ais_state_t* data);
+nmea_result_t nmea_get_ais_data(const nmea_context_t *ctx,
+                                nmea_ais_state_t *data);
 #endif
 
 #if NMEA_MODULE_NAVIGATION_ENABLED
@@ -303,8 +303,8 @@ nmea_result_t nmea_get_ais_data(const nmea_context_t* ctx,
  *
  * @see nmea_navigation_state_t
  */
-nmea_result_t nmea_get_navigation_data(const nmea_context_t* ctx,
-                                       nmea_navigation_state_t* data);
+nmea_result_t nmea_get_navigation_data(const nmea_context_t *ctx,
+                                       nmea_navigation_state_t *data);
 #endif
 
 #if NMEA_MODULE_WAYPOINT_ENABLED
@@ -319,8 +319,8 @@ nmea_result_t nmea_get_navigation_data(const nmea_context_t* ctx,
  *
  * @see nmea_waypoint_state_t
  */
-nmea_result_t nmea_get_waypoint_data(const nmea_context_t* ctx,
-                                     nmea_waypoint_state_t* data);
+nmea_result_t nmea_get_waypoint_data(const nmea_context_t *ctx,
+                                     nmea_waypoint_state_t *data);
 #endif
 
 #if NMEA_MODULE_HEADING_ENABLED
@@ -335,8 +335,8 @@ nmea_result_t nmea_get_waypoint_data(const nmea_context_t* ctx,
  *
  * @see nmea_heading_state_t
  */
-nmea_result_t nmea_get_heading_data(const nmea_context_t* ctx,
-                                    nmea_heading_state_t* data);
+nmea_result_t nmea_get_heading_data(const nmea_context_t *ctx,
+                                    nmea_heading_state_t *data);
 #endif
 
 #if NMEA_MODULE_SENSOR_ENABLED
@@ -351,8 +351,8 @@ nmea_result_t nmea_get_heading_data(const nmea_context_t* ctx,
  *
  * @see nmea_sensor_state_t
  */
-nmea_result_t nmea_get_sensor_data(const nmea_context_t* ctx,
-                                   nmea_sensor_state_t* data);
+nmea_result_t nmea_get_sensor_data(const nmea_context_t *ctx,
+                                   nmea_sensor_state_t *data);
 #endif
 
 #if NMEA_MODULE_RADAR_ENABLED
@@ -367,8 +367,8 @@ nmea_result_t nmea_get_sensor_data(const nmea_context_t* ctx,
  *
  * @see nmea_radar_state_t
  */
-nmea_result_t nmea_get_radar_data(const nmea_context_t* ctx,
-                                  nmea_radar_state_t* data);
+nmea_result_t nmea_get_radar_data(const nmea_context_t *ctx,
+                                  nmea_radar_state_t *data);
 #endif
 
 #if NMEA_MODULE_SAFETY_ENABLED
@@ -383,8 +383,8 @@ nmea_result_t nmea_get_radar_data(const nmea_context_t* ctx,
  *
  * @see nmea_safety_state_t
  */
-nmea_result_t nmea_get_safety_data(const nmea_context_t* ctx,
-                                   nmea_safety_state_t* data);
+nmea_result_t nmea_get_safety_data(const nmea_context_t *ctx,
+                                   nmea_safety_state_t *data);
 #endif
 
 #if NMEA_MODULE_COMM_ENABLED
@@ -399,8 +399,8 @@ nmea_result_t nmea_get_safety_data(const nmea_context_t* ctx,
  *
  * @see nmea_comm_state_t
  */
-nmea_result_t nmea_get_comm_data(const nmea_context_t* ctx,
-                                 nmea_comm_state_t* data);
+nmea_result_t nmea_get_comm_data(const nmea_context_t *ctx,
+                                 nmea_comm_state_t *data);
 #endif
 
 #if NMEA_MODULE_SYSTEM_ENABLED
@@ -415,8 +415,8 @@ nmea_result_t nmea_get_comm_data(const nmea_context_t* ctx,
  *
  * @see nmea_system_state_t
  */
-nmea_result_t nmea_get_system_data(const nmea_context_t* ctx,
-                                   nmea_system_state_t* data);
+nmea_result_t nmea_get_system_data(const nmea_context_t *ctx,
+                                   nmea_system_state_t *data);
 #endif
 
 #if NMEA_MODULE_ATTITUDE_ENABLED
@@ -431,8 +431,8 @@ nmea_result_t nmea_get_system_data(const nmea_context_t* ctx,
  *
  * @see nmea_attitude_state_t
  */
-nmea_result_t nmea_get_attitude_data(const nmea_context_t* ctx,
-                                     nmea_attitude_state_t* data);
+nmea_result_t nmea_get_attitude_data(const nmea_context_t *ctx,
+                                     nmea_attitude_state_t *data);
 #endif
 
 #if NMEA_MODULE_MISC_ENABLED
@@ -447,8 +447,8 @@ nmea_result_t nmea_get_attitude_data(const nmea_context_t* ctx,
  *
  * @see nmea_misc_state_t
  */
-nmea_result_t nmea_get_misc_data(const nmea_context_t* ctx,
-                                 nmea_misc_state_t* data);
+nmea_result_t nmea_get_misc_data(const nmea_context_t *ctx,
+                                 nmea_misc_state_t *data);
 #endif
 
 /* ========================================================================== */
@@ -489,7 +489,7 @@ size_t nmea_get_context_size(void);
  *
  * @note The returned string is statically allocated and should not be freed.
  */
-const char* nmea_get_error_string(nmea_result_t result);
+const char *nmea_get_error_string(nmea_result_t result);
 
 /**
  * @brief Get library version string
@@ -498,7 +498,7 @@ const char* nmea_get_error_string(nmea_result_t result);
  *
  * @return Pointer to static version string
  */
-const char* nmea_get_version(void);
+const char *nmea_get_version(void);
 
 /**
  * @brief Check if a sentence type is enabled
@@ -510,8 +510,8 @@ const char* nmea_get_version(void);
  *
  * @return true if sentence is enabled, false otherwise
  */
-bool nmea_is_sentence_enabled(const nmea_context_t* ctx,
-                              const char* sentence_id);
+bool nmea_is_sentence_enabled(const nmea_context_t *ctx,
+                              const char *sentence_id);
 
 /**
  * @brief Check if a module is enabled
@@ -523,7 +523,7 @@ bool nmea_is_sentence_enabled(const nmea_context_t* ctx,
  *
  * @return true if module is enabled, false otherwise
  */
-bool nmea_is_module_enabled(const nmea_context_t* ctx, nmea_module_t module);
+bool nmea_is_module_enabled(const nmea_context_t *ctx, nmea_module_t module);
 
 #ifdef __cplusplus
 }

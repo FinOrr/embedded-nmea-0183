@@ -66,39 +66,39 @@ typedef struct {
 
 /* Parser declarations */
 #if NMEA_SENTENCE_DBT_ENABLED
-nmea_result_t nmea_parse_dbt(nmea_context_t* ctx, const nmea_tokens_t* tokens);
+nmea_result_t nmea_parse_dbt(nmea_context_t *ctx, const nmea_tokens_t *tokens);
 #endif
 
 #if NMEA_SENTENCE_DPT_ENABLED
-nmea_result_t nmea_parse_dpt(nmea_context_t* ctx, const nmea_tokens_t* tokens);
+nmea_result_t nmea_parse_dpt(nmea_context_t *ctx, const nmea_tokens_t *tokens);
 #endif
 
 #if NMEA_SENTENCE_MTW_ENABLED
-nmea_result_t nmea_parse_mtw(nmea_context_t* ctx, const nmea_tokens_t* tokens);
+nmea_result_t nmea_parse_mtw(nmea_context_t *ctx, const nmea_tokens_t *tokens);
 #endif
 
 #if NMEA_SENTENCE_MWD_ENABLED
-nmea_result_t nmea_parse_mwd(nmea_context_t* ctx, const nmea_tokens_t* tokens);
+nmea_result_t nmea_parse_mwd(nmea_context_t *ctx, const nmea_tokens_t *tokens);
 #endif
 
 #if NMEA_SENTENCE_MWV_ENABLED
-nmea_result_t nmea_parse_mwv(nmea_context_t* ctx, const nmea_tokens_t* tokens);
+nmea_result_t nmea_parse_mwv(nmea_context_t *ctx, const nmea_tokens_t *tokens);
 #endif
 
 #if NMEA_SENTENCE_VBW_ENABLED
-nmea_result_t nmea_parse_vbw(nmea_context_t* ctx, const nmea_tokens_t* tokens);
+nmea_result_t nmea_parse_vbw(nmea_context_t *ctx, const nmea_tokens_t *tokens);
 #endif
 
 #if NMEA_SENTENCE_VHW_ENABLED
-nmea_result_t nmea_parse_vhw(nmea_context_t* ctx, const nmea_tokens_t* tokens);
+nmea_result_t nmea_parse_vhw(nmea_context_t *ctx, const nmea_tokens_t *tokens);
 #endif
 
 #if NMEA_SENTENCE_VLW_ENABLED
-nmea_result_t nmea_parse_vlw(nmea_context_t* ctx, const nmea_tokens_t* tokens);
+nmea_result_t nmea_parse_vlw(nmea_context_t *ctx, const nmea_tokens_t *tokens);
 #endif
 
 #if NMEA_SENTENCE_VPW_ENABLED
-nmea_result_t nmea_parse_vpw(nmea_context_t* ctx, const nmea_tokens_t* tokens);
+nmea_result_t nmea_parse_vpw(nmea_context_t *ctx, const nmea_tokens_t *tokens);
 #endif
 
 #endif /* NMEA_MODULE_SENSOR_ENABLED */

@@ -572,11 +572,11 @@ void print_stats(stream_stats_t *stats) {
 
 ### Typical Data Rates
 
-| Device Type | Baud Rate | Sentences/sec | Bytes/sec |
-|-------------|-----------|---------------|-----------|
-| Standard GPS | 4800 | 5-10 | ~400-800 |
-| Modern GPS | 9600 | 5-15 | ~500-1200 |
-| High-rate GPS | 38400 | 20-50 | ~2000-5000 |
+| Device Type   | Baud Rate | Sentences/sec | Bytes/sec  |
+|---------------|-----------|---------------|------------|
+| Standard GPS  | 4800      | 5-10          | ~400-800   |
+| Modern GPS    | 9600      | 5-15          | ~500-1200  |
+| High-rate GPS | 38400     | 20-50         | ~2000-5000 |
 
 ### Buffer Sizing
 

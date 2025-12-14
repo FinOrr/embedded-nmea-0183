@@ -111,26 +111,26 @@ This guide will help you find the right documentation.
 
 ### Memory Usage
 
-| Configuration | RAM | Flash |
-|---------------|-----|-------|
+| Configuration       | RAM        | Flash   |
+|---------------------|------------|---------|
 | GNSS only (minimal) | ~200 bytes | ~5-6 KB |
-| GNSS + Sensor | ~600 bytes | ~15 KB |
-| All modules | ~1.8 KB | ~30 KB |
+| GNSS + Sensor       | ~600 bytes | ~15 KB  |
+| All modules         | ~1.8 KB    | ~30 KB  |
 
 ### Common Baud Rates
 
-| Device Type | Baud Rate |
-|-------------|-----------|
-| Older GPS | 4800 |
-| Modern GPS | 9600 |
-| High-rate GPS | 38400+ |
+| Device Type   | Baud Rate |
+|---------------|-----------|
+| Older GPS     | 4800      |
+| Modern GPS    | 9600      |
+| High-rate GPS | 38400+    |
 
 ### Buffer Sizes
 
-| Buffer | Minimum | Recommended |
-|--------|---------|-------------|
-| Sentence buffer | 82 bytes | 128 bytes |
-| Parse buffer | 256 bytes | 256 bytes |
+| Buffer          | Minimum   | Recommended |
+|-----------------|-----------|-------------|
+| Sentence buffer | 82 bytes  | 128 bytes   |
+| Parse buffer    | 256 bytes | 256 bytes   |
 
 ## Platform-Specific Quick Links
 
@@ -169,7 +169,7 @@ Module-specific headers:
 
 Found an issue or want to contribute?
 
-- Report bugs: https://github.com/FinOrr/embedded-nmea-0183/issues
+- Report bugs: <https://github.com/FinOrr/embedded-nmea-0183/issues>
 - Documentation improvements welcome!
 - See [LICENSE](../LICENSE) for terms
 

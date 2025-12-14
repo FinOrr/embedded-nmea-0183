@@ -208,62 +208,62 @@ typedef struct {
 
 #if NMEA_SENTENCE_GGA_ENABLED
 /** Parse GGA - Global Positioning System Fix Data */
-nmea_result_t nmea_parse_gga(nmea_context_t* ctx, const nmea_tokens_t* tokens);
+nmea_result_t nmea_parse_gga(nmea_context_t *ctx, const nmea_tokens_t *tokens);
 #endif
 
 #if NMEA_SENTENCE_GLL_ENABLED
 /** Parse GLL - Geographic Position - Latitude/Longitude */
-nmea_result_t nmea_parse_gll(nmea_context_t* ctx, const nmea_tokens_t* tokens);
+nmea_result_t nmea_parse_gll(nmea_context_t *ctx, const nmea_tokens_t *tokens);
 #endif
 
 #if NMEA_SENTENCE_GNS_ENABLED
 /** Parse GNS - GNSS Fix Data */
-nmea_result_t nmea_parse_gns(nmea_context_t* ctx, const nmea_tokens_t* tokens);
+nmea_result_t nmea_parse_gns(nmea_context_t *ctx, const nmea_tokens_t *tokens);
 #endif
 
 #if NMEA_SENTENCE_RMC_ENABLED
 /** Parse RMC - Recommended Minimum Specific GNSS Data */
-nmea_result_t nmea_parse_rmc(nmea_context_t* ctx, const nmea_tokens_t* tokens);
+nmea_result_t nmea_parse_rmc(nmea_context_t *ctx, const nmea_tokens_t *tokens);
 #endif
 
 #if NMEA_SENTENCE_RMB_ENABLED
 /** Parse RMB - Recommended Minimum Navigation Information */
-nmea_result_t nmea_parse_rmb(nmea_context_t* ctx, const nmea_tokens_t* tokens);
+nmea_result_t nmea_parse_rmb(nmea_context_t *ctx, const nmea_tokens_t *tokens);
 #endif
 
 #if NMEA_SENTENCE_RMA_ENABLED
 /** Parse RMA - Recommended Minimum LORAN-C Data */
-nmea_result_t nmea_parse_rma(nmea_context_t* ctx, const nmea_tokens_t* tokens);
+nmea_result_t nmea_parse_rma(nmea_context_t *ctx, const nmea_tokens_t *tokens);
 #endif
 
 #if NMEA_SENTENCE_GSA_ENABLED
 /** Parse GSA - GNSS DOP and Active Satellites */
-nmea_result_t nmea_parse_gsa(nmea_context_t* ctx, const nmea_tokens_t* tokens);
+nmea_result_t nmea_parse_gsa(nmea_context_t *ctx, const nmea_tokens_t *tokens);
 #endif
 
 #if NMEA_SENTENCE_GSV_ENABLED
 /** Parse GSV - GNSS Satellites in View */
-nmea_result_t nmea_parse_gsv(nmea_context_t* ctx, const nmea_tokens_t* tokens);
+nmea_result_t nmea_parse_gsv(nmea_context_t *ctx, const nmea_tokens_t *tokens);
 #endif
 
 #if NMEA_SENTENCE_GBS_ENABLED
 /** Parse GBS - GNSS Satellite Fault Detection */
-nmea_result_t nmea_parse_gbs(nmea_context_t* ctx, const nmea_tokens_t* tokens);
+nmea_result_t nmea_parse_gbs(nmea_context_t *ctx, const nmea_tokens_t *tokens);
 #endif
 
 #if NMEA_SENTENCE_GST_ENABLED
 /** Parse GST - GNSS Pseudorange Noise Statistics */
-nmea_result_t nmea_parse_gst(nmea_context_t* ctx, const nmea_tokens_t* tokens);
+nmea_result_t nmea_parse_gst(nmea_context_t *ctx, const nmea_tokens_t *tokens);
 #endif
 
 #if NMEA_SENTENCE_GRS_ENABLED
 /** Parse GRS - GNSS Range Residuals */
-nmea_result_t nmea_parse_grs(nmea_context_t* ctx, const nmea_tokens_t* tokens);
+nmea_result_t nmea_parse_grs(nmea_context_t *ctx, const nmea_tokens_t *tokens);
 #endif
 
 #if NMEA_SENTENCE_GFA_ENABLED
 /** Parse GFA - GNSS Fix Accuracy and Integrity */
-nmea_result_t nmea_parse_gfa(nmea_context_t* ctx, const nmea_tokens_t* tokens);
+nmea_result_t nmea_parse_gfa(nmea_context_t *ctx, const nmea_tokens_t *tokens);
 #endif
 
 #endif /* NMEA_MODULE_GNSS_ENABLED */
