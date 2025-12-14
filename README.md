@@ -7,18 +7,21 @@ C library for parsing NMEA-0183 sentences on embedded systems. Zero heap allocat
 **Don't use this if:** you need NMEA-2000, need dynamic configuration, or want automatic sentence type detection without compile-time configuration.
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Unit Tests](https://github.com/FinOrr/embedded-nmea-0183/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/FinOrr/embedded-nmea-0183/actions/workflows/unit-tests.yml)
 [![GitHub top language](https://img.shields.io/github/languages/top/FinOrr/embedded-nmea-0183.svg)](https://github.com/FinOrr/embedded-nmea-0183)
 [![GitHub issues](https://img.shields.io/github/issues/FinOrr/embedded-nmea-0183.svg)](https://github.com/FinOrr/embedded-nmea-0183/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/FinOrr/embedded-nmea-0183.svg)](https://github.com/FinOrr/embedded-nmea-0183/pulls)
 
 ## Features
 
-- **Zero heap allocation** - All state in caller-provided context, working buffer for tokenization
-- **Multi-instance support** - Multiple independent parser contexts
-- **Modular** - Enable only the modules you need (GNSS, AIS, Navigation, Heading, Sensor, Radar, Safety, Comm, System, Attitude, Waypoint, Misc)
-- **Compile-time configuration** - Disable unused sentence types to reduce binary size
-- **~100+ sentence types** - See [supported-sentences.md](doc/supported-sentences.md)
-- **Static library** - Link with CMake
+| What | Why |
+|------|-----|
+| Zero heap allocation | All state in caller-provided context - predictable memory usage |
+| Multi-instance support | Run multiple independent parsers for redundant sensors |
+| Modular architecture | Enable only needed modules to minimize binary size |
+| Compile-time configuration | Strip out unused sentence types before compilation |
+| ~100+ sentence types | Comprehensive coverage - see [supported-sentences.md](doc/supported-sentences.md) |
+| Static library | Link with CMake - no dynamic dependencies |
 
 ## Quick Start
 

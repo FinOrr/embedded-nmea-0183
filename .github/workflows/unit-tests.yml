@@ -1,0 +1,46 @@
+---
+name: Unit Tests
+
+on:
+  merge_group: {}
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake build-essential
+
+      - name: Configure CMake
+        run: |
+          mkdir build
+          cd build
+          cmake .. -DENABLE_UNIT_TESTS=ON -DCMAKE_BUILD_TYPE=Debug
+
+      - name: Build
+        run: |
+          cd build
+          make -j"$(nproc)"
+
+      - name: Run tests
+        run: |
+          cd build
+          ctest --output-on-failure --verbose
