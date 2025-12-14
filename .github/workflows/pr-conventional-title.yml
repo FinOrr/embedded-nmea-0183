@@ -12,7 +12,7 @@ permissions: {}
 
 jobs:
   validate-pr-title:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     permissions:
       pull-requests: write
     steps:
