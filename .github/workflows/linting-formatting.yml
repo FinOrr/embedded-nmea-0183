@@ -27,7 +27,7 @@ jobs:
           clean: true
           fetch-tags: true
 
-      - uses: oxsecurity/megalinter@v8
+      - uses: oxsecurity/megalinter@v9
         env:
           APPLY_FIXES: all
           VALIDATE_ALL_CODEBASE: true
