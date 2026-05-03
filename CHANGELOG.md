@@ -1,5 +1,47 @@
 # Changelog
 
+## [1.1.0](https://github.com/FinOrr/embedded-nmea-0183/compare/v1.0.0...v1.1.0) (2026-05-03)
+
+
+### Features
+
+* Add ARC sentence support. ([967fc5f](https://github.com/FinOrr/embedded-nmea-0183/commit/967fc5fe59f43b21f568571a591e1b84ad3e2fc3))
+* Add ARC support to config.h ([eb87fae](https://github.com/FinOrr/embedded-nmea-0183/commit/eb87fae0bd895395dbfe815e65146ff63739c7d6))
+* Add checksum and address fields to sentence structures. ([967fc5f](https://github.com/FinOrr/embedded-nmea-0183/commit/967fc5fe59f43b21f568571a591e1b84ad3e2fc3))
+* Add enum types for ACA parameters ([967fc5f](https://github.com/FinOrr/embedded-nmea-0183/commit/967fc5fe59f43b21f568571a591e1b84ad3e2fc3))
+* Add missing modules ([352fc0d](https://github.com/FinOrr/embedded-nmea-0183/commit/352fc0dcfb6735c20b49d75a8bc4a45aa9d78258))
+* Add safety module, radar module ([05c2238](https://github.com/FinOrr/embedded-nmea-0183/commit/05c22389fc4deb1b1c59b27d454666222ef72bea))
+* Added ALR sentence ([0ba45cc](https://github.com/FinOrr/embedded-nmea-0183/commit/0ba45ccae868b179e6771095cc9f5dfef6b64818))
+* Added APB sentence. ([6793fc8](https://github.com/FinOrr/embedded-nmea-0183/commit/6793fc8922161310e494608d88b22c27ef8f21e9))
+* Added GNSS, sensor, heading, navigation, waypoint, AIS modules ([c7663fe](https://github.com/FinOrr/embedded-nmea-0183/commit/c7663fe38730733f13d90f5933599e8dcba5f44c))
+* **comm:** Added nmea communications module ([e73049f](https://github.com/FinOrr/embedded-nmea-0183/commit/e73049f4697eec0e42bfedcb7ff7ff042686935b))
+* **misc:** Added nmea miscellaneous module header, for functions I don't know how else to classify ([7e66366](https://github.com/FinOrr/embedded-nmea-0183/commit/7e66366bf20bb7f05d1c8dd7cf942e5e4131a4e6))
+* Nmea attitude module ([31e1acb](https://github.com/FinOrr/embedded-nmea-0183/commit/31e1acb8c01c58e8a8d1c9ab0b9f22a4b84e7972))
+* **nmea_parser.h:** Add new header-only design for the parser ([10dc40b](https://github.com/FinOrr/embedded-nmea-0183/commit/10dc40b315da48f02ef67668022c224b4e3f4186))
+* Remove old header files for the original design, move to header-only implementation ([5c31245](https://github.com/FinOrr/embedded-nmea-0183/commit/5c31245ab3e91c8b3ddaaf2241f8bc9f4e8bc86a))
+* **system:** Added nmea system module ([28a979c](https://github.com/FinOrr/embedded-nmea-0183/commit/28a979c2ca2a1b97b0ff6c579ba35d34595ba60e))
+
+
+### Bug Fixes
+
+* **CMakePresets.json:** Removed unused reference to mutation tests that caused presets to fail ([b1ddee2](https://github.com/FinOrr/embedded-nmea-0183/commit/b1ddee2d9ae34d6816975514986cd9344ddc2786))
+* Config ALF enabled typo ([f1f1d84](https://github.com/FinOrr/embedded-nmea-0183/commit/f1f1d844252366342ebbf89bcc3c6f3d9304751d))
+* **devcontainer-license:** Included the license from the Philips AMP Devcontainer repo to properly credit them ([be76ffc](https://github.com/FinOrr/embedded-nmea-0183/commit/be76ffc7c24eff5d88af2f1716736db2d6366870))
+* Fix for failing tests ([de24093](https://github.com/FinOrr/embedded-nmea-0183/commit/de24093242bedcd2a06451529d6b8d7fcf56a5e3))
+* Fix for failing tests ([d27ca94](https://github.com/FinOrr/embedded-nmea-0183/commit/d27ca94460e8715cc3568d582a6e2b15a8f671c6))
+* Remove incorrect status fields. ([967fc5f](https://github.com/FinOrr/embedded-nmea-0183/commit/967fc5fe59f43b21f568571a591e1b84ad3e2fc3))
+* Supported sentences link no longer broken ([6948a54](https://github.com/FinOrr/embedded-nmea-0183/commit/6948a5431842c1610a9667fedc7210f67449092a))
+
+
+### Chores
+
+* Consistent formatting ([967fc5f](https://github.com/FinOrr/embedded-nmea-0183/commit/967fc5fe59f43b21f568571a591e1b84ad3e2fc3))
+* Consistent formatting ([6793fc8](https://github.com/FinOrr/embedded-nmea-0183/commit/6793fc8922161310e494608d88b22c27ef8f21e9))
+* **main:** Release 1.0.0 ([80b78a6](https://github.com/FinOrr/embedded-nmea-0183/commit/80b78a608f113b9db262b45d0bb3c4d47ad41667))
+* **main:** Release 1.0.0 ([f8ef492](https://github.com/FinOrr/embedded-nmea-0183/commit/f8ef492219ca610c8ebff2aa5a2f15b1789a41da))
+* **release:** Release v2.0.0 ([4491534](https://github.com/FinOrr/embedded-nmea-0183/commit/4491534c0674968abd2b2ae715a41eaad6ef1b99))
+* Sentence enable macros prefixed with "CFG_". ([0ba45cc](https://github.com/FinOrr/embedded-nmea-0183/commit/0ba45ccae868b179e6771095cc9f5dfef6b64818))
+
 ## 1.0.0 (2025-12-14)
 
 
